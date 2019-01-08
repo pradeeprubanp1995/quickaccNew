@@ -13,6 +13,6 @@
  */
 define('WP_USE_THEMES', true);
 echo"Hi";
-
+print_r('fgfd');
 /** Loads the WordPress Environment and Template */
 require( dirname( __FILE__ ) . '/wp-blog-header.php' );
