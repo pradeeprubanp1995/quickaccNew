@@ -13,6 +13,6 @@
  */
 define('WP_USE_THEMES', true);
 echo"Hi";
-print_r('fgfd');
+print_r('ruban');
 /** Loads the WordPress Environment and Template */
 require( dirname( __FILE__ ) . '/wp-blog-header.php' );
