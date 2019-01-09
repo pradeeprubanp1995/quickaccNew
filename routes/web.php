@@ -35,6 +35,7 @@ Route::any('/register/response','Auth\RegisterController@register')->name('regis
 
 //Profile
 Route::get('/profile', 'HomeController@profile')->name('profile');
+Route::any('/editprofile', 'HomeController@editprofile')->name('editprofile');
 
 //Change password
 Route::get('/changepassword', 'HomeController@changepassword')->name('changepassword');

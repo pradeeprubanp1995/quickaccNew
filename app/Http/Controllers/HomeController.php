@@ -7,7 +7,7 @@ use App\User;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Session;
-
+use Image;
 class HomeController extends Controller
 {
     /**
@@ -40,6 +40,37 @@ class HomeController extends Controller
         return view('profile',compact('data'));
        
     }
+    public function editprofile(Request $request)
+    {
+
+        // dd($request->file('img'));
+        $upload_image=$request->file('img');
+        if(!empty($upload_image)){         
+        $image=$upload_image->getClientOriginalName();
+        $upload_image->move(public_path().'/uploads/', $image); 
+         $data = User::find( $request['id']);
+        $data->user_id=$request['userid'];
+        $data->name=$request['name'];
+        $data->gender=$request['gender'];
+        $data->doj=$request['doj'];
+        $data->images=$image;
+        $data->email=$request['email'];
+        $data->save();          
+        } 
+        $data = User::find( $request['id']);
+        $data->user_id=$request['userid'];
+        $data->name=$request['name'];
+        $data->gender=$request['gender'];
+        $data->doj=$request['doj'];       
+        $data->email=$request['email'];
+        $data->save();
+        return redirect()->back()->with('success','Updated successfully');
+          
+        // return view('profile',compact('data'));
+       
+    }
+   
+    
     public function changedpassword(Request $request)
     {
         // dd($request);exit();;;
