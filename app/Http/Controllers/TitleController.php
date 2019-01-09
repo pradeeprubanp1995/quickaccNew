@@ -16,10 +16,19 @@ class TitleController extends Controller
      */
     public function index()
     {
+
+        
+        $result = array();
         //$result = Title::select('*')->get();
-        $result = Title::with('department','category','subcategory')->get();
-        //$result = title::find(1)->department();
+        $result[0] = Title::with('category','subcategory')->get();
 // echo "<pre>";print_r($result);exit;
+        $result[1] = \DB::table("titles")
+        ->select("titles.*",\DB::raw("GROUP_CONCAT(departments.dept_name) as deptname"))
+        ->leftjoin("departments",\DB::raw("FIND_IN_SET(departments.id,titles.dept_id)"),">",\DB::raw("'0'"))
+        ->groupBy("titles.id")  
+        ->get();
+        
+
                // dd($result);
         return view('titlelist',['post_data' => $result]);
     }

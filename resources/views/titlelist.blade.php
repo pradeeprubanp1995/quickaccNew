@@ -64,15 +64,15 @@
                   <tbody>
                   <!-- <?php //echo "<pre>"; print_r($post_data); exit; ?>   -->
 
-                  @foreach ($post_data as $key => $data)
+                  @foreach ($post_data[1] as $key => $data)
 
 
                     <tr>
                     <td>{{ $key+1 }}</td>
                       
-                      <td> </td>
-                      <td> {{ $data->category->cat_name }}</td>
-                      <td> {{ $data->subcategory->cat_name }}</td>
+                      <td> {{ $data->deptname }}</td>
+                      <td> {{ $post_data[0][$key]->category->cat_name }}</td>
+                      <td> {{ $post_data[0][$key]->subcategory->cat_name }}</td>
                       <td> {{ $data->title_name }}</td>
                       <td><a href="{{ url('edittitlepage/'.$data->id ) }}" class="btn btn-secondary">Edit</a></td>
                       
