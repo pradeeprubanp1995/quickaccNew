@@ -102,7 +102,7 @@
     
   <?php $selected = ( ( $data['id'] == $holddept[$inc] ) ? 'selected="selected"' : ''); ?>
   <option value="{{ $data->id }}" <?php echo $selected; ?> >{{ $data->dept_name }}</option>
-    <?php  if($inc < $cnt-1 ) { $inc++; }  ?>
+    <?php  if($inc < $cnt-1 ) { $inc = $inc+1; }  ?>
 
   @endforeach
 </select>

@@ -74,10 +74,9 @@ $(document).ready(function() {
   $('.subcategorydiv').hide();
   var cat= $('.category').val();
   var holdsubcat = $('#holdsubcat').val();
-  // alert(holdsubcat);
   src = "{{ route('getsubcategory') }}";
-         
-         // alert(cat);
+      if(cat > 0)
+      {
           $.ajax({
                      url: src,
                      dataType : 'json',
@@ -93,6 +92,8 @@ $(document).ready(function() {
                           $('.subcategorydiv').fadeIn(2000);
                           var id = JSON.stringify(res);
                         // console.log(id);
+      
+                        
                      
 // console.log(holdsubcat);
                           $("#subcategory").get(0).options[$("#subcategory").get(0).options.length] = new Option("----    Select Subcategory    ----", "");
@@ -118,6 +119,12 @@ $(document).ready(function() {
                         }
                       }
                  });
+        }
+        else
+        {
+          $('#subcategory').empty();
+          $('.subcategorydiv').hide();
+        }
   
 
 $(document).on( "change", ".category", function() {

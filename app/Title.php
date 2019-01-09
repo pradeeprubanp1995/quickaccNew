@@ -3,19 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
+// use Department;
 
 class Title extends Model
 {
 
 	
-    public function department(){
-
-    	 //return $this->hasMany('App\Department', 'id');
-    	 // $this->belongsTo('App\Department', 'dept_id');
-         // dd($data);exit;
-         return $this->belongsTo('App\Department', 'dept_id');
-    	 
-    }
+    
     public function category(){
 
     	 //return $this->hasMany('App\Department', 'id');
