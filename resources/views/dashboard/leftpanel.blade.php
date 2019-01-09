@@ -6,7 +6,8 @@
             <div class="nav-link">
               <div class="user-wrapper">
                 <div class="profile-image">
-                  <img src="{{asset('asset/images/faces/face1.jpg')}}" alt="profile image">
+                  <img src="{{URL('/')}}/uploads/{{Auth::user()->images}}" alt="profile image">
+                  
                 </div>
                 <div class="text-wrapper">
                   <p class="profile-name"><?php echo Auth::user()->name;?></p>
