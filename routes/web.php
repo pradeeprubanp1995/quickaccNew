@@ -37,7 +37,10 @@ Route::any('/register/response','Auth\RegisterController@register')->name('regis
 Route::get('/profile', 'HomeController@profile')->name('profile');
 Route::any('/editprofile', 'HomeController@editprofile')->name('editprofile');
 
+//cron
+Route::get('/cron', 'HomeController@cron')->name('cron');
 //Change password
+
 Route::get('/changepassword', 'HomeController@changepassword')->name('changepassword');
 Route::any('/changedpassword', 'HomeController@changedpassword')->name('changedpassword');
 
@@ -71,7 +74,7 @@ Route::post('/addtitle', 'TitleController@createtitle')->name('addtitle');
 Route::post('/getsubcategory', 'TitleController@getsubcategory')->name('getsubcategory');
 Route::post('/edittitle', 'TitleController@edittitle')->name('edittitle');
 
-
+Route::post('/titleauto','TitleController@titleautosearch')->name('titleauto');
 
 
 

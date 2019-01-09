@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Upcoming_title;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Session;
 use Image;
+use App\Title;
 class HomeController extends Controller
 {
     /**
@@ -100,6 +102,33 @@ class HomeController extends Controller
           
         return view('changepassword');
        
+    }
+
+    public function cron(){
+        $date=date("Y-m-d");
+        $data=Upcoming_title::get()->where('status','2')->where('date_of_quiz','<=',$date);
+        foreach ($data as $value) {
+            $id=$value['id'];
+            $title=$value['title_id'];
+            if($title=="0"){
+            $newtitle=Title::all()->random(1);
+            $randomtitle=json_decode($newtitle);
+            // echo '<pre>';print_r($randomtitle);
+            $data=Upcoming_title::find($id);
+            $data->status="1";                       
+            $data->title_id=$randomtitle[0]->id;
+            $data->save();
+            // echo $newtitle;
+            }
+        }
+       
+        
+
+        // $data->status="1";
+        // $data->save();
+        // echo"ok";
+
+
     }
     
 }
