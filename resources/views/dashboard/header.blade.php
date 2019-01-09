@@ -17,7 +17,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{asset('asset/images/favicon.png')}}" />
+  <link rel="shortcut icon" href="{{asset('asset/images/favicon.ico')}}" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
@@ -26,12 +26,12 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-        <a class="navbar-brand brand-logo" href="index.html">
-          <img src="{{asset('asset/images/logo.svg')}}" alt="logo" />
+        <a class="navbar-brand brand-logo" href="https://colaninfotech.com/">
+          <img src="{{asset('asset/images/logo-colan.png')}}" alt="logo" />
         </a>
-        <a class="navbar-brand brand-logo-mini" href="index.html">
+        <!-- <a class="navbar-brand brand-logo-mini" href="index.html">
           <img src="{{asset('asset/images/logo-mini.svg')}}" alt="logo" />
-        </a>
+        </a> -->
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
         <!-- <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
