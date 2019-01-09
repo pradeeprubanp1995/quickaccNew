@@ -55,7 +55,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Email Address</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" value="<?php echo $data['email'];?>" />
+                            <input type="email" class="form-control" value="<?php echo $data['email'];?>" required/>
                           </div>
                         </div>
                       </div>

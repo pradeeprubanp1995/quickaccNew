@@ -28,17 +28,7 @@
             <div class="auto-form-wrapper">
                     <form method="POST" action="{{ route('login.request') }}">
                         @csrf
-
-                <div class="form-group">
-                  <label class="label">User Name</label>
-                  <div class="input-group">
-                    <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email address" value="{{old('email')}}">
-                    <div class="input-group-append">
-                      <span class="input-group-text">
-                        <i class="mdi mdi-check-circle-outline"></i>
-                      </span>
-                    </div>
-                    <!-- @if (session()->has('errors'))
+                        <!-- @if (session()->has('errors'))
     <div class="alert alert-danger text-center animated fadeIn">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -48,6 +38,17 @@
         </strong>
     </div>
 @endif -->
+
+                <div class="form-group">
+                  <label class="label">User Name</label>
+                  <div class="input-group">
+                    <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email address" value="{{old('email')}}" required>
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="mdi mdi-check-circle-outline"></i>
+                      </span>
+                    </div>
+                    
                      @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>

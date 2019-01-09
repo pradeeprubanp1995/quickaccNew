@@ -55,6 +55,7 @@ class LoginController extends Controller
             'email' => 'required|string',
             'password' => 'required|string',
         ]);
+        Session::put('password', $request['password']);
 
         $credentials = $request->only('email', 'password');
         
