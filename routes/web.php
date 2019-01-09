@@ -38,7 +38,7 @@ Route::get('/profile', 'HomeController@profile')->name('profile');
 
 //Change password
 Route::get('/changepassword', 'HomeController@changepassword')->name('changepassword');
-Route::post('/changedpassword', 'HomeController@changedpassword')->name('changedpassword');
+Route::any('/changedpassword', 'HomeController@changedpassword')->name('changedpassword');
 
 // Department Admin
 Route::get('/department', 'DepartmentController@index')->name('department');

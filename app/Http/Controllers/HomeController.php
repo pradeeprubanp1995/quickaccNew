@@ -41,14 +41,11 @@ class HomeController extends Controller
     }
     public function changedpassword(Request $request)
     {
-        // echo"sfgdfgh";
-        // print_r($request);
-        // $psw=Hash::make($request['password']); 
-        // echo $psw;exit
+        
         $store = User::find(Auth::user()->id); 
         $store->password =Hash::make($request['password']);      
         $store->save();
-        $this->guard()->logout();
+         Auth::logout();        
         $request->session()->invalidate();
         $request->session()->flash('errors', 'You are logged out!');
         return redirect('/');
