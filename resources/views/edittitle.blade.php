@@ -118,7 +118,7 @@
 <input type="submit" name="submit" class="btn btn-primary btn-block" >
 </form> 
 </div>
-<div class="card-footer small text-muted">Today time at {{ date('Y-m-d h:m:sa')}}</div>
+
 </div>
 
         </div>

@@ -71,7 +71,18 @@ Route::post('/addtitle', 'TitleController@createtitle')->name('addtitle');
 Route::post('/getsubcategory', 'TitleController@getsubcategory')->name('getsubcategory');
 Route::post('/edittitle', 'TitleController@edittitle')->name('edittitle');
 
-Route::get('/addupcommingpage', 'TitleController@addupcomminginput')->name('addupcomminginput');
 
-Route::post('/addupcomming', 'TitleController@createupcomming')->name('addupcomming');
 
+
+
+// upcoming
+
+Route::get('/addupcommingpage', 'UpcomingTitleController@addupcomminginput')->name('addupcomminginput');
+
+Route::post('/addupcomming', 'UpcomingTitleController@createupcomming')->name('addupcomming');
+Route::get('/upcominglist', 'UpcomingTitleController@upcominglist')->name('upcomming');
+
+Route::get('/editupcomingpage/{id}', 'UpcomingTitleController@editupcominginput')->name('edittitleinput');
+Route::get('/deleteupcoming/{id}', 'UpcomingTitleController@deleteupcoming')->name('deleteupcoming');
+
+Route::post('/editupcoming', 'UpcomingTitleController@editupcoming')->name('editupcoming');

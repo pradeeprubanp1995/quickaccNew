@@ -25,4 +25,5 @@ class Title extends Model
          return $this->belongsTo('App\Category', 'subcat_id');
          
     }
+    
 }

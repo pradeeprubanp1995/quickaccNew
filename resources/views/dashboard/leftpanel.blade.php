@@ -41,7 +41,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('addupcomminginput') }}">
+            <a class="nav-link" href="{{ route('upcomming') }}">
               <i class="menu-icon mdi mdi-content-copy"></i>
               <span class="menu-title">Upcomming</span>
             </a>

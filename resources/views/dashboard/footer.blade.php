@@ -72,7 +72,9 @@ $(document).ready(function() {
 $(document).ready(function() {
 
   $('.subcategorydiv').hide();
+  $('#subcategory').val("0");
   var cat= $('.category').val();
+
   var holdsubcat = $('#holdsubcat').val();
   src = "{{ route('getsubcategory') }}";
       if(cat > 0)
@@ -114,6 +116,9 @@ $(document).ready(function() {
                         }
                         else
                         {
+                      
+                          $('#subcategory').val("0");
+                          
                           $('#subcategory').empty();
                           $('.subcategorydiv').hide();
                         }
@@ -162,8 +167,11 @@ $(document).on( "change", ".category", function() {
                         }
                         else
                         {
+                          
+                          
                           $('#subcategory').empty();
                           $('.subcategorydiv').hide();
+                          
                         }
                       }
                  });
@@ -171,6 +179,63 @@ $(document).on( "change", ".category", function() {
   });
 
 });
+
+
+
+
+// for auto complete
+
+
+$(document).ready(function() {
+  $('.titlediv').hide();
+
+$(document).on( "change", ".dept", function() {
+      
+    src = "{{ route('titleauto') }}";
+    cat = $('#category').val();
+    subcat = $('#subcategory').val();
+    dept = $('#dept').val();
+// alert(cat);
+     
+
+     $.ajax({
+                     url: src,
+                     dataType : 'json',
+                     type : 'POST',
+                     data : { cat:cat,subcat:subcat,dept:dept },
+                     
+                     success: function(res) 
+                     {
+                      
+                        if(res.length > 0)
+                        {
+                          $('#titleauto').empty();
+                          $('.titlediv').fadeIn(2000);
+                          var id = JSON.stringify(res);
+                        // console.log(id);
+                     
+
+                          $("#titleauto").get(0).options[$("#titleauto").get(0).options.length] = new Option("----    Select Title    ----", "");
+                            
+                            $.each($.parseJSON(id), function(idx, obj) {
+                              // console.log(obj.cat_name);
+                                $("#titleauto").get(0).options[$("#titleauto").get(0).options.length] = new Option(obj.title_name, obj.id);
+                               
+                            });
+                        }
+                        else
+                        {
+                          $('#titleauto').empty();
+                          $('.titlediv').hide();
+                        }
+                      }
+                 });
+    });
+
+
+});
+
+
 </script>
 
 
