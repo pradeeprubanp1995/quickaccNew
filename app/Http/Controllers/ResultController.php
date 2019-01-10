@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Result;
+use Auth;
 use App\Question;
 use Illuminate\Http\Request;
 
@@ -15,13 +16,19 @@ class ResultController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        $resultcheck = Result::where('user_id',2)->where('today_date',date("Y-m-d"))->exists();
-        // dd($resultcheck);
-         // dd($request);
-        if($resultcheck == true){
+        // Get loggedin User data
+        $user_id = Auth::id();
+        $dept_id = Auth::user()->dept_id;
+
+        // check for user already attended result
+        $resultcheck = Result::where('user_id',$user_id)->where('today_date',date("Y-m-d"))->exists();
+        
+        if($resultcheck == true)
+        {
            return redirect('/result')->with('success','Already submitted');
         }
+
+        // Submitted data processing for result and points
          $utid=$request->upcomingtitle_id;
          $points = 0;
          $date = date("Y-m-d");
@@ -40,26 +47,32 @@ class ResultController extends Controller
                     'question_id'=>$qno,
                     'user_answer' => $request[$qno]
                 ];
-            // $count = count($options);
          }
          $user_answer= json_encode($jarray);
+
+         // stores result table with values 
          $result = new Result;
-         $result->user_id = 2;
-         $result->dept_id = 2;
+         $result->user_id = $user_id;
+         $result->dept_id = $dept_id;
          $result->today_date = $date;
          $result->user_answer = $user_answer;
          $result->points = $points;
          $result->save();
-         // echo "done";
-         // exit;
-         // echo $user_answer;
-         // exit;
-         // dd($points);
+         
+         // stores result point in user table
+         $user = Auth::user();
+         $user->points=$user['points']+$points;
+         $user->save();
+
+         // redirect to view result
          return redirect()->route('resultview');
     }
     public function indexx()
     {
-        $result = Result::where('user_id',2)->where('today_date',date("Y-m-d"))->get();
+        // instant view for result
+        $user_id = Auth::id();
+        $dept_id = Auth::user()->dept_id;
+        $result = Result::where('user_id', $user_id)->where('today_date',date("Y-m-d"))->get();
         // dd($result);
         $user_answer = $result[0]['user_answer'];
         $points = $result[0]['points'];
@@ -96,7 +109,9 @@ class ResultController extends Controller
     {
         //
         // dd($date);
-        $result = Result::where('user_id',2)->where('today_date',$date)->get();
+        $user_id = Auth::id();
+        $dept_id = Auth::user()->dept_id;
+        $result = Result::where('user_id', $user_id)->where('today_date',$date)->get();
         // dd($result);
         $user_answer = $result[0]['user_answer'];
         $points = $result[0]['points'];
