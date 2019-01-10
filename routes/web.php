@@ -41,7 +41,7 @@ Route::any('/editprofile', 'HomeController@editprofile')->name('editprofile');
 Route::get('/cron', 'HomeController@cron')->name('cron');
 //Change password
 
-Route::get('/changepassword', 'HomeController@changepassword')->name('changepassword');
+Route::any('/changepassword', 'HomeController@changepassword')->name('changepassword');
 Route::any('/changedpassword', 'HomeController@changedpassword')->name('changedpassword');
 
 // Department Admin
@@ -94,6 +94,9 @@ Route::post('/editupcoming', 'UpcomingTitleController@editupcoming')->name('edit
 // user 
 
 Route::get('/user/login','UpcomingTitleController@userlogin')->name('userlogin');
+
+// question update
+Route::get('/updatequestioninput','QuestionController@updatequestioninput')->name('updatequestioninput');
 
 
 
