@@ -112,3 +112,4 @@ Route::post('/answersubmit', 'ResultController@index')->name('result');
 Route::get('/result', 'ResultController@indexx')->name('resultview');
 Route::get('/resulthistory','ResultController@show');
 Route::get('/result/{date}','ResultController@view');
+Route::get('/highscore','ResultController@highscore')->name('rank');

@@ -1,18 +1,24 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
+@include('dashboard.userheader')
+@extends('dashboard.userleftpanel')
+@section('content') 
+ <div class="content">
 	<div class="card-body">
-      <h1>Result</h1>
+		@if (\Session::has('danger'))
+<div class="alert alert-danger">
+<p>{{ \Session::get('danger') }}</p>
+</div><br />
+@endif
+      <center><h3>Result</h3></center>
     <br />
-    <p>your Today's Point is {{$points}}</p>
-    <div class="md-8">
+    <p style="text-align: center;font-size: 20px;color: green;">your Today's Point is {{$points}}</p>
+    <div style="padding: 30px;">
 	    @php
 		    $q = 1;
 		    $user_answer= json_decode($answer,true);
 	    @endphp
 	    @foreach($user_answer as $key => $ans)
-		    <div><h5>{{$q}}.{{$question[$key]['question']}}</h5></div>
+	    <div style="padding-bottom: 10px;">
+		    <div>{{$q}}.<span style="font-size: 18px;">{{$question[$key]['question']}}</span></div>
 			    @php
 				    $option = json_decode($question[$key]['options'],true);
 				    $count = count($option);
@@ -41,9 +47,11 @@
 			    	<p>The correct answer is <span style="color:green"><strong> {{$no[$n]}} {{$correctanswer}}</strong></span></p>
 			    @endif
 		   		 @php $q++ @endphp
+		   		</div>
 	    @endforeach
 	</div>
     
  </div>
 </div>
+@include('dashboard.userfooter')
 @endsection
