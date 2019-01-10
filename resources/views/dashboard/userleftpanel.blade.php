@@ -19,6 +19,10 @@
                             <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ url('/updatequestion') }}">Update Question</a></li>
                         </ul>
                     </li>
+                    <li class="menu-item">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>QuiZ</a>
+                        
+                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
