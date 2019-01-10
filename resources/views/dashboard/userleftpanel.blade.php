@@ -13,9 +13,10 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Login</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
-                            <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
+                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ url('/user/login') }}">Login</a></li>
+                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ url('/register') }}">Register</a></li>
+                            <li><i class="menu-icon fa fa-paper-plane"></i><a href="{{ url('/changepassword') }}">Change Password</a></li>
+                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ url('/updatequestion') }}">Update Question</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -126,7 +127,7 @@
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i>Settings</a>
 
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i>Logout</a>
+                            <a class="nav-link" href="{{ route('logout') }}"><i class="fa fa-power-off"></i>Logout</a>
                         </div>
                     </div> 
                 </div>  

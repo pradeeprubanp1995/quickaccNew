@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use Illuminate\Http\Request;
+use Auth;
+use App\Upcoming_title;
+use App\Title;
 
 class QuestionController extends Controller
 {
@@ -26,9 +29,25 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function updatequestioninput()
     {
-        //
+        $userid = Auth::user()->id;
+        $dept_id = Auth::user()->dept_id;
+        $today = date('Y-m-d');
+
+        $upcoming = Upcoming_title::select('*')->where('date_of_quiz',$today)->where('status','1')->get();
+
+        foreach ($upcoming as $key => $value) {
+            
+            
+            $title = Title::select('*')->where('id',$value->title_id)->get();
+
+            
+
+            echo "<pre>";print_r($title[0]->title_name);exit();
+        }
+
+        
     }
 
     /**

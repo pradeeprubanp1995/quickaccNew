@@ -64,14 +64,21 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             // Session::set('userid',Auth::user()->user_type);
             // Authentication passed...
-            if(Auth::user()->user_type==1){
-            return redirect()->route('adminindex');}
+            if(Auth::user()->user_type==1)
+            {
+                return redirect()->route('adminindex');
+            }
+            else if(Auth::user()->user_type==0)
+            {
+                return redirect()->route('home');
+            }
+
             else{
                 
                 $this->guard()->logout();
-        $request->session()->invalidate();
-        $request->session()->flash('errors', 'You are logged out!');
-        return redirect('/');
+                $request->session()->invalidate();
+                $request->session()->flash('errors', 'You are logged out!');
+                return redirect('/');
                 // $this->guard()->logout();
 
                 // $request->session()->invalidate();

@@ -14,9 +14,10 @@ class UpcomingTitleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function userlogin()
     {
-        return view('userdashboard');
+        return view('userlogin');
     }
 
     /**

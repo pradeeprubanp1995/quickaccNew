@@ -79,9 +79,7 @@
 					</div>
 
 					<div class="text-center p-t-90">
-						<a class="txt1" href="#">
-							Forgot Password?
-						</a>&nbsp; | &nbsp;
+						
 						<a class="txt1" href="{{ url('/register') }}">
 							Register Here
 						</a>
