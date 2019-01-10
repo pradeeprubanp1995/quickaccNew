@@ -50,8 +50,8 @@
 
  <?php 
 
- $holddept=array(); $holddept=explode(",", $post_data[2]['dept_id']); $inc=0; 
- $cnt = count($holddept);  
+ $holddept=array(); $holddept=explode(",", $post_data[2]['dept_id']); 
+   
  // print_r($holddept);exit;
  ?>
 <div class="form-group">
@@ -97,12 +97,16 @@
 <!-- <input type="text" id="dept" name="dept" class="form-control" autofocus="autofocus" >  -->
 <select id="dept" name="dept[]" class="form-control" multiple="multiple">
   
-  
+  if (in_array("Glenn", $people))
+
   @foreach ($post_data[0] as $key => $data)
     
-  <?php $selected = ( ( $data['id'] == $holddept[$inc] ) ? 'selected="selected"' : ''); ?>
+  <?php  if(in_array( $data['id'], $holddept) )  
+            $selected = 'selected="selected"'; 
+          else  $selected =''; 
+  ?>
   <option value="{{ $data->id }}" <?php echo $selected; ?> >{{ $data->dept_name }}</option>
-    <?php  if($inc < $cnt-1 ) { $inc = $inc+1; }  ?>
+    
 
   @endforeach
 </select>

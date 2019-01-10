@@ -14,9 +14,9 @@ class UpcomingTitleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function userlogin()
     {
-        //
+        return view('userdashboard');
     }
 
     /**
@@ -88,7 +88,7 @@ class UpcomingTitleController extends Controller
     {
         $result = array();
         $result[0] = Department::select('*')->get();
-        $result[1] = Category::select('*')->get();
+        $result[1] = Category::select('*')->where('parent_id','0')->get();
         // dd($result);
          return view('addupcomming',['post_data' => $result]);
     }
@@ -106,10 +106,14 @@ class UpcomingTitleController extends Controller
         $data = $this->validate($request, [
             'titleauto'=>'required',
             'category'=>'required',
-            'subcategory'=> 'required',
+            // 'subcategory'=> 'required',
             'dept'=> 'required',
             
         ]);
+        if(!isset($request['subcategory']))
+        {
+            $data['subcategory'] = '0';
+        }
 
         $title->title_id = $data['titleauto'];
         $title->date_of_quiz = $tomorrow;

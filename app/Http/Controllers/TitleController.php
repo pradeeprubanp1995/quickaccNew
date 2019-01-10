@@ -20,17 +20,43 @@ class TitleController extends Controller
 
         
         $result = array();
-        //$result = Title::select('*')->get();
-        $result[0] = Title::with('category','subcategory')->get();
-// echo "<pre>";print_r($result);exit;
-        $result[1] = \DB::table("titles")
+        
+        $title = \DB::table("titles")
         ->select("titles.*",\DB::raw("GROUP_CONCAT(departments.dept_name) as deptname"))
         ->leftjoin("departments",\DB::raw("FIND_IN_SET(departments.id,titles.dept_id)"),">",\DB::raw("'0'"))
         ->groupBy("titles.id")  
         ->get();
         
+        
+        
 
-               // dd($result);
+        foreach ($title as $key => $value) 
+        {
+
+            $category = Category::select('*')->where('id',$value->cat_id)->get();
+            if($value->subcat_id == 0 )
+            {
+                $result[$key]['subcat_name'] = 'None';
+            }
+            else
+            {
+                $subcategory = Category::select('*')->where('id',$value->subcat_id)->get();
+                $result[$key]['subcat_name'] = $subcategory[0]->cat_name;
+
+            }
+            
+
+                $result[$key]['id'] = $value->id;
+                $result[$key]['deptname'] = $value->deptname;
+                $result[$key]['title_name'] = $value->title_name;
+                $result[$key]['cat_name'] = $category[0]->cat_name;
+                
+        }
+
+
+// echo "<pre>";print_r($result);exit();
+        
+       
         return view('titlelist',['post_data' => $result]);
     }
 
@@ -43,7 +69,7 @@ class TitleController extends Controller
     {
         $result = array();
         $result[0] = Department::select('*')->get();
-        $result[1] = Category::select('*')->get();
+        $result[1] = Category::select('*')->where('parent_id','0')->get();
         // dd($result);
          return view('addtitle',['post_data' => $result]);
     }
@@ -51,7 +77,7 @@ class TitleController extends Controller
     {
         $result = array();
         $result[0] = Department::select('*')->get();
-        $result[1] = Category::select('*')->get();
+        $result[1] = Category::select('*')->where('parent_id','0')->get();
         $result[2] = Title::select('*')->where('id' , $id)->first();
         // dd($result[2]);
          return view('edittitle',['post_data' => $result]);
@@ -92,10 +118,15 @@ class TitleController extends Controller
         $data = $this->validate($request, [
             'title'=>'required',
             'category'=>'required',
-            'subcategory'=> 'required',
+            // 'subcategory'=> 'required',
             'dept'=> 'required',
             
         ]);
+
+        if(!isset($request['subcategory']))
+        {
+            $data['subcategory'] = '0';
+        }
 
         $title = Title::find($id);
         $title->title_name = $data['title'];
@@ -137,30 +168,7 @@ class TitleController extends Controller
 
 
 
-    public function createupcomming(Request $request)
-    {
-        $tomorrow = date("Y-m-d", strtotime("+1 day"));
-        // dd($request);exit;
-       
-
-
-        $data = $this->validate($request, [
-            'titleauto'=>'required',
-            'category'=>'required',
-            'subcategory'=> 'required',
-            'dept'=> 'required',
-            
-        ]);
-
-         DB::table('upcoming_title_tbl')->insert(['title_id'=>$data['titleauto'],
-'dept_id'=>$data['dept'],'date_of_quiz'=>$tomorrow,'status'=>'2']);
-         
-           
-
-            return redirect()->route('addupcomminginput')->with('success','Insert Successfully');
-
-        // print_r($_POST);exit;
-    }
+    
 
 
 
@@ -188,24 +196,7 @@ class TitleController extends Controller
     }
 
 
-     public function upcominglist()
-    {
-
-        
-        $result = array();
-        //$result = Title::select('*')->get();
-        $result[0] = DB::table('upcoming_title_tbl')->with('department','title')->get();
-echo "<pre>";print_r($result);exit;
-        $result[1] = \DB::table("titles")
-        ->select("titles.*",\DB::raw("GROUP_CONCAT(departments.dept_name) as deptname"))
-        ->leftjoin("departments",\DB::raw("FIND_IN_SET(departments.id,titles.dept_id)"),">",\DB::raw("'0'"))
-        ->groupBy("titles.id")  
-        ->get();
-        
-
-               // dd($result);
-        return view('titlelist',['post_data' => $result]);
-    }
+     
 
     /**
      * Store a newly created resource in storage.

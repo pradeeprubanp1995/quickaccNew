@@ -90,6 +90,13 @@ Route::get('/deleteupcoming/{id}', 'UpcomingTitleController@deleteupcoming')->na
 
 Route::post('/editupcoming', 'UpcomingTitleController@editupcoming')->name('editupcoming');
 
+
+// user 
+
+Route::get('/user/login','UpcomingTitleController@userlogin')->name('userlogin');
+
+
+
 //muthu
 
 Route::get('/test', function () {
@@ -97,6 +104,7 @@ Route::get('/test', function () {
 });
 
 Route::get('/quiz/{id}','QuestionController@index')->name('quizview');
+
 Route::post('/answersubmit', 'ResultController@index')->name('result');
 Route::get('/result', 'ResultController@indexx')->name('resultview');
 Route::get('/resulthistory','ResultController@show');
