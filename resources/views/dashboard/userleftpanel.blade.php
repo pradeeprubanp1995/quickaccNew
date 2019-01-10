@@ -23,6 +23,14 @@
                         <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>QuiZ</a>
                         
                     </li>
+                    <li class="menu-item">
+                        <a href="{{route('history')}}"><i class="menu-icon fa fa-glass"></i>Results</a>
+                        
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{route('rank')}}"> <i class="menu-icon fa fa-glass"></i>HIGHSCORE</a>
+                        
+                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>

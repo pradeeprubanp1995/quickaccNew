@@ -110,6 +110,6 @@ Route::get('/quiz/{id}','QuestionController@index')->name('quizview');
 
 Route::post('/answersubmit', 'ResultController@index')->name('result');
 Route::get('/result', 'ResultController@indexx')->name('resultview');
-Route::get('/resulthistory','ResultController@show');
+Route::get('/resulthistory','ResultController@show')->name('history');
 Route::get('/result/{date}','ResultController@view');
 Route::get('/highscore','ResultController@highscore')->name('rank');
