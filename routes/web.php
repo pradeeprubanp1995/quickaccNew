@@ -89,3 +89,13 @@ Route::get('/editupcomingpage/{id}', 'UpcomingTitleController@editupcominginput'
 Route::get('/deleteupcoming/{id}', 'UpcomingTitleController@deleteupcoming')->name('deleteupcoming');
 
 Route::post('/editupcoming', 'UpcomingTitleController@editupcoming')->name('editupcoming');
+
+//muthu
+
+Route::get('/test', function () {
+    return view('sample');
+});
+
+Route::get('/quiz/{id}','QuestionController@index')->name('quizview');
+
+Route::post('/answersubmit', 'ResultController@index')->name('result');

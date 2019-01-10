@@ -18,7 +18,7 @@ class QuestionController extends Controller
         $question = Question::where('upcomingtitle_id',$id)->get();
 
 
-        return view('testquestion',['ques' => $question]);
+        return view('testquestion',['ques' => $question,'id' => $id]);
     }
 
     /**
