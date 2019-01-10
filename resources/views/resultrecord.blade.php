@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
 	<div class="card-body">
-      <h1>Result</h1>
+		<h1>Result Record on {{$date}}</h1>
     <br />
-    <p>your Today's Point is {{$points}}</p>
+    <p>your {{$date}}'s Point was {{$points}}</p>
     <div class="md-8">
 	    @php
 		    $q = 1;
@@ -25,25 +25,22 @@
 			    @for ($i=0;$i<$count;$i++)
 			    	<div class="md-{{$design}}" style="padding:10px;">
 				    	@if($option[$i]['options'] == $ans['user_answer'] )
-					    	 <span style="color:{{($option[$i]['options'] == $correctanswer)? 'green;font-weight:bold;' : 'red;font-weight:bold; text-decoration: line-through;'}}">{{$no[$i]}} {{$option[$i]['options']}}
-					    	 	@php $y = $i; @endphp
+					    	 <span style="color:{{($option[$i]['options'] == $correctanswer)? 'green;font-weight:bold;' : 'red;font-weight:bold; text-decoration: line-through;'}}">{{$no[$i]}}{{$option[$i]['options']}}
 					    		</span>
 				    	@else
-							    <span style="color:{{($option[$i]['options'] == $correctanswer)? 'green;font-weight:bold;' : 'none'}}">{{$no[$i]}} {{$option[$i]['options']}}
+							    <span style="color:{{($option[$i]['options'] == $correctanswer)? 'green;font-weight:bold;' : 'none'}}">{{$no[$i]}}{{$option[$i]['options']}}
 							    </span>
-							    @php if($option[$i]['options'] == $correctanswer){$n = $i;}@endphp
 				    	@endif
 				    </div>
 			    @endfor
 			    			</div>
-		    		<p>Your answer :<span style="color: Blue;"><strong> {{$no[$y]}} {{$ans['user_answer']}}</strong></span></p>
+		    		<p>Your answer :<span style="color: Blue;"><strong>{{$ans['user_answer']}}</strong></span></p>
 			    @if($ans['user_answer'] != $correctanswer)
-			    	<p>The correct answer is <span style="color:green"><strong> {{$no[$n]}} {{$correctanswer}}</strong></span></p>
+			    	<p>The correct answer is <span style="color:green"><strong>{{$correctanswer}}</strong></span></p>
 			    @endif
 		   		 @php $q++ @endphp
 	    @endforeach
 	</div>
-    
- </div>
+</div>
 </div>
 @endsection
