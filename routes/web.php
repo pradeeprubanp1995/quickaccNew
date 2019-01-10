@@ -97,5 +97,7 @@ Route::get('/test', function () {
 });
 
 Route::get('/quiz/{id}','QuestionController@index')->name('quizview');
-
 Route::post('/answersubmit', 'ResultController@index')->name('result');
+Route::get('/result', 'ResultController@indexx')->name('resultview');
+Route::get('/resulthistory','ResultController@show');
+Route::get('/result/{date}','ResultController@view');
