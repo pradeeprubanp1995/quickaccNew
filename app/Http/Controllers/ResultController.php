@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Result;
 use Auth;
+use DB;
 use App\Question;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class ResultController extends Controller
         
         if($resultcheck == true)
         {
-           return redirect('/result')->with('success','Already submitted');
+           return redirect('/result')->with('danger','Already submitted');
         }
 
         // Submitted data processing for result and points
@@ -71,7 +72,9 @@ class ResultController extends Controller
     {
         // instant view for result
         $user_id = Auth::id();
+        // dd($user_id);
         $dept_id = Auth::user()->dept_id;
+
         $result = Result::where('user_id', $user_id)->where('today_date',date("Y-m-d"))->get();
         // dd($result);
         $user_answer = $result[0]['user_answer'];
@@ -84,6 +87,18 @@ class ResultController extends Controller
         // dd($upcoming_id);
         $question = Question::where('upcomingtitle_id',$upcoming_id)->get();
         return view('result',['answer' => $user_answer,'question' => $question,'points' => $points]);
+    }
+
+    public function highscore()
+    {
+        //
+        $dept_id = Auth::user()->dept_id;
+        // dd($dept_id);
+        $resulttoday = Result::where('dept_id', $dept_id)->where('today_date',date("Y-m-d"))->max('points');
+        $result = Result::where('dept_id', $dept_id)->where('today_date',date("Y-m-d"))->where('points',$resulttoday)->get();
+    // dd($result);
+    // dd($rt);
+    //     dd($resulttoday);
     }
     /**
      * Show the form for creating a new resource.
@@ -133,7 +148,8 @@ class ResultController extends Controller
     public function show()
     {
         //
-        $result = Result::where('user_id',2)->get();
+        $user_id = Auth::id();
+        $result = Result::where('user_id',$user_id)->get();
         return view('resulthistory',['history' => $result]);
     }
 
