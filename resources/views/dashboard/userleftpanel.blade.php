@@ -16,19 +16,23 @@
                             <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ url('/user/login') }}">Login</a></li>
                             <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ url('/register') }}">Register</a></li>
                             <li><i class="menu-icon fa fa-paper-plane"></i><a href="{{ url('/changepassword') }}">Change Password</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ url('/updatequestion') }}">Update Question</a></li>
+                            
                         </ul>
                     </li>
+                    <!-- <li class="menu-item">
+                        <a href="{{route('updatequestioninput')}}" > <i class="menu-icon fa fa-sign-in"></i>Post Question Today</a>
+                        
+                    </li> -->
                     <li class="menu-item">
-                        <a href="{{route('quiz')}}" > <i class="menu-icon fa fa-glass"></i>QuiZ</a>
+                        <a href="{{route('quiz')}}" > <i class="menu-icon fa fa-sign-in"></i>QuiZ</a>
                         
                     </li>
                     <li class="menu-item">
-                        <a href="{{route('history')}}"><i class="menu-icon fa fa-glass"></i>Results</a>
+                        <a href="{{route('history')}}"><i class="menu-icon fa fa-sign-in"></i>Results</a>
                         
                     </li>
                     <li class="menu-item">
-                        <a href="{{route('rank')}}"> <i class="menu-icon fa fa-glass"></i>HIGHSCORE</a>
+                        <a href="{{route('rank')}}"> <i class="menu-icon fa fa-sign-in"></i>HIGHSCORE</a>
                         
                     </li>
                 </ul>
@@ -46,7 +50,7 @@
         <header id="header" class="header">  
             <div class="top-left">
                 <div class="navbar-header"> 
-                    <a class="navbar-brand" href="./"><img src="{{asset('asset/user/original/images/logo.png')}}" alt="Logo"></a>
+                    <a class="navbar-brand" href="./"><img width="100" src="{{asset('asset/user/original/images/logo.png')}}" alt="Logo"></a>
                     <a class="navbar-brand hidden" href="./"><img src="{{asset('asset/user/original/images/logo2.png')}}" alt="Logo"></a> 
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a> 
                 </div> 

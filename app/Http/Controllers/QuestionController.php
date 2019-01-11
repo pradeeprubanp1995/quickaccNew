@@ -52,27 +52,84 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function updatequestioninput()
+     public function updatequestioninput()
     {
         $userid = Auth::user()->id;
-        $dept_id = Auth::user()->dept_id;
+        $dept = Auth::user()->dept_id;
         $today = date('Y-m-d');
+        $result = array();
 
-        $upcoming = Upcoming_title::select('*')->where('date_of_quiz',$today)->where('status','1')->get();
+        $upcoming = Upcoming_title::select('*')->where('date_of_quiz',$today)->where('status','1')->whereRaw('FIND_IN_SET(?,dept_id)', [$dept])->get();
 
-        foreach ($upcoming as $key => $value) {
+        if(isset($upcoming[0]))
+        {
             
             
-            $title = Title::select('*')->where('id',$value->title_id)->get();
+            
+                $title = Title::select('*')->where('id',$upcoming[0]->title_id)->get();
 
+                $result['title_name'] = $title[0]->title_name;
+                $result['id'] = $upcoming[0]->id;
+
+                
+                // echo "<pre>";print_r($upcoming);exit();
+                return view('updatequestion',['post_data' => $result]);
             
 
-            echo "<pre>";print_r($title[0]->title_name);exit();
+            
         }
+        
+
+        
 
         
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updatequestion(Request $request)
+    { 
+        $hold =array();
+        if(isset($_POST['keys']))
+        {
+            foreach ($_POST['keys'] as $key => $value) {
+                $hold[$key] = array('options' => $value);
+            }
+        }
+        $options = json_encode($hold);
+        // print_r(json_encode($hold));exit;
+        $question = new Question();
+        $data = $this->validate($request, [
+            'ques'=>'required',
+            // 'keys'=>'required',
+            'answer'=> 'required',
+            
+        ]);
+        
+            $question->upcomingtitle_id = $_POST['upcomingid'];
+            $question->question = $data['ques'];
+            $question->options = $options;
+            $question->answer = $data['answer'];
+            $question->save();
+
+
+            $userid = Auth::user()->id;
+            $dept = Auth::user()->dept_id;
+            $today = date('Y-m-d');
+            
+
+        $upcoming = Upcoming_title::find($_POST['upcomingid']);
+        $upcoming->status = '0';
+        $upcoming->save();
+
+            echo '1';
+
+            // return redirect()->route('updatequestioninput')->with('success','Insert Successfully');
+    }
     /**
      * Store a newly created resource in storage.
      *

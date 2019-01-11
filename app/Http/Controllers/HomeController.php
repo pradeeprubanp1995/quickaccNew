@@ -191,11 +191,45 @@ public function cron()
     }
      public function userprofileview()
     {       
-          $data = User::find( Auth::user()->id); 
-          // dd($data['dept_id']);
-          $department = Department::find($data['dept_id']);
-          // dd()
-        return view('userprofileview',['data' => $data, 'dept' => $department]);
+
+
+        $userid = Auth::user()->id;
+        $dept = Auth::user()->dept_id;
+        $today = date('Y-m-d');
+        $result = array();
+
+        $upcoming = Upcoming_title::select('*')->where('date_of_quiz',$today)->where('status','1')->whereRaw('FIND_IN_SET(?,dept_id)', [$dept])->get();
+
+        if(isset($upcoming[0]))
+        {
+            
+            
+            
+                $title = Title::select('*')->where('id',$upcoming[0]->title_id)->get();
+
+                $result['title_name'] = $title[0]->title_name;
+                $result['id'] = $upcoming[0]->id;
+
+                
+                // echo "<pre>";print_r($upcoming);exit();
+                 $data[0] = User::find( Auth::user()->id); 
+              // dd($data['dept_id']);
+              $data[1] = Department::find($data[0]['dept_id']);
+
+                // return view('updatequestion',['post_data' => $result]);
+                return view('userprofileview',['data' => $data, 'post_data' => $result]);
+            
+
+            
+        }
+        else
+        {
+              $data[0] = User::find( Auth::user()->id); 
+              // dd($data['dept_id']);
+              $data[1] = Department::find($data[0]['dept_id']);
+              // dd()
+            return view('userprofileview',['data' => $data]);
+        }
         
        
     }
