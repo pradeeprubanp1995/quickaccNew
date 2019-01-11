@@ -6,6 +6,8 @@ use App\Result;
 use Auth;
 use DB;
 use App\Question;
+use App\Title;
+use App\Upcoming_title;
 use Illuminate\Http\Request;
 
 class ResultController extends Controller
@@ -149,8 +151,28 @@ class ResultController extends Controller
     {
         //
         $user_id = Auth::id();
+        $dept_id = Auth::user()->dept_id;
+        $titles = array();
         $result = Result::where('user_id',$user_id)->get();
-        return view('resulthistory',['history' => $result]);
+        foreach($result as $key => $res)
+        {
+            $quiz_date = $res->today_date;
+            // dd($dept_id);
+            $upcoming_id = Upcoming_title::where('dept_id',$dept_id)->where('date_of_quiz',$quiz_date)->get();
+            //dd($upcoming_id);
+            $title_id = $upcoming_id[0]['title_id'];
+            // dd($title_id);
+            $title = Title::find($title_id);
+            //dd($title->title_name);
+            $tile = $title->title_name;
+            $titles[] = $tile;
+             
+
+        }
+        // echo "<pre>";
+        // print_r($titles);
+        // exit;
+        return view('resulthistory',['history' => $result,'title' => $titles]);
     }
 
     /**

@@ -6,15 +6,34 @@
       <center><h3>Quiz Result History</h3></center>
     <br />
     <div style="padding: 30px;">
-    <ul>
-    	@foreach($history as $his)
+        <p style="float:right;font-weight:bold;">Your Total Points: {{Auth::user()->points}}</p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>S.no</th>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Points</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php $n=0; @endphp
+    	@foreach($history as $key => $his)
+        <tr>
+            <td>{{++$n}}</td>
     	@if(date("Y-m-d") == $his['today_date'])
-    	<li><div style="padding:10px;"><a href="{{url('/result/'.$his['today_date'])}}">Today</a></div></li>
+    	<td>Today</td>
     	@else
-    	<li><div style="padding:10px;"><a href="{{url('/result/'.$his['today_date'])}}">{{$his->today_date}}</a></div></li>
+    	<td>{{$his->today_date}}</td>
     	@endif
+        <td>{{$title[$key]}}</td>
+        <td>{{$his->points}}</td>
+        <td><a href="{{url('/result/'.$his['today_date'])}}" class="btn btn-primary">View</a></td>
+        </tr>
     	@endforeach
-    </ul>
+      </tbody>
+    </table>
 </div>
 </div>
 	</div>
