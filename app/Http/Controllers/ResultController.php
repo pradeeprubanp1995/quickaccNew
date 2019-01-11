@@ -155,6 +155,11 @@ class ResultController extends Controller
         // dd($date);
         $user_id = Auth::id();
         $dept_id = Auth::user()->dept_id;
+        if($dept_id == '')
+        {
+            return view('testquestion',['empty' => '']);
+
+        }
         $result = Result::where('user_id', $user_id)->where('today_date',$date)->get();
         // dd($result);
         $user_answer = $result[0]['user_answer'];
@@ -181,12 +186,22 @@ class ResultController extends Controller
         $dept_id = Auth::user()->dept_id;
         $titles = array();
         $result = Result::where('user_id',$user_id)->get();
+        if($result->isEmpty()){
+            return view('resulthistory',['empty' => '']);
+
+        }
+        // dd($result);
         foreach($result as $key => $res)
         {
             $quiz_date = $res->today_date;
-            // dd($dept_id);
+            //dd($quiz_date);
             $upcoming_id = Upcoming_title::where('dept_id',$dept_id)->where('date_of_quiz',$quiz_date)->get();
-            //dd($upcoming_id);
+            // dd($upcoming_id);
+            if($upcoming_id->isEmpty()){
+                
+            return view('resulthistory',['empty' => '']);
+            }
+            // dd($upcoming_id);
             $title_id = $upcoming_id[0]['title_id'];
             // dd($title_id);
             $title = Title::find($title_id);
@@ -201,6 +216,7 @@ class ResultController extends Controller
         // exit;
         return view('resulthistory',['history' => $result,'title' => $titles]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

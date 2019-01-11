@@ -5,6 +5,8 @@
  	<div class="card-body">
       <center><h1>Question</h1></center>
     <br />
+    @php $error="No Question Found"; @endphp
+    @if(isset($empty) && $empty == '') {{$error}} @else
     <div style="padding-bottom: 10px;margin: 20px;">
 <form method="post" action="{{route('result')}}">
 	{{ csrf_field() }}
@@ -29,6 +31,7 @@ $count = count($options);
 <input type="submit" value="submit" class="btn btn-primary" style="float:right;" name="submit">
 </form>
 </div>
+@endif
 </div>
 </div>
 @include('dashboard.userfooter')

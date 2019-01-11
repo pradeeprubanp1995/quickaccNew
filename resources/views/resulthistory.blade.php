@@ -5,6 +5,8 @@
  	<div class="card-body">
       <center><h3>Quiz Result History</h3></center>
     <br />
+    @php $n=0; $error="No Data Found" @endphp
+    @if(isset($empty) && $empty == '') {{$error}} @else
     <div style="padding: 30px;">
         <p style="float:right;font-weight:bold;">Your Total Points: {{Auth::user()->points}}</p>
     <table class="table table-striped">
@@ -18,7 +20,6 @@
             </tr>
         </thead>
         <tbody>
-            @php $n=0; @endphp
     	@foreach($history as $key => $his)
         <tr>
             <td>{{++$n}}</td>
@@ -32,6 +33,7 @@
         <td><a href="{{url('/result/'.$his['today_date'])}}" class="btn btn-primary">View</a></td>
         </tr>
     	@endforeach
+        @endif
       </tbody>
     </table>
 </div>

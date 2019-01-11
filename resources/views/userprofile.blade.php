@@ -75,7 +75,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Image</label>
                           <div class="col-sm-9">
-                             <img src="{{URL('/')}}/uploads/{{$data['images']}}"/></img>
+                             <img src="{{URL('/')}}/uploads/{{$data['images']}}" width="100px" height="100px"/></img>
                             
                             <input type="file" class="form-control" value="" name="img" />
                           </div>
