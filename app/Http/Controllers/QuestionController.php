@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Upcoming_title;
 use App\Title;
+use App\Result;
 
 class QuestionController extends Controller
 {
@@ -15,11 +16,26 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        //
-        $question = Question::where('upcomingtitle_id',$id)->get();
+        $user_id = Auth::id();
+        // check for user already attended result
+        $resultcheck = Result::where('user_id',$user_id)->where('today_date',date("Y-m-d"))->exists();
 
+        if($resultcheck == true)
+        {
+        return redirect('/result')->with('danger','Already submitted');
+        }
+
+        $date=date("Y-m-d");
+        $dept_id=Auth::user()->dept_id;
+        // dd($dept_id);
+        $upcoming_id=Upcoming_title::where('dept_id',$dept_id)->where('date_of_quiz',$date)->get();
+        // dd($upcoming_id[0]['id']);exit();
+        $id=$upcoming_id[0]['id'];
+        // echo $id;exit;
+        $question = Question::where('upcomingtitle_id',$id)->get();
+        // dd($question);
 
         return view('testquestion',['ques' => $question,'id' => $id]);
     }

@@ -20,7 +20,7 @@
                         </ul>
                     </li>
                     <li class="menu-item">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>QuiZ</a>
+                        <a href="{{route('quiz')}}" > <i class="menu-icon fa fa-glass"></i>QuiZ</a>
                         
                     </li>
                     <li class="menu-item">

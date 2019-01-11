@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Session;
 use Image;
 use App\Title;
+use App\Department;
 class HomeController extends Controller
 {
     /**
@@ -104,33 +105,82 @@ class HomeController extends Controller
         return view('changepassword');
        
     }
-
-    public function cron(){
-        $date=date("Y-m-d");
-        $data=Upcoming_title::get()->where('status','2')->where('date_of_quiz','<=',$date);
-        foreach ($data as $value) {
-            $id=$value['id'];
-            $title=$value['title_id'];
-            if($title=="0"){
-            $newtitle=Title::all()->random(1);
-            $randomtitle=json_decode($newtitle);
-            // echo '<pre>';print_r($randomtitle);
-            $data=Upcoming_title::find($id);
-            $data->status="1";                       
-            $data->title_id=$randomtitle[0]->id;
-            $data->save();
-            // echo $newtitle;
-            }
+public function cron()
+    {        
+        $status_data=Upcoming_title::select('id')
+                ->where('status','1')->get();
+        foreach ($status_data as $data)
+         {
+            $id=$data['id'];
+            $status_data1=Upcoming_title::find($id);
+            $status_data1->status="0";
+            $status_data1->save();
         }
-       
+
+        $date=date("Y-m-d");
+        $data=Upcoming_title::select('id')->where('status','2')->where('date_of_quiz','<=',$date)->get();
+        foreach ($data as $value)
+         {
+            $id=$value['id'];            
+            $data=Upcoming_title::find($id);
+            $data->status="1";
+            $data->save();
+           
+        }
+
+
+        $dept=Upcoming_title::select('dept_id')
+                ->where('date_of_quiz',$date)->get();
+        $particular_dept=Department::select('id','dept_name')
+                ->whereNotIn('id', $dept)->get();  
+        // echo$particular_dept;      
+        $dept=json_decode($particular_dept);               
+        $title_assign=[];
+        $forrand = array();
+        foreach ($dept as $key=> $value) {
+          $title_assign[$key] =Title::select('id')
+          ->whereRaw('FIND_IN_SET(?,dept_id)', [$value->id])->get();
+                       
+        }
+
+        foreach ($title_assign as $key => $value) 
+        {
+                foreach ($value as $keydata => $val) {
+                    
+                     $forrand[$dept[$key]->id][$val->id] =  $dept[$key]->dept_name;
+                }
+           
+            
+        }
+        $randvalues =[];
+        foreach($forrand as $key => $row) {
+
+            $randvalues[$key] =array_rand($row,1);
+             
+            
+             
+        }
+       // echo'<pre>';
+       //      print_r($randvalues);exit();
+
+        // $tot_title=count($randvalues); 
+                
+        foreach($randvalues as $key => $settitle){ 
+            // print_r($settitle[]);key
+        $title = new Upcoming_title();   
+        $title->title_id = $settitle;
+        $title->date_of_quiz = $date;
+        $title->status = '1';
+        $title->dept_id = $key;
+        $title->save();
+        }
         
+ 
 
-        // $data->status="1";
-        // $data->save();
-        // echo"ok";
-
-
+        
+        
     }
+
 
 
 
