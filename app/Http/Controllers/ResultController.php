@@ -93,14 +93,41 @@ class ResultController extends Controller
 
     public function highscore()
     {
-        //
-        $dept_id = Auth::user()->dept_id;
-        // dd($dept_id);
-        $resulttoday = Result::where('dept_id', $dept_id)->where('today_date',date("Y-m-d"))->max('points');
-        $result = Result::where('dept_id', $dept_id)->where('today_date',date("Y-m-d"))->where('points',$resulttoday)->get();
-    // dd($result);
-    // dd($rt);
-    //     dd($resulttoday);
+     $todate=date('Y-m-d');
+     $today = date("D"); 
+
+    if($today=="Fri")
+     {
+        $days_ago = date('Y-m-d', strtotime('-5 days', strtotime($todate)));
+
+     } 
+     $users = Result::groupBy('user_id')
+             ->selectRaw('*, sum(points) as sum')
+            ->whereBetween('today_date', [$days_ago,$todate])
+
+            ->get();
+//              echo'<pre>';
+// print_r($users);exit();
+    
+    foreach ($users as $value) {
+//     echo'<pre>';
+// print_r($value['user_id']); 
+        $weekpoints = User::find($value['user_id']);
+        $weekpoints->weekpoints=$value['sum'];
+        $weekpoints->save();
+
+        $store_weekpoints=new weekpoints;      
+        $store_weekpoints->userid=$value['user_id'];
+        $store_weekpoints->dept_id=$value['dept_id'];
+        $store_weekpoints->date=$todate;
+        $store_weekpoints->total_points=$value['sum'];
+        $store_weekpoints->save();
+    }
+    
+
+
+     
+     
     }
     /**
      * Show the form for creating a new resource.
