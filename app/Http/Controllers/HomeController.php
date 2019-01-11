@@ -180,8 +180,54 @@ public function cron()
         
         
     }
+    public function userprofile()
+    {       
+          $data = User::find( Auth::user()->id); 
+          $department = Department::select('*')->get();
+          
+        return view('userprofile',['data' => $data, 'department' => $department]);
+        
+       
+    }
+     public function userprofileview()
+    {       
+          $data = User::find( Auth::user()->id); 
+          // dd($data['dept_id']);
+          $department = Department::find($data['dept_id']);
+          // dd()
+        return view('userprofileview',['data' => $data, 'dept' => $department]);
+        
+       
+    }
+    public function usereditprofile(Request $request)
+    {
 
-
+        // dd($request->file('img'));
+        $upload_image=$request->file('img');
+        if(!empty($upload_image)){         
+        $image=$upload_image->getClientOriginalName();
+        $upload_image->move(public_path().'/uploads/', $image); 
+         $data = User::find( $request['id']);
+        $data->user_id=$request['userid'];
+        $data->name=$request['name'];
+        $data->gender=$request['gender'];
+        $data->dept_id=$request['dept_id'];
+        $data->images=$image;
+        $data->email=$request['email'];
+        $data->save();          
+        } 
+        $data = User::find( $request['id']);
+        $data->user_id=$request['userid'];
+        $data->name=$request['name'];
+        $data->gender=$request['gender'];
+        $data->dept_id=$request['dept_id'];       
+        $data->email=$request['email'];
+        $data->save();
+        return redirect()->back()->with('success','Updated successfully');
+          
+        // return view('profile',compact('data'));
+       
+    }
 
 
     

@@ -113,3 +113,6 @@ Route::get('/result', 'ResultController@indexx')->name('resultview');
 Route::get('/resulthistory','ResultController@show')->name('history');
 Route::get('/result/{date}','ResultController@view');
 Route::get('/highscore','ResultController@highscore')->name('rank');
+Route::get('/userprofile','HomeController@userprofile')->name('userprofile');
+Route::any('/usereditprofile', 'HomeController@usereditprofile')->name('usereditprofile');
+Route::get('/userprofileview','HomeController@userprofileview')->name('userprofileview');
