@@ -26,6 +26,8 @@
         <div class="row w-100">
           <div class="col-lg-4 mx-auto">
             <div class="auto-form-wrapper">
+              <center><img src="{{asset('asset/images/logo-colan.png')}}" alt="logo" /><h4 style="padding-top: 10px;">SELF EVALUATE TOOL</h4></center>
+              <hr>
                     <form method="POST" action="{{ route('login.request') }}">
                         @csrf
                         <!-- @if (session()->has('errors'))
@@ -85,10 +87,10 @@
                   </div>
                   <a href="#" class="text-small forgot-password text-black">Forgot Password</a>
                 </div> -->
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <button class="btn btn-block g-login">
                     <img class="mr-3" src="{{asset('asset/images/file-icons/icon-google.svg')}}" alt="">Log in with Google</button>
-                </div>
+                </div> -->
                 <div class="text-block text-center my-3">
                   <span class="text-small font-weight-semibold">Welcome To Self Evaluate Tool</span>
                   <!-- <a href="{{route('register')}}" class="text-black text-small">Create new account</a> -->

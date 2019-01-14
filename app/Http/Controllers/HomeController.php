@@ -293,7 +293,7 @@ public function cron()
         else{
         return redirect()->back()->with('warning', 'Please Give correct oldpassword');}      
     }
-
+    
     
     
 }
