@@ -112,7 +112,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="images/avatar/3.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="{{URL('/')}}/uploads/{{Auth::user()->images}}"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Cheryl Wheeler</span>
                                         <span class="time float-right">10 minutes ago</span>
@@ -132,16 +132,16 @@
                     </div>
 
                     <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="{{URL('/')}}/uploads/{{Auth::user()->images}}" alt="User Avatar">
+                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@if(Auth::user()->images == '')<i class="fa fa-user" style="font-size: 20px;"></i>@else
+                            <img class="user-avatar rounded-circle" src="{{URL('/')}}/uploads/{{Auth::user()->images}}" alt="User Avatar">@endif
                         </a>
 
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="{{route('userprofileview')}}"><i class="fa fa-user"></i>My Profile</a>
 
-                            <!-- <a class="nav-link" href="#"><i class="fa fa-bell-o"></i>Notifications <span class="count">13</span></a>
+                            <a class="nav-link" href="{{route('userchangepassword')}}"><i class="fa fa-unlock-alt"></i>change password</a>
 
-                            <a class="nav-link" href="#"><i class="fa fa-cog"></i>Settings</a> -->
+                            <!-- <a class="nav-link" href="#"><i class="fa fa-cog"></i>Settings</a> -->
 
                             <a class="nav-link" href="{{ route('logout') }}"><i class="fa fa-power-off"></i>Logout</a>
                         </div>

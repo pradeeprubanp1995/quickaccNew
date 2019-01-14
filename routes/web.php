@@ -117,3 +117,5 @@ Route::get('/highscore','ResultController@highscore')->name('rank');
 Route::get('/userprofile','HomeController@userprofile')->name('userprofile');
 Route::any('/usereditprofile', 'HomeController@usereditprofile')->name('usereditprofile');
 Route::get('/userprofileview','HomeController@userprofileview')->name('userprofileview');
+Route::any('/userchangepassword', 'HomeController@userchangepassword')->name('userchangepassword');
+Route::any('/userchangedpassword', 'HomeController@userchangedpassword')->name('userchangedpassword');

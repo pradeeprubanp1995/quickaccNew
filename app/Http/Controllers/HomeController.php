@@ -262,7 +262,37 @@ public function cron()
         // return view('profile',compact('data'));
        
     }
-
+    
+    public function userchangepassword()
+    {       
+          
+        return view('userchangepassword');
+       
+    }
+    public function userchangedpassword(Request $request)
+    {
+        // dd($request);exit();;;
+        // echo Auth::user()->password;
+        // dd(Session::get('password'));exit();
+        $request->validate([
+            
+            'oldpassword' => 'required',
+            'password' => 'min:5|required_with:confirmpassword|same:confirmpassword',
+            'confirmpassword' => 'required|min:5',
+        ]);
+        
+        if($request['oldpassword']==Session::get('password'))
+        {
+        $store = User::find(Auth::user()->id); 
+        $store->password =Hash::make($request['password']);      
+        $store->save();
+         Auth::logout();        
+        $request->session()->invalidate();
+        $request->session()->flash('errors', 'You are logged out!');
+        return redirect('/user/login');}
+        else{
+        return redirect()->back()->with('warning', 'Please Give correct oldpassword');}      
+    }
 
     
     
