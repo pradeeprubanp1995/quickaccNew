@@ -97,11 +97,16 @@ class LoginController extends Controller
     }
     public function logout(Request $request)
     {
+        $usertype = Auth::user()->user_type;
+        // echo $usertype;exit;
         $this->guard()->logout();
 
         $request->session()->invalidate();
 
-        return $this->loggedOut($request) ?: redirect('/');
+        if($usertype == 1)
+                return $this->loggedOut($request) ?: redirect('/');
+        else
+                return $this->loggedOut($request) ?: redirect('/user/login');
     }
 
 

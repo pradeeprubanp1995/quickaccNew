@@ -96,7 +96,30 @@ img
             </div>
         </div>
 
-        <div class="content"> 
+        <div class="content">
+@if (\Session::has('success'))
+<div class="alert alert-success">
+<p>{{ \Session::get('success') }}</p>
+</div><br />
+@endif
+
+@if (\Session::has('danger'))
+<div class="alert alert-danger">
+<p>{{ \Session::get('danger') }}</p>
+</div><br />
+@endif
+
+
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif 
         <!-- <?php //echo "<pre>"; print_r($post_data['title_name']); exit; ?> -->
         <div align="center" style="color:red;" id="queserror"></div>
         <div align="center" style="color:red;" id="optnerror"></div>
@@ -113,7 +136,7 @@ img
                         <td width="90%"> 
                         <textarea name="ques" class="form-control" id="ques" placeholder="QUESTION" required/></textarea> 
                         <input type="hidden" name="src_cancel" id="src_cancel" value="{{asset('asset/images/cancel.png')}}" />
-                        <input type="hidden" name="submit_url" id="submit_url" value="{{ route('updatequestion') }}" />
+                       <!--  <input type="hidden" name="submit_url" id="submit_url" value="{{ route('updatequestion') }}" /> -->
                         <input type="hidden" name="title_name" id="title_name" value="{{ $post_data['title_name'] }}" />
                         <input type="hidden" name="upcomingid" id="upcomingid" value="{{ $post_data['id'] }}" /> 
                         </td>
@@ -121,13 +144,17 @@ img
                         <td width="10%"> <img src="{{asset('asset/images/plus.png')}}" id="add"  name="add"  /></td>                    
                 </tr>
                 <tr> <td> &nbsp; <br/> 
-                           <div id="add_input"></div>   
+                           <div id="add_input">
+                               
+                               <div class=" add_div_0"> <div class="col-xs-2"> <input type="radio"  name="keys_radio" value="0" /> </div> <div class="col-xs-8">  <input type="text" class="form-control" name="keys[]" placeholder="Option" required /> </div> <div class="col-xs-2">  &nbsp; &nbsp; &nbsp; &nbsp;<!-- <img src="{{asset('asset/images/cancel.png')}}" class="cancel_div" /> --> </div> <div> &nbsp; </div> </div>
+
+                           </div>   
 
                 </td> </tr>
 
 
                 <tr align="right">  <td> 
-                <input type="button" class="btn btn-success btn-block " name="submit" id="save" value="Submit"  /> 
+                <input type="submit" class="btn btn-success btn-block " name="submit" id="submit" value="Submit"  /> 
 
                  <!-- <button type="button" class="btn btn-success btn-block" name="insert-data" id="insert" onclick="return val();" >Insert Data</button> -->
                 </td></tr>

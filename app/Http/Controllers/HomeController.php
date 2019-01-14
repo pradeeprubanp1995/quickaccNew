@@ -11,6 +11,8 @@ use Session;
 use Image;
 use App\Title;
 use App\Department;
+use App\Result;
+use DateTime;
 class HomeController extends Controller
 {
     /**
@@ -28,9 +30,62 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function getLastWeekDates()
+    {
+        $lastWeek = array();
+     
+        $prevMon = abs(strtotime("previous monday"));
+        $currentDate = abs(strtotime("today"));
+        $seconds = 86400; //86400 seconds in a day
+     
+        $dayDiff = ceil( ($currentDate-$prevMon)/$seconds ); 
+     
+        if( $dayDiff < 7 )
+        {
+            $dayDiff += 1; //if it's monday the difference will be 0, thus add 1 to it
+            $prevMon = strtotime( "previous monday", strtotime("-$dayDiff day") );
+        }
+     
+        $prevMon = date("Y-m-d",$prevMon);
+     
+        // create the dates from Monday to Sunday
+        for($i=0; $i<7; $i++)
+        {
+            $d = date("Y-m-d", strtotime( $prevMon." + $i day") );
+            $lastWeek[]=$d;
+        }
+     
+        return $lastWeek;
+    }
+
+
     public function index()
     {
-        return view('userdashboard');
+
+        $week = $this->getLastWeekDates();
+
+
+$month_ini = new DateTime("first day of last month");
+$month_end = new DateTime("last day of last month");
+
+$firstmon = $month_ini->format('Y-m-d'); // 2012-02-01
+$lastmon = $month_end->format('Y-m-d'); // 2012-02-29
+    // exit;
+    //     print_r($revenueMonth);
+
+
+        $date = date('Y-m-d');
+        $dept_id = Auth::user()->dept_id;
+        $data[0] = Result::select('*')->where('today_date',$date)->where('dept_id',$dept_id)->orderBy('points', 'desc')->first();
+
+        $data[1] = Result::select('*')->selectRaw('sum(points) as weekpoints')->whereBetween('created_at', array($week[0], $week[4]))->where('dept_id',$dept_id)->groupBy('user_id')->orderBy('weekpoints', 'desc')->first();
+
+        $data[2] = Result::select('*')->selectRaw('sum(points) as monthpoints')->whereBetween('created_at', array($firstmon, $lastmon))->where('dept_id',$dept_id)->groupBy('user_id')->orderBy('monthpoints', 'desc')->first();
+
+        // dd($getmonth);
+
+
+        return view('userdashboard',['post_data'=>$data]);
     }
     public function adminindex()
     {

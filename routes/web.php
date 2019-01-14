@@ -98,6 +98,7 @@ Route::get('/user/login','UpcomingTitleController@userlogin')->name('userlogin')
 // question update
 Route::get('/updatequestioninput','QuestionController@updatequestioninput')->name('updatequestioninput');
 Route::post('/updatequestion','QuestionController@updatequestion')->name('updatequestion');
+Route::get('/attendquiz','QuestionController@attendquiz')->name('attendquiz');
 
 
 

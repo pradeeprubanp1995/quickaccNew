@@ -71,21 +71,10 @@
                     <hr/>
                     <h3>Actions</h3><br/>
                     <div class="col-sm-12">
-                        <div class="col-sm-6">
+                        
                             <a href="{{route('userprofile')}}" class="btn btn-primary" style="float:left">Edit</a>
-                        </div>
-                        <div class="col-sm-6">
-                            <?php 
-                                if(isset($post_data))
-                                { ?>
-
-                                    
-                                    <a href="{{ route('updatequestioninput')}}" class="btn btn-primary" style="float:left">Update Today Question</a>
-
-                               <?php  }
-                                else echo '';
-                            ?>
-                        </div>
+                       
+                        
                     </div>
 
 </div>

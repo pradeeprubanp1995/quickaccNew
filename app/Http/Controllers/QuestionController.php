@@ -18,13 +18,56 @@ class QuestionController extends Controller
      */
     public function index()
     {
+        
+        $userid = Auth::user()->id;
+        $dept = Auth::user()->dept_id;
+        $tomorrow = date("Y-m-d", strtotime('tomorrow'));
+        $result = array();
+
+        $upcoming = Upcoming_title::select('*')->where('date_of_quiz',$tomorrow)->where('status','2')->where('dept_id', $dept)->get();
+
+
+        // echo "<pre>";print_r($upcoming[0]);exit;
+
+        if(isset($upcoming[0]))
+        {
+             $question = Question::select('*')->where('user_id',$userid)->where('upcomingtitle_id',$upcoming[0]->id)->get();
+
+             if(isset($question[0]))
+             {
+            // echo "<pre>";print_r($question);exit;
+            
+                return view('quizview',[ 'post_data' => $question[0]]);
+            }
+            else
+            {
+                return view('quizview');
+            }
+            
+
+            
+        }
+       
+            return view('quizview');
+       
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function attendquiz()
+    {
         $user_id = Auth::id();
         // check for user already attended result
         $resultcheck = Result::where('user_id',$user_id)->where('today_date',date("Y-m-d"))->exists();
-
+// dd($resultcheck);
         if($resultcheck == true)
         {
-        return redirect('/result')->with('danger','Already submitted');
+            // echo "sdfds";exit;  
+            return redirect('/result')->with('danger','Already submitted');
         }
 
         $date=date("Y-m-d");
@@ -47,19 +90,16 @@ class QuestionController extends Controller
         return view('testquestion',['ques' => $question,'id' => $id]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
      public function updatequestioninput()
-    {
+    {   
         $userid = Auth::user()->id;
         $dept = Auth::user()->dept_id;
-        $today = date('Y-m-d');
+        $tomorrow = date("Y-m-d", strtotime('tomorrow'));
         $result = array();
 
-        $upcoming = Upcoming_title::select('*')->where('date_of_quiz',$today)->where('status','1')->whereRaw('FIND_IN_SET(?,dept_id)', [$dept])->get();
+        $upcoming = Upcoming_title::select('*')->where('date_of_quiz',$tomorrow)->where('status','2')->where('dept_id', $dept)->get();
 
         if(isset($upcoming[0]))
         {
@@ -72,13 +112,16 @@ class QuestionController extends Controller
                 $result['id'] = $upcoming[0]->id;
 
                 
-                // echo "<pre>";print_r($upcoming);exit();
+                
                 return view('updatequestion',['post_data' => $result]);
             
 
             
         }
-        
+        else
+        {
+            echo "something went wrong";exit;
+        }
 
         
 
@@ -101,19 +144,26 @@ class QuestionController extends Controller
             }
         }
         $options = json_encode($hold);
-        // print_r(json_encode($hold));exit;
+        // print_r($_POST);exit;
         $question = new Question();
         $data = $this->validate($request, [
             'ques'=>'required',
-            // 'keys'=>'required',
-            'answer'=> 'required',
+           
+            'keys_radio'=> 'required',
             
         ]);
-        
+
+
+        $getquescount = Question::select('id')->where('upcomingtitle_id' , $_POST['upcomingid'])->count();
+        // echo"<pre>";print_r($getcount);exit;
+        if($getquescount <= 2)
+        {
+            
+            $question->user_id = Auth::user()->id;
             $question->upcomingtitle_id = $_POST['upcomingid'];
             $question->question = $data['ques'];
             $question->options = $options;
-            $question->answer = $data['answer'];
+            $question->answer = $data['keys_radio'];
             $question->save();
 
 
@@ -122,13 +172,18 @@ class QuestionController extends Controller
             $today = date('Y-m-d');
             
 
-        $upcoming = Upcoming_title::find($_POST['upcomingid']);
-        $upcoming->status = '0';
-        $upcoming->save();
+        // $upcoming = Upcoming_title::find($_POST['upcomingid']);
+        // $upcoming->status = '1';
+        // $upcoming->save();
 
-            echo '1';
+            // echo '1';
 
-            // return redirect()->route('updatequestioninput')->with('success','Insert Successfully');
+            return redirect()->route('quiz')->with('success','Your question posted Successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('danger','That title already have 20 questions.Thank you..');
+        }
     }
     /**
      * Store a newly created resource in storage.

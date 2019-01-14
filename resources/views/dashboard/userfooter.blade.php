@@ -49,7 +49,7 @@ $(document).ready(function(){
 
         // $('#myModal').modal('show');
         // var abc = ['A','B','C','D','E'];
-        var labCnt = $('.add_div').length;
+        var labCnt = $('.add_div').length+1;
         // alert(labCnt);
         // <div class="col-xs-2"><b>'+abc[labCnt]+'</b></div><div class="col-xs-6"></div>
         if(labCnt < 4 )
