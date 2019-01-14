@@ -46,36 +46,13 @@
                             </select>
                           </div>
                         </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Department</label>
-                          <div class="col-sm-9">
-                            <select style="width:100%" name="dept_id">
-                    <!-- <option value="" selected disabled hidden>Choose here</option> -->
-                    <option value="0" selected>None</option>
-                      @foreach($department as $dept)
-                      <option value="{{$dept->id}}" {{($dept['id'] == $data['dept_id']) ? 'selected' : ''}}>{{$dept->dept_name}}</option>
-                      @endforeach
-                    </select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Email Address</label>
-                          <div class="col-sm-9">
-                            <input type="email" class="form-control" value="<?php echo $data['email'];?>" name="email"  required/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
+                      </div>      
+                     <div class="col-md-6">
+                      <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Image</label>
                           <div class="col-sm-9">
-                             <img src="{{URL('/')}}/uploads/{{$data['images']}}" width="100px" height="100px"/></img>
+                            @if(Auth::user()->images == '') <i class="fa fa-user" style="font-size: 20px;"></i>@else
+                             <img src="{{URL('/')}}/uploads/{{$data['images']}}" width="100px" height="100px"/></img>@endif
                             
                             <input type="file" class="form-control" value="" name="img" />
                           </div>

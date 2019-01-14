@@ -44,7 +44,8 @@
                     @endif
                   </div>
                 </div>
-                 <div class="form-group">
+
+                <div class="form-group">
                   <div class="input-group">
                     <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="Email Address" value="{{ old('email') }}">
                     <div class="input-group-append">
@@ -58,7 +59,30 @@
                                     </span>
                   @endif
                   </div>
-                </div>               
+                </div> 
+
+                <div class="form-group">
+                  <div class="input-group">
+                    <select name="dept_id" class="form-control" style="height: 44px;">
+                    <!-- <option value="" selected disabled hidden>Choose here</option> -->
+                    <option value="0" selected>None</option>
+                      @foreach($department as $dept)
+                      <option value="{{$dept->id}}">{{$dept->dept_name}}</option>
+                      @endforeach
+                    </select>
+                    <!-- <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="Email Address" value="{{ old('email') }}"> -->
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="mdi mdi-check-circle-outline"></i>
+                      </span>
+                    </div>
+                 @if ($errors->has('dept_id'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('dept_id') }}</strong>
+                                    </span>
+                  @endif
+                  </div>
+                </div>                
 
                 <div class="form-group">
                   <div class="input-group">
