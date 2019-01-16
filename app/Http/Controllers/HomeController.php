@@ -63,27 +63,32 @@ class HomeController extends Controller
     public function index()
     {
 
-        $week = $this->getLastWeekDates();
+        // $week = $this->getLastWeekDates();
+         $date = date('Y-m-d');
+        $weekfirst = date('Y-m-d',strtotime('-1 Monday'));
+        $firstmon  = date('Y-m-01'); 
+        $tommorrow = date("Y-m-d", strtotime('tomorrow'));
+
+// $month_ini = new DateTime("first day of last month");
+// $month_end = new DateTime("last day of last month");
+
+// $firstmon = $month_ini->format('Y-m-d'); // 2012-02-01
+// $lastmon = $month_end->format('Y-m-d'); // 2012-02-29
 
 
-$month_ini = new DateTime("first day of last month");
-$month_end = new DateTime("last day of last month");
-
-$firstmon = $month_ini->format('Y-m-d'); // 2012-02-01
-$lastmon = $month_end->format('Y-m-d'); // 2012-02-29
     // exit;
-    //     print_r($revenueMonth);
+        // print_r($tommorrow);exit;
 
 
-        $date = date('Y-m-d');
+       
         $dept_id = Auth::user()->dept_id;
         $data[0] = Result::select('*')->where('today_date',$date)->where('dept_id',$dept_id)->orderBy('points', 'desc')->first();
 
-        $data[1] = Result::select('*')->selectRaw('sum(points) as weekpoints')->whereBetween('created_at', array($week[0], $week[4]))->where('dept_id',$dept_id)->groupBy('user_id')->orderBy('weekpoints', 'desc')->first();
+        $data[1] = Result::select('*')->selectRaw('sum(points) as weekpoints')->whereBetween('today_date', array($weekfirst, $tommorrow))->first();
 
-        $data[2] = Result::select('*')->selectRaw('sum(points) as monthpoints')->whereBetween('created_at', array($firstmon, $lastmon))->where('dept_id',$dept_id)->groupBy('user_id')->orderBy('monthpoints', 'desc')->first();
+        $data[2] = Result::select('*')->selectRaw('sum(points) as monthpoints')->whereBetween('today_date', array($firstmon, $tommorrow))->where('dept_id',$dept_id)->groupBy('user_id')->orderBy('monthpoints', 'desc')->first();
 
-        // dd($getmonth);
+        // dd($data[2]);
         $user['today'] = User::find($data[0]['user_id']);
 
         $user['week'] = User::find($data[1]['user_id']);
@@ -171,81 +176,7 @@ $lastmon = $month_end->format('Y-m-d'); // 2012-02-29
         return view('changepassword');
        
     }
-public function cron()
-    {        
-        $status_data=Upcoming_title::select('id')
-                ->where('status','1')->get();
-        foreach ($status_data as $data)
-         {
-            $id=$data['id'];
-            $status_data1=Upcoming_title::find($id);
-            $status_data1->status="0";
-            $status_data1->save();
-        }
-
-        $date=date("Y-m-d");
-        $data=Upcoming_title::select('id')->where('status','2')->where('date_of_quiz','<=',$date)->get();
-        foreach ($data as $value)
-         {
-            $id=$value['id'];            
-            $data=Upcoming_title::find($id);
-            $data->status="1";
-            $data->save();
-           
-        }
-
-
-        $dept=Upcoming_title::select('dept_id')
-                ->where('date_of_quiz',$date)->get();
-        $particular_dept=Department::select('id','dept_name')
-                ->whereNotIn('id', $dept)->get();  
-        // echo$particular_dept;      
-        $dept=json_decode($particular_dept);               
-        $title_assign=[];
-        $forrand = array();
-        foreach ($dept as $key=> $value) {
-          $title_assign[$key] =Title::select('id')
-          ->whereRaw('FIND_IN_SET(?,dept_id)', [$value->id])->get();
-                       
-        }
-
-        foreach ($title_assign as $key => $value) 
-        {
-                foreach ($value as $keydata => $val) {
-                    
-                     $forrand[$dept[$key]->id][$val->id] =  $dept[$key]->dept_name;
-                }
-           
-            
-        }
-        $randvalues =[];
-        foreach($forrand as $key => $row) {
-
-            $randvalues[$key] =array_rand($row,1);
-             
-            
-             
-        }
-       // echo'<pre>';
-       //      print_r($randvalues);exit();
-
-        // $tot_title=count($randvalues); 
-                
-        foreach($randvalues as $key => $settitle){ 
-            // print_r($settitle[]);key
-        $title = new Upcoming_title();   
-        $title->title_id = $settitle;
-        $title->date_of_quiz = $date;
-        $title->status = '1';
-        $title->dept_id = $key;
-        $title->save();
-        }
-        
- 
-
-        
-        
-    }
+   
     public function userprofile()
     {       
           $data = User::find( Auth::user()->id); 

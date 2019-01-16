@@ -22,7 +22,7 @@ class DepartmentController extends Controller
         public function index()
         {
             //
-            $result = Department::select('*')->get();
+            $result = Department::select('*')->paginate(4);
             // dd($result[0]);
 
             return view('department',['dept_data' => $result]);

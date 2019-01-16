@@ -11,7 +11,7 @@
       <center><h3>Today Result</h3></center>
     <br />
     @php $error="No Result Found"; @endphp
-    @if(isset($empty) && $empty == '') {{$error}} @else
+    @if(isset($empty) && $empty == '') <center><p>{{$error}}</p></center> @else
      <div class="card border border-success">
        <div class="card-header" style="text-align: center;font-size: 20px;">
                                 <strong class="card-title">your Today's Point is </strong>

@@ -192,7 +192,7 @@ class ResultController extends Controller
         $user_id = Auth::id();
         $dept_id = Auth::user()->dept_id;
         $titles = array();
-        $result = Result::where('user_id',$user_id)->get();
+        $result = Result::where('user_id',$user_id)->paginate(10);
         if($result->isEmpty()){
             return view('resulthistory',['empty' => '']);
 
@@ -205,9 +205,9 @@ class ResultController extends Controller
             $upcoming_id = Upcoming_title::where('dept_id',$dept_id)->where('date_of_quiz',$quiz_date)->get();
             // dd($upcoming_id);
             if($upcoming_id->isEmpty()){
-                
-            return view('resulthistory',['empty' => '']);
-            }
+            $titles[] = '';
+            // return view('resulthistory',['empty' => '']);
+            }else{
             // dd($upcoming_id);
             $title_id = $upcoming_id[0]['title_id'];
             // dd($title_id);
@@ -215,6 +215,7 @@ class ResultController extends Controller
             //dd($title->title_name);
             $tile = $title->title_name;
             $titles[] = $tile;
+            }
              
 
         }

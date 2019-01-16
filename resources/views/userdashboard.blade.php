@@ -32,7 +32,7 @@
                                         <h3 class="mb-0 fw-r">
                                             <span class="currency  mr-1"></span>
                                              @if($post_data[0] != null)
-                                            <span class="count">{{ $post_data[0]->points }}</span>@else<span> - - </span>
+                                            <span class="count">{{ $post_data[0]->points }}</span>@else<span> 0 </span>
                                             @endif
                                         </h3>
                                         @php  $img1 = $user['today']['images']; @endphp
@@ -46,7 +46,7 @@
                                          {{$user['today']['name']}} @else
                                          <i> None </i> </p>
                                          @endif
-                                        <h3>Day of the Employer</h3>
+                                        <h3>Employee of the Day</h3>
                                         
                                     </div><!-- /.card-left -->
 
@@ -66,11 +66,11 @@
                                         <h3 class="mb-0 fw-r">
                                             <span class="currency  mr-1"></span>
                                             @if($post_data[1] != null)
-                                            <span class="count">{{ $post_data[1]->weekpoints }}</span>@else<span> - - </span>
+                                            <span class="count">{{ $post_data[1]->weekpoints }}</span>@else<span> 0 </span>
                                             @endif
                                         </h3>
                                         @php $img2 = $user['week']['images']; @endphp
-                                        <p class="text-light">Last Week High Score</p>
+                                        <p class="text-light">This Week High Score</p>
                                         <img src="{{asset('asset/images/king_crown.png')}}" height="100px"></img>
                                         @if($img2 != '')
                                         <img class="user-avatar rounded-circle" src="{{URL('/')}}/uploads/{{$img2}}"  width="160px" height="160px" style="    background-color: white;" /></img>@else
@@ -80,7 +80,7 @@
                                          {{$user['week']['name']}} @else
                                          <i> None </i> </p>
                                          @endif
-                                        <h3>Week of the Employer</h3>
+                                        <h3>Employee of the Week</h3>
                                         
                                     </div><!-- /.card-left -->
 
@@ -99,11 +99,11 @@
                                         <h3 class="mb-0 fw-r">
                                             <span class="currency  mr-1"></span>
                                              @if($post_data[2] != null)
-                                            <span class="count">{{ $post_data[2]->monthpoints }}</span>@else<span> - - </span>
+                                            <span class="count">{{ $post_data[2]->monthpoints }}</span>@else<span> 0 </span>
                                             @endif
                                         </h3>
                                         @php $img3 = $user['month']['images']; @endphp
-                                        <p class="text-light">Last Month High Score</p>
+                                        <p class="text-light">This Month High Score</p>
                                         <img src="{{asset('asset/images/diamond.png')}}" height="100px"></img>
                                         @if($img3 != '')
                                         <img class="user-avatar rounded-circle" src="{{URL('/')}}/uploads/{{$img3}}"  width="160px" height="160px" style="    background-color: white;" /></img>@else
@@ -113,7 +113,7 @@
                                          {{$user['month']['name']}} @else
                                          <i> None </i> </p>
                                          @endif
-                                        <h3>Month of the Employer</h3>
+                                        <h3>Employee of the Month</h3>
                                         
                                     </div><!-- /.card-left -->
 

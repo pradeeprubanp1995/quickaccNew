@@ -206,7 +206,7 @@ $(document).on( "change", ".dept", function() {
                      
                      success: function(res) 
                      {
-                      
+                      console.log(res);
                         if(res.length > 0)
                         {
                           $('#titleauto').empty();

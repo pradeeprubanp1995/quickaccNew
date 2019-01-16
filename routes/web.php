@@ -37,7 +37,7 @@ Route::any('/adminindex', 'HomeController@adminindex')->name('adminindex');
 
 //Registration
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', 'Auth\RegisterController@register');
+Route::post('/register', 'Auth\RegisterController@register');
 Route::any('/register/response','Auth\RegisterController@register')->name('register.request');
 
 //Profile
@@ -45,7 +45,7 @@ Route::get('/profile', 'HomeController@profile')->name('profile');
 Route::any('/editprofile', 'HomeController@editprofile')->name('editprofile');
 
 //cron
-Route::get('/cron', 'HomeController@cron')->name('cron');
+Route::get('/cron', 'Auth\LoginController@cron')->name('cron');
 //Change password
 
 Route::any('/changepassword', 'HomeController@changepassword')->name('changepassword');

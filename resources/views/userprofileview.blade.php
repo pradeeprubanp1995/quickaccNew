@@ -62,7 +62,7 @@
                           <label class="col-sm-3 col-form-label">Image</label>
                           <div class="col-sm-9">
                             @if(Auth::user()->images == '') <i class="fa fa-user" style="font-size: 20px;"></i>@else
-                             <img src="{{URL('/')}}/uploads/{{$data['images']}}" width="100px" height="100px"/></img>@endif
+                             <img src="{{URL('/')}}/uploads/{{$data[0]['images']}}" width="100px" height="100px"/></img>@endif
                             
                           </div>
                         </div>

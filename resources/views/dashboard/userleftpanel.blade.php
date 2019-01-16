@@ -18,7 +18,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Result</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ route('history') }}">All Records</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ route('resultview') }}">Today Records</a></li>
+                            <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ route('resultview') }}">Today Record</a></li>
                             
                             
                         </ul>

@@ -136,7 +136,7 @@ class UpcomingTitleController extends Controller
     {
 
         
-        $result= Upcoming_title::with('department','title')->get();
+        $result= Upcoming_title::with('department','title')->paginate(10);
         // echo "<pre>";print_r($result);exit;
 
                // dd($result);

@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Session;
 use Illuminate\Support\Facades\Hash;
-
+use App\Upcoming_title;
+use App\Department;
+use App\Title;
 
 class LoginController extends Controller
 {
@@ -95,7 +97,7 @@ class LoginController extends Controller
         ]);
         }
     }
-    public function logout(Request $request)
+        public function logout(Request $request)
         {
             $usertype = Auth::user()->user_type;
             // echo $usertype;exit;
@@ -108,6 +110,83 @@ class LoginController extends Controller
             else
             return $this->loggedOut($request) ?: redirect('/user/login');
         }
+
+         public function cron()
+    {        
+        $status_data=Upcoming_title::select('id')
+                ->where('status','1')->get();
+        foreach ($status_data as $data)
+         {
+            $id=$data['id'];
+            $status_data1=Upcoming_title::find($id);
+            $status_data1->status="0";
+            $status_data1->save();
+        }
+
+        $date= date("Y-m-d");
+        $tommorrow =date("Y-m-d", strtotime('tomorrow'));
+        $data=Upcoming_title::select('id')->where('status','2')->where('date_of_quiz','<=',$date)->get();
+        foreach ($data as $value)
+         {
+            $id=$value['id'];            
+            $data=Upcoming_title::find($id);
+            $data->status="1";
+            $data->save();
+           
+        }
+
+
+        $dept=Upcoming_title::select('dept_id')
+                ->where('date_of_quiz',$date)->get();
+        $particular_dept=Department::select('id','dept_name')
+                ->whereNotIn('id', $dept)->get();  
+        // echo$particular_dept;      
+        $dept=json_decode($particular_dept);               
+        $title_assign=[];
+        $forrand = array();
+        foreach ($dept as $key=> $value) {
+          $title_assign[$key] =Title::select('id')
+          ->whereRaw('FIND_IN_SET(?,dept_id)', [$value->id])->get();
+                       
+        }
+
+        foreach ($title_assign as $key => $value) 
+        {
+                foreach ($value as $keydata => $val) {
+                    
+                     $forrand[$dept[$key]->id][$val->id] =  $dept[$key]->dept_name;
+                }
+           
+            
+        }
+        $randvalues =[];
+        foreach($forrand as $key => $row) {
+
+            $randvalues[$key] =array_rand($row,1);
+             
+            
+             
+        }
+       // echo'<pre>';
+       //      print_r($randvalues);exit();
+
+        // $tot_title=count($randvalues); 
+                
+        foreach($randvalues as $key => $settitle){ 
+            // print_r($settitle[]);key
+        $title = new Upcoming_title();   
+        $title->title_id = $settitle;
+        $title->date_of_quiz = $tommorrow;
+        $title->status = '2';
+        $title->dept_id = $key;
+        $title->save();
+        }
+        
+ 
+
+        
+        
+    }
 
 
 

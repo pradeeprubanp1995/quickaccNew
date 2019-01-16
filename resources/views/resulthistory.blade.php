@@ -6,7 +6,7 @@
       <center><h3>Quiz Result History</h3></center>
     <br />
     @php $n=0; $error="No Data Found" @endphp
-    @if(isset($empty) && $empty == '') {{$error}} @else
+    @if(isset($empty) && $empty == '') <center><p>{{$error}}</p></center> @else
     <div style="padding: 30px;">
         <p style="float:right;font-weight:bold;">Your Total Points: {{Auth::user()->points}}</p>
     <table class="table table-striped">
@@ -28,7 +28,10 @@
     	@else
     	<td>{{$his->today_date}}</td>
     	@endif
-        <td>{{$title[$key]}}</td>
+
+        @if($title[$key] != '')
+<td>{{$title[$key]}}</td>@else<td><i>Title Not found</i></td>@endif
+
         <td>{{$his->points}}</td>
         <td><a href="{{url('/result/'.$his['today_date'])}}" class="btn btn-primary">View</a></td>
         </tr>
@@ -36,6 +39,7 @@
         @endif
       </tbody>
     </table>
+        
 </div>
 </div>
 	</div>

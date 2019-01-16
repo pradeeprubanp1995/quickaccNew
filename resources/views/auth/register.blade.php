@@ -47,6 +47,22 @@
 
                 <div class="form-group">
                   <div class="input-group">
+                    <input type="text" class="form-control{{ $errors->has('employeeid') ? ' is-invalid' : '' }}" name="employeeid" placeholder="Employee Id">
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="mdi mdi-check-circle-outline"></i>
+                      </span>
+                    </div>
+                    @if ($errors->has('employeeid'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('employeeid') }}</strong>
+                                    </span>
+                    @endif
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="input-group">
                     <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="Email Address" value="{{ old('email') }}">
                     <div class="input-group-append">
                       <span class="input-group-text">
@@ -60,7 +76,7 @@
                   @endif
                   </div>
                 </div> 
-
+<!-- <?php //print_r($department); exit; ?> -->
                 <div class="form-group">
                   <div class="input-group">
                     <select name="dept_id" class="form-control" style="height: 44px;">

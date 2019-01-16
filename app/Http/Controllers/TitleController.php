@@ -126,13 +126,13 @@ class TitleController extends Controller
 
         if(!isset($request['subcategory']))
         {
-            $data['subcategory'] = '0';
+            $request['subcategory'] = '0';
         }
 
         $title = Title::find($id);
         $title->title_name = $data['title'];
         $title->cat_id = $data['category'];
-        $title->subcat_id = $data['subcategory'];
+        $title->subcat_id = $request['subcategory'];
         $title->dept_id = implode(",", $data['dept']);
         $title->save();
 
@@ -182,15 +182,26 @@ class TitleController extends Controller
         $subcat=$_REQUEST['subcat'];
         $dept=$_REQUEST['dept'];
 
+        // echo $subcat; exit;
         //  $cat=1;
         // $subcat=3;
         // $dept=2;
         // print_r($_POST); exit;
+        if($subcat == '')
+        {
+             $getdata=Title::select('*')->where('cat_id',$cat)->where('subcat_id',NULL)
+            ->whereRaw('FIND_IN_SET(?,dept_id)', [$dept])
+            ->get();
+            echo json_encode($getdata);
+        }
+        else
+        {
+            $getdata=Title::select('*')->where('cat_id',$cat)->where('subcat_id',$subcat)
+                ->whereRaw('FIND_IN_SET(?,dept_id)', [$dept])
+                ->get();
+                echo json_encode($getdata);
+        }
         
-        $getdata=Title::select('*')->where('cat_id',$cat)->where('subcat_id',$subcat)
-        ->whereRaw('FIND_IN_SET(?,dept_id)', [$dept])
-        ->get();
-        echo json_encode($getdata);
 
         // echo "<pre>";print_r($getdata);exit;
         

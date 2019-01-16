@@ -45,6 +45,7 @@
 			@endforeach
 		</tbody>
 	</table>
+	{{ $dept_data->links() }}
 </div>
 </div>
 </div>
@@ -127,7 +128,7 @@
 		    { // this is the "a" tag
 			    evn.preventDefault();
 			    var $updateModal = $('#editModal');
-			    $updateModal.modal('show');
+			    // $updateModal.modal('show');
 			    var department = $(this).data('deptname');
 			    var resourceId = $(this).data('itemId'),
 			        $pressedButton = $(this);

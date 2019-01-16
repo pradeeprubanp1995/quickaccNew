@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $result = Category::select('*')->get();
+        $result = Category::select('*')->paginate(10);
         // dd($result);
         return view('category',['cat_data' => $result]);
     }

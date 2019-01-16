@@ -60,7 +60,10 @@
 			@endforeach
 		</tbody>
 	</table>
+	{{ $cat_data->links() }}
      </div>
+	
+	
  	</div>
  	</div>
     </div>
