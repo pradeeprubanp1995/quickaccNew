@@ -6,13 +6,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
+    <title>Self Evaluate Tool</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="{{asset('asset/user/original/images/favicon.png')}}">
+    <link rel="apple-touch-icon" href="{{asset('asset/user/original/images/logo-frontuser.png')}}">
 
-    <link rel="shortcut icon" href="{{asset('asset/user/original/images/favicon.png')}}"> 
+    <link rel="shortcut icon" href="{{asset('asset/user/original/images/logo-frontuser.png')}}"> 
 
     <link rel="stylesheet" href="{{asset('asset/user/original/assets/css/normalize.css')}}">
     <link rel="stylesheet" href="{{asset('asset/user/original/assets/css/bootstrap.min.css')}}">

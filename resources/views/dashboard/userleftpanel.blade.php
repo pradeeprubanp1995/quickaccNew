@@ -54,7 +54,7 @@
                     <div class="col-sm-8">
                           <div class="col-sm-4">
                     <a class="navbar-brand" href="./"><img width="20px" src="{{asset('asset/user/original/images/logo-frontuser.png')}}" alt="Logo"></a></div>
-                    <div class="col-sm-4 titset"> <span class="logoset"><b>SET</b></span> </div> </div> 
+                    <div class="col-sm-4 titset"> <span class="logoset"><b>SET</b></span> </div> </div>   
                     <a class="navbar-brand hidden" href="./"><img src="{{asset('asset/user/original/images/logo2.png')}}" alt="Logo"></a> 
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a> 
                 </div> 
@@ -164,6 +164,9 @@
                 .titset
                 {
                     padding-top: 20px;
+                }
+                .navbar-brand img {
+                width: 30px !important; 
                 }
             </style>
         </header><!-- /header -->
