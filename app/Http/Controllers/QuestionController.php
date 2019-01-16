@@ -24,7 +24,7 @@ class QuestionController extends Controller
         $tomorrow = date("Y-m-d", strtotime('tomorrow'));
         $result = array();
 
-        $upcoming = Upcoming_title::select('*')->where('date_of_quiz',$tomorrow)->where('status','2')->where('dept_id', $dept)->get();
+        $upcoming = Upcoming_title::select('*')->where('date_of_quiz',$tomorrow)->where('status','1')->where('dept_id', $dept)->get();
 
 
         // echo "<pre>";print_r($upcoming[0]);exit;

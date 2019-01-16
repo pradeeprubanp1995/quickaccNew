@@ -13,6 +13,7 @@ use App\Title;
 use App\Department;
 use App\Result;
 use DateTime;
+use App\Category;
 class HomeController extends Controller
 {
     /**
@@ -89,7 +90,11 @@ $lastmon = $month_end->format('Y-m-d'); // 2012-02-29
     }
     public function adminindex()
     {
-        return view('welcome');
+        $result = array();
+        $result[0] = Department::select('*')->get();
+        $result[1] = Category::select('*')->where('parent_id','0')->get();
+        // dd($result);
+         return view('addupcomming',['post_data' => $result]);
     }
     public function profile()
     {

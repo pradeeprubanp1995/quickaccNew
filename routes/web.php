@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -10,9 +11,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Department;
+use App\Category;
 
 Route::get('/', function () {
-    return view('welcome');
+    $result = array();
+        $result[0] = Department::select('*')->get();
+        $result[1] = Category::select('*')->where('parent_id','0')->get();
+        // dd($result);
+         return view('addupcomming',['post_data' => $result]);
 })->middleware('auth');
 
 // Auth::routes();

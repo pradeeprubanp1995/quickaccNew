@@ -113,5 +113,5 @@
 
 
 
-  @include('dashboard.footer')
+@include('dashboard.footer')
 @endsection
