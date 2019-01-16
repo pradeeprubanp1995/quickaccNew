@@ -84,9 +84,15 @@ $lastmon = $month_end->format('Y-m-d'); // 2012-02-29
         $data[2] = Result::select('*')->selectRaw('sum(points) as monthpoints')->whereBetween('created_at', array($firstmon, $lastmon))->where('dept_id',$dept_id)->groupBy('user_id')->orderBy('monthpoints', 'desc')->first();
 
         // dd($getmonth);
+        $user['today'] = User::find($data[0]['user_id']);
+
+        $user['week'] = User::find($data[1]['user_id']);
+
+        $user['month'] = User::find($data[2]['user_id']);
+        
 
 
-        return view('userdashboard',['post_data'=>$data]);
+        return view('userdashboard',['post_data'=>$data , 'user' => $user]);
     }
     public function adminindex()
     {
@@ -305,17 +311,13 @@ public function cron()
         $data->user_id=$request['userid'];
         $data->name=$request['name'];
         $data->gender=$request['gender'];
-        $data->dept_id=$request['dept_id'];
         $data->images=$image;
-        $data->email=$request['email'];
         $data->save();          
         } 
         $data = User::find( $request['id']);
         $data->user_id=$request['userid'];
         $data->name=$request['name'];
         $data->gender=$request['gender'];
-        $data->dept_id=$request['dept_id'];       
-        $data->email=$request['email'];
         $data->save();
         return redirect()->back()->with('success','Updated successfully');
           
