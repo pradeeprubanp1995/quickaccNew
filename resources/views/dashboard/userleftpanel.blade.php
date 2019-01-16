@@ -9,7 +9,7 @@
                         <a href="{{ url('/home') }}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     
-                    <li class="menu-title">Menu</li><!-- /.menu-title -->
+                    <!-- <li class="menu-title">Menu</li> -->
                     <li class="menu-item">
                         <a href="{{route('quiz')}}" > <i class="menu-icon fa fa-sign-in"></i>QuiZ</a>
                         

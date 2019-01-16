@@ -128,7 +128,7 @@ img
         <form action="{{ route('updatequestion') }}" method="post" id="updatequestionform">
             <table  align="center" width="80%" border="0" >
                 <tr class="sty">
-                        <th colspan="2" height="50px" style="text-align: center;"> <h1> ADD QUESTION </h1> </th> 
+                        <th colspan="2" height="50px" style="text-align: center;"> <h1> {{ $post_data['title_name'] }}</h1> </th> 
                 </tr>  
 
                 <tr> <td> &nbsp;</td> </tr>

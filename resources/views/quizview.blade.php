@@ -44,77 +44,22 @@
 
 
 
-            
-              
-                  <?php 
-                      if(isset($post_data))
-                      {  ?>
-
-                      <h2> Your Today Post </h2> <br/>
-                      <!-- echo "<pre>"; print_r(json_decode($post_data->options, true)); exit(); -->
-                      <div class="form-group">
-                     1. <label>{{$post_data->question}}</label>
-                      <br/><br/>
-                      @php
-                       
-                       $q = 1; $no = ['a)','b)','c)','d)','e)','f)'];
-
-                      $array = $post_data['options'];
-                      $options = json_decode($array, true);
-                      $count = count($options);
-
-                      @endphp
-                      <div class="row col-sm-12">
-                      @for ($i=0;$i<$count;$i++)
-                      <br />
-                      <div class="col-sm-3"> {{$no[$i]}}   {{$options[$i]['options']}} </div>
-                      @endfor
-                     </div>
-
-                     
-                     <div class="row col-sm-12"> <label><br/> Answer :  </label> <label style="color: blue;"> <br/>&nbsp;&nbsp;{{ $options[ $post_data->answer]['options'] }}</label> </div>
-
-
-                     </div>
-                                    
-                            
-                 <?php  }
-                            else
-
-                      { ?>
-                    <div class="row">   
-                      <a href="{{ route('updatequestioninput') }}" class="col-sm-12 col-lg-12" >
-                               <div class="card text-white bg-flat-color-1">
-                                <div class="card-body">
-                                    <div class="card-left pt-1 float-left">
-                                        <h3 class="mb-0 fw-r">
-                                            <span class="currency float-left mr-1"></span>
-                                            <span class="">Post Today Question</span>
-                                        </h3>
-                                        <p class="text-light mt-1 m-0"></p>
-                                    </div><!-- /.card-left -->
-
-                                    <div class="card-right float-right text-right">
-                                        <!-- <i class="icon fade-5 icon-lg pe-7f-cart"></i> -->
-                                        <i class="fa fa-comment-o" style="font-size:60px"></i>
-                                    </div><!-- /.card-right -->
-
-                                </div>
-
-                            </div>
-                        </a>
-
-                       <?php } ?>
-
-
-                    <a href="{{ route('attendquiz') }}" class="col-sm-12 col-lg-12" >
+        <!-- <?php  //echo "<pre>"; print_r($post_data[0]); exit; ?> -->
+               <div class="row"> 
+                  <div class="col-sm-12 col-lg-12" >
                         <div class="card text-white bg-flat-color-3">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
                                     <h3 class="mb-0 fw-r">
-                                        <span class="">Attend Today Quiz</span>
+                                        <span class="">Today :</span>
                                     </h3>
-                                    <p class="text-light mt-1 m-0"></p>
+                                     <p class="text-light mt-8 m-20" align="center">
+                                     <span >Title : </span>
+                                         <?php  if(isset($post_data[1])) 
+                                         { ?>
+                                              <a  class="tit" href="{{ route('attendquiz') }}" > {{ $post_data[1][0]->title_name }} </a>
+                                          <?php } else echo "<span> Title will be upload soon </span>"; ?>
+                                        </p>
                                 </div><!-- /.card-left -->
 
                                 <div class="card-right float-right text-right">
@@ -125,12 +70,68 @@
                             </div>
 
                         </div>
-                    </a>
+                    </div>
+
+
+
+                      
+                      <div class="col-sm-12 col-lg-12" >
+                               <div class="card text-white bg-flat-color-1">
+                                <div class="card-body">
+                                    <div class="card-left pt-1 float-left">
+                                        <h3 class="mb-0 fw-r">
+                                            <span class="currency float-left mr-1"></span>
+                                            <span class="">Tommorrow :</span>
+                                        </h3>
+                                        
+                                        <p class="text-light mt-8 m-20" align="center">
+                                        <span >Title : </span>
+                                         <?php  if(isset($post_data[0])) 
+                                         { ?>
+                                              <a  class="tit" href="{{ route('updatequestioninput') }}" > {{ $post_data[0][0]->title_name }} </a>
+                                          <?php } else echo "<span > Title will be upload soon </span>"; ?>
+                                        </p>
+                                    </div><!-- /.card-left -->
+
+                                    <div class="card-right float-right text-right">
+                                        <!-- <i class="icon fade-5 icon-lg pe-7f-cart"></i> -->
+                                        <i class="fa fa-comment-o" style="font-size:60px"></i>
+                                    </div><!-- /.card-right -->
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                      
+
+
+                    
 
 
 
                     </div>
         </div>
+
+        <style type="text/css">
+          .tit
+          {
+            font-size: 25px;
+            color: white;
+            text-decoration:none;
+          }
+          .tit:hover
+          {
+            /*color: white;*/
+            font-size: 25px;
+            text-decoration:none;
+          }
+          span
+          {
+            font-size: 25px;
+          }
+        </style>
 @include('dashboard.userfooter')
 @endsection
             

@@ -22,33 +22,29 @@ class QuestionController extends Controller
         $userid = Auth::user()->id;
         $dept = Auth::user()->dept_id;
         $tomorrow = date("Y-m-d", strtotime('tomorrow'));
+        $today = date("Y-m-d");
         $result = array();
+        $title = array();
+        $question = Upcoming_title::select('*')->where('date_of_quiz',$tomorrow)->where('status','2')->where('dept_id', $dept)->get();
+        $quiz = Upcoming_title::select('*')->where('date_of_quiz',$today)->where('status','1')->where('dept_id', $dept)->get();
 
-        $upcoming = Upcoming_title::select('*')->where('date_of_quiz',$tomorrow)->where('status','1')->where('dept_id', $dept)->get();
-
-
-        // echo "<pre>";print_r($upcoming[0]);exit;
-
-        if(isset($upcoming[0]))
-        {
-             $question = Question::select('*')->where('user_id',$userid)->where('upcomingtitle_id',$upcoming[0]->id)->get();
-
-             if(isset($question[0]))
-             {
-            // echo "<pre>";print_r($question);exit;
-            
-                return view('quizview',[ 'post_data' => $question[0]]);
-            }
-            else
-            {
-                return view('quizview');
-            }
-            
-
-            
+        // echo "<pre>";print_r(isset($question));exit;
+        if(isset($question[0]))
+        { 
+            // echo "1";exit;
+            $title[0] = Title::select('*')->where('id',$question[0]->title_id)->get();    
         }
+        if(isset($quiz[0]))
+        {
+            // echo "2";exit;
+            $title[1] = Title::select('*')->where('id',$quiz[0]->title_id)->get();    
+        }
+        // echo "<pre>";print_r($title);exit;
+        return view('quizview',[ 'post_data' => $title]);
+        
+        // echo "<pre>";print_r($upcoming[0]->title_id);exit;
+
        
-            return view('quizview');
        
     }
 
@@ -101,30 +97,31 @@ class QuestionController extends Controller
 
         $upcoming = Upcoming_title::select('*')->where('date_of_quiz',$tomorrow)->where('status','2')->where('dept_id', $dept)->get();
 
-        if(isset($upcoming[0]))
+        $title = Title::select('*')->where('id',$upcoming[0]->title_id)->get();
+
+            $result['title_name'] = $title[0]->title_name;
+            $result['id'] = $upcoming[0]->id;
+
+
+         if(isset($upcoming[0]))
         {
-            
-            
-            
-                $title = Title::select('*')->where('id',$upcoming[0]->title_id)->get();
+             $question = Question::select('*')->where('user_id',$userid)->where('upcomingtitle_id',$upcoming[0]->id)->get();
 
-                $result['title_name'] = $title[0]->title_name;
-                $result['id'] = $upcoming[0]->id;
+             // echo "<pre>";print_r($question[0]);exit;
 
-                
-                
-                return view('updatequestion',['post_data' => $result]);
+             if(isset($question[0]))
+             {
+            
+            
+                return view('viewupdatequiz',[ 'post_data' => $question[0] ,'result' => $result ]);
+            }
+            
+       
+            return view('updatequestion',['post_data' => $result]);
             
 
             
         }
-        else
-        {
-            echo "something went wrong";exit;
-        }
-
-        
-
         
     }
 
@@ -155,8 +152,8 @@ class QuestionController extends Controller
 
 
         $getquescount = Question::select('id')->where('upcomingtitle_id' , $_POST['upcomingid'])->count();
-        // echo"<pre>";print_r($getcount);exit;
-        if($getquescount <= 2)
+        // echo"<pre>";print_r($_POST['upcomingid']);exit;
+        if($getquescount <= 4)
         {
             
             $question->user_id = Auth::user()->id;
