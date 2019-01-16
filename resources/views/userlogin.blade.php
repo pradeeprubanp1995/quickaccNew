@@ -70,11 +70,13 @@
 						<input class="input100" type="password" name="password" id="password" placeholder="Password">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
+					
                      @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert" style="display: block;">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
+                                <input type="hidden" name="type" value="user">
 					<div class="contact100-form-checkbox">
 						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 						<label class="label-checkbox100" for="ckb1">

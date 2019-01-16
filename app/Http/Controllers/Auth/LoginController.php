@@ -55,6 +55,7 @@ class LoginController extends Controller
             'email' => 'required|string',
             'password' => 'required|string',
         ]);
+        // print_r($_POST);exit();
         Session::put('password', $request['password']);
 
         $credentials = $request->only('email', 'password');
@@ -64,11 +65,11 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             // Session::set('userid',Auth::user()->user_type);
             // Authentication passed...
-            if(Auth::user()->user_type==1)
+            if(Auth::user()->user_type==1 && $_POST['type']=="admin")
             {
                 return redirect()->route('adminindex');
             }
-            else if(Auth::user()->user_type==0)
+            else if(Auth::user()->user_type==0 && $_POST['type']=="user")
             {
                 return redirect()->route('home');
             }
@@ -78,12 +79,11 @@ class LoginController extends Controller
                 $this->guard()->logout();
                 $request->session()->invalidate();
                 $request->session()->flash('errors', 'You are logged out!');
-                return redirect('/');
-                // $this->guard()->logout();
-
-                // $request->session()->invalidate();
-
-                // return $this->loggedOut($request) ?: redirect('/')->withMessages('warning','error');
+                if($_POST == 'admin')
+                    return redirect('/');
+                else
+                    return redirect()->route('userlogin');
+                
                 }
             
         }
@@ -96,13 +96,18 @@ class LoginController extends Controller
         }
     }
     public function logout(Request $request)
-    {
-        $this->guard()->logout();
+        {
+            $usertype = Auth::user()->user_type;
+            // echo $usertype;exit;
+            $this->guard()->logout();
 
-        $request->session()->invalidate();
+            $request->session()->invalidate();
 
-        return $this->loggedOut($request) ?: redirect('/');
-    }
+            if($usertype == 1)
+            return $this->loggedOut($request) ?: redirect('/');
+            else
+            return $this->loggedOut($request) ?: redirect('/user/login');
+        }
 
 
 

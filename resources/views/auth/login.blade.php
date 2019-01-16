@@ -76,6 +76,11 @@
                                 @endif
                         </div>
                     </div>
+                    
+                        <input type="hidden" name="type" value="admin">
+                        
+                        
+
                     <div class="form-group">
                   <button class="btn btn-primary submit-btn btn-block">Login</button>
                 </div>
