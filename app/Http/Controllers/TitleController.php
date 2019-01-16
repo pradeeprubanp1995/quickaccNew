@@ -84,7 +84,7 @@ class TitleController extends Controller
     }
     public function createtitle(Request $request)
     {
-        
+        // echo $request['subcategory'];exit;
         $title = new Title();
         $data = $this->validate($request, [
             'title'=>'required',
@@ -95,13 +95,14 @@ class TitleController extends Controller
         ]);
         if(!isset($request['subcategory']))
         {
-            $data['subcategory'] = '0';
+            // echo "dsfdsf";exit;
+            $request['subcategory'] = '0';
         }
 
-//         
+        // exit;
             $title->title_name = $data['title'];
             $title->cat_id = $data['category'];
-            $title->subcat_id = $data['subcategory'];
+            $title->subcat_id = $request['subcategory'];
             $title->dept_id = implode(",", $data['dept']);
             $title->save();
 
