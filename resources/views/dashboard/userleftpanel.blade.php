@@ -51,7 +51,10 @@
         <header id="header" class="header">  
             <div class="top-left">
                 <div class="navbar-header"> 
-                    <a class="navbar-brand" href="./"><img width="100" src="{{asset('asset/user/original/images/logo.png')}}" alt="Logo"></a>
+                    <div class="col-sm-8">
+                          <div class="col-sm-4">
+                    <a class="navbar-brand" href="./"><img width="20px" src="{{asset('asset/user/original/images/logo-frontuser.png')}}" alt="Logo"></a></div>
+                    <div class="col-sm-4 titset"> <span class="logoset"><b>SET</b></span> </div> </div> 
                     <a class="navbar-brand hidden" href="./"><img src="{{asset('asset/user/original/images/logo2.png')}}" alt="Logo"></a> 
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a> 
                 </div> 
@@ -149,6 +152,20 @@
                     </div> 
                 </div>  
             </div>
+
+            <style type="text/css">
+                .logoset
+                {
+                    color: #54D3D3;
+                    font-size: 20px;
+
+                    /*line-height:-50px;*/
+                }
+                .titset
+                {
+                    padding-top: 20px;
+                }
+            </style>
         </header><!-- /header -->
         <!-- Header-->
         @yield('content')
