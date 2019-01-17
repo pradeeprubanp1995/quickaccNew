@@ -49,20 +49,22 @@
                   <div class="col-sm-12 col-lg-12" >
                         <div class="card text-white bg-flat-color-3">
                             <div class="card-body">
-                                <div class="card-left pt-1 float-left">
-                                    <h3 class="mb-0 fw-r">
+                                <div class="card-left pt-1 float-left" style="width:90%!important;">
+                                    <h3 class="mb-0 fw-r" align="center">
                                         <span class="">Today :</span>
-                                    </h3>
-                                     <p class="text-light mt-8 m-20" align="center">
-                                     <span >Title : </span>
-                                         <?php  if(isset($post_data[1])) 
+                                        <?php  if(isset($post_data[1])) 
                                          { ?>
-                                              <a  class="tit" href="{{ route('attendquiz') }}" > {{ $post_data[1][0]->title_name }} </a>
+                                              <a  class="tit" href="{{ route('attendquiz') }}" > {{ucfirst( $post_data[1][0]->title_name )}} </a>
                                           <?php } else echo "<span> Title will be upload soon </span>"; ?>
+                                    
+                                     <p class="text-light mt-8 m-20" align="center">
+                                    <!--  <span >Title : </span> -->
+                                         
                                         </p>
+
                                 </div><!-- /.card-left -->
 
-                                <div class="card-right float-right text-right">
+                                <div class="card-right float-right text-right" style="width:10%!important;">
                                     <!-- <i class="icon fade-5 icon-lg pe-7f-users"></i> -->
                                     <i class="fa fa-check-square" style="font-size:60px;"></i>
                                 </div><!-- /.card-right -->
@@ -78,22 +80,23 @@
                       <div class="col-sm-12 col-lg-12" >
                                <div class="card text-white bg-flat-color-1">
                                 <div class="card-body">
-                                    <div class="card-left pt-1 float-left">
-                                        <h3 class="mb-0 fw-r">
+                                    <div class="card-left pt-1 float-left" style="width:90%!important;">
+                                        <h3 class="mb-0 fw-r" align="center">
                                             <span class="currency float-left mr-1"></span>
-                                            <span class="">Tommorrow :</span>
+                                            <span class="tom_span">Tommorrow :</span>
+                                            <?php  if(isset($post_data[0])) 
+                                         { ?>
+                                              <a  class="tit" href="{{ route('updatequestioninput') }}" > {{ucfirst( $post_data[0][0]->title_name) }} </a>
+                                          <?php } else echo "<span > Title will be upload soon </span>"; ?>
                                         </h3>
                                         
                                         <p class="text-light mt-8 m-20" align="center">
-                                        <span >Title : </span>
-                                         <?php  if(isset($post_data[0])) 
-                                         { ?>
-                                              <a  class="tit" href="{{ route('updatequestioninput') }}" > {{ $post_data[0][0]->title_name }} </a>
-                                          <?php } else echo "<span > Title will be upload soon </span>"; ?>
+                                        <!-- <span >Title : </span> -->
+                                         
                                         </p>
                                     </div><!-- /.card-left -->
 
-                                    <div class="card-right float-right text-right">
+                                    <div class="card-right float-right text-right" style="width:10%!important;">
                                         <!-- <i class="icon fade-5 icon-lg pe-7f-cart"></i> -->
                                         <i class="fa fa-comment-o" style="font-size:60px"></i>
                                     </div><!-- /.card-right -->
@@ -131,6 +134,7 @@
           {
             font-size: 25px;
           }
+
         </style>
 @include('dashboard.userfooter')
 @endsection

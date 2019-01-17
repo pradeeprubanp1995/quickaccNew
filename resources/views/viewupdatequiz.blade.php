@@ -14,7 +14,7 @@
                     <div class="col-sm-12 headingdiv" >
                         <div class=" float-center">
                             <div class="page-title"  >
-                                <h1>{{ $result['title_name']}}</h1>
+                                <h1>{{ ucfirst($result['title_name']) }}</h1>
                             </div>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                             
                       <!-- echo "<pre>"; print_r(json_decode($post_data->options, true)); exit(); -->
                       <div class="form-group">
-                     1. <label>{{$post_data->question}}</label>
+                     1. <label>{{ ucfirst($post_data->question) }}</label>
                       <br/><br/>
                       @php
                        

@@ -33,7 +33,7 @@
 		<tbody>
 			@foreach($dept_data as $data)
 			<tr>
-				<td>{{$data->dept_name}}</td>
+				<td>{{ ucfirst($data->dept_name) }}</td>
 				<td><a href="javascript:void(0)" data-toggle="modal" data-target="#editModal" type="button" class="btn btn-warning edit" data-item-id="{{$data->id}}" data-deptname="{{$data->dept_name}}"><i class="fa fa-edit"></i>Edit</a></td>
 				<td>
 					<form action="{{ url('/dept_delete/'.$data['id']) }}" method="get">

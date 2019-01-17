@@ -70,10 +70,10 @@
                     <tr>
                     <td>{{ $key+1 }}</td>
                       
-                      <td> {{ $data->department->dept_name }}</td>
-                      <td> {{ $data->title->title_name }}</td>
-                      <td> {{ $data->date_of_quiz }}</td>
-                      <td> {{ $sts[$data->status] }} </td>
+                      <td> {{ ucfirst($data->department->dept_name) }}</td>
+                      <td> {{ ucfirst($data->title->title_name) }}</td>
+                      <td> {{ ucfirst($data->date_of_quiz) }}</td>
+                      <td> {{ ucfirst($sts[$data->status]) }} </td>
                       <!-- <td><a href="{{ url('editupcomingpage/'.$data->id ) }}" class="btn btn-secondary">Edit</a></td> -->
                       
                       <td>

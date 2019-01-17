@@ -35,13 +35,13 @@
 			@foreach($cat_data as $data)
 				
 				<tr>
-				<td>{{ $data->cat_name }}</td>
+				<td>{{ ucfirst($data->cat_name) }}</td>
                  <td>
                  	@php $pid=$data->parent_id @endphp
                  	@if($pid != 0)
 				 @foreach($cat_data as $parent)
 				    @if($parent['id'] == $pid)
-				    {{ $parent->cat_name }}
+				    {{ ucfirst($parent->cat_name) }}
 				    @endif
 				    
 				  @endforeach

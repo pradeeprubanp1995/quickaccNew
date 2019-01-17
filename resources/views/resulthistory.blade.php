@@ -8,7 +8,7 @@
     @php $n=0; $error="No Data Found" @endphp
     @if(isset($empty) && $empty == '') <center><p>{{$error}}</p></center> @else
     <div style="padding: 30px;">
-        <p style="float:right;font-weight:bold;">Your Total Points: {{$points}}</p>
+        <p style="float:right;font-weight:bold;">Your Total Points: {{Auth::user()->points}}</p>
     <table class="table table-striped">
         <thead>
             <tr>

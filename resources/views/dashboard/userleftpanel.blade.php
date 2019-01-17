@@ -1,7 +1,8 @@
 <!-- Left Panel -->
 
     <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
+        <br />
+        <nav class="navbar navbar-expand-sm navbar-default" style="background-color: white!important;border-color: white!important;">
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -15,7 +16,7 @@
                         
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Result</a>
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Result</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ route('history') }}">All Records</a></li>
                             <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ route('resultview') }}">Today Record</a></li>
@@ -62,15 +63,15 @@
             <div class="top-right"> 
                 <div class="header-menu"> 
                     <div class="header-left">
-                        <button class="search-trigger"><i class="fa fa-search"></i></button>
-                        <div class="form-inline">
+                        <!-- <button class="search-trigger"><i class="fa fa-search"></i></button> -->
+                        <!-- <div class="form-inline">
                             <form class="search-form">
                                 <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
                                 <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
                             </form>
-                        </div>
+                        </div> -->
 
-                        <div class="dropdown for-notification">
+                        <!-- <div class="dropdown for-notification">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell"></i>
                                 <span class="count bg-danger">3</span>
@@ -90,9 +91,9 @@
                                     <p>Server #3 overloaded.</p>
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="dropdown for-message">
+                       <!--  <div class="dropdown for-message">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-envelope"></i>
                                 <span class="count bg-primary">4</span>
@@ -132,7 +133,7 @@
                                     </div>
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="user-area dropdown float-right">
@@ -168,6 +169,15 @@
                 .navbar-brand img {
                 width: 30px !important; 
                 }
+                ul li a:hover
+                {
+                    color: #03A9F3 !important;
+                    /*color: white !important;*/
+                }
+               /* ul li a:hover
+                {
+                    color: white !important;
+                }*/
             </style>
         </header><!-- /header -->
         <!-- Header-->

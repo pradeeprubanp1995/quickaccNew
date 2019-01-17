@@ -74,10 +74,10 @@
                     <tr>
                     <td>{{ $key+1 }}</td>
                       
-                      <td> {{ $data['deptname'] }}</td>
-                      <td> {{ $data['cat_name'] }}</td>
-                      <td> {{ $data['subcat_name'] }}</td>
-                      <td> {{ $data['title_name'] }}</td>
+                      <td> {{ ucfirst($data['deptname']) }}</td>
+                      <td> {{ ucfirst($data['cat_name']) }}</td>
+                      <td> {{ ucfirst($data['subcat_name']) }}</td>
+                      <td> {{ ucfirst($data['title_name']) }}</td>
                       <td><a href="{{ url('edittitlepage/'.$data['id'] ) }}" class="btn btn-secondary">Edit</a></td>
                       
                       <td>

@@ -15,17 +15,17 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">UserID</label>
+                          <label class="col-sm-3 ">UserID</label>
                           <div class="col-sm-9">
-                            <?php echo $data[0]['user_id'];?>
+                            <?php echo ucfirst($data[0]['user_id']);?>
                             
                           </div>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Name</label>
-                          <div class="col-sm-9"> <?php echo $data[0]['name'];?>
+                          <label class="col-sm-3 ">Name</label>
+                          <div class="col-sm-9"> <?php echo ucfirst($data[0]['name']);?>
                           </div>
                         </div>
                       </div>
@@ -33,17 +33,17 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Gender</label>
+                          <label class="col-sm-3 ">Gender</label>
                           <div class="col-sm-9">
-                            <?php echo $data[0]['gender'];?>
+                            <?php echo ucfirst($data[0]['gender']);?>
                           </div>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Department</label>
+                          <label class="col-sm-3 ">Department</label>
                           <div class="col-sm-9">
-                        {{$data[1]->dept_name}}
+                        {{ucfirst($data[1]->dept_name)}}
                           </div>
                         </div>
                       </div>
@@ -51,7 +51,7 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Email Address</label>
+                          <label class="col-sm-3 ">Email Address</label>
                           <div class="col-sm-9">
                            <?php echo $data[0]['email'];?>
                           </div>
@@ -59,7 +59,7 @@
                       </div>
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Image</label>
+                          <label class="col-sm-3 ">Image</label>
                           <div class="col-sm-9">
                             @if(Auth::user()->images == '') <i class="fa fa-user" style="font-size: 20px;"></i>@else
                              <img src="{{URL('/')}}/uploads/{{$data[0]['images']}}" width="100px" height="100px"/></img>@endif
@@ -67,6 +67,17 @@
                           </div>
                         </div>
                       </div>
+                    </div>
+                     <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 ">Total Points</label>
+                          <div class="col-sm-9">
+                           {{ Auth::user()->points }}
+                          </div>
+                        </div>
+                      </div>
+                     
                     </div>
                     <hr/>
                     <h3>Actions</h3><br/>

@@ -75,7 +75,7 @@ class QuestionController extends Controller
         $dept_id=Auth::user()->dept_id;
         
         
-        $upcoming_id=Upcoming_title::where('dept_id',$dept_id)->where('date_of_quiz',$date)->get();
+        $upcoming_id=Upcoming_title::where('dept_id',$dept_id)->where('date_of_quiz',$date)->where('status','1')->get();
         // dd($upcoming_id);
          if($upcoming_id->isEmpty()){
                 
