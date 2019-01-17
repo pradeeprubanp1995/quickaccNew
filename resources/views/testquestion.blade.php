@@ -6,7 +6,7 @@
       <center><h1>Question</h1></center>
     <br />
     @php $error="No Question Found"; @endphp
-    @if(isset($empty) && $empty == '') {{$error}} @else
+    @if(isset($empty) && $empty == '') <center><p>{{$error}}</p></center> @else
     <div style="padding-bottom: 10px;margin: 20px;">
 <form method="post" action="{{route('result')}}">
 	{{ csrf_field() }}
@@ -38,6 +38,6 @@ $count = count($options);
 </div>
 @endif
 </div>
-</div>
+
 @include('dashboard.userfooter')
 @endsection

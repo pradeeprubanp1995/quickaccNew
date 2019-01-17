@@ -14,12 +14,13 @@ class UpcomingTitleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
-
-    public function userlogin()
+    public function __construct()
     {
-        return view('userlogin');
+        $this->middleware('is_admin');
     }
+
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -89,7 +90,12 @@ class UpcomingTitleController extends Controller
     public function addupcomminginput()
     {
         $result = array();
-        $result[0] = Department::select('*')->get();
+        // $result[0] = Department::select('*')->get();
+        $tommorrow =date("Y-m-d", strtotime('tomorrow'));
+        $dept=Upcoming_title::select('dept_id')
+                ->where('date_of_quiz',$tommorrow)->get();
+        $result[0]=Department::select('id','dept_name')
+                ->whereNotIn('id', $dept)->get();
         $result[1] = Category::select('*')->where('parent_id','0')->get();
         // dd($result);
          return view('addupcomming',['post_data' => $result]);
@@ -117,18 +123,26 @@ class UpcomingTitleController extends Controller
             $data['subcategory'] = '0';
         }
 
-        $title->title_id = $data['titleauto'];
-        $title->date_of_quiz = $tomorrow;
-        $title->status = '2';
-        $title->dept_id = $data['dept'];
-        $title->save();
 
+        $upcomming = Upcoming_title::select('*')->where('date_of_quiz',$tomorrow)->where('dept_id',$data['dept'])->get();
+        
+        if($upcomming->isEmpty())
+        {
+            // dd($upcomming[0]);
+            $title->title_id = $data['titleauto'];
+            $title->date_of_quiz = $tomorrow;
+            $title->status = '2';
+            $title->dept_id = $data['dept'];
+            $title->save();
+            return redirect()->route('upcomming')->with('success','Insert Successfully');
+        }
+        // echo "sdfdsf";exit;
 //          DB::table('upcoming_title_tbl')->insert(['title_id'=>$data['titleauto'],
 // 'dept_id'=>$data['dept'],'date_of_quiz'=>$tomorrow,'status'=>'2']);
-         
+         return redirect()->route('addupcomminginput')->with('danger','Already that Department has Upcoming Title');
            
 
-            return redirect()->route('upcomming')->with('success','Insert Successfully');
+            
 
         // print_r($_POST);exit;
     }

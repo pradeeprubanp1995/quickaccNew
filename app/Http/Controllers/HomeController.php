@@ -84,11 +84,11 @@ class HomeController extends Controller
         $dept_id = Auth::user()->dept_id;
         $data[0] = Result::select('*')->where('today_date',$date)->where('dept_id',$dept_id)->orderBy('points', 'desc')->first();
 
-        $data[1] = Result::select('*')->selectRaw('sum(points) as weekpoints')->whereBetween('today_date', array($weekfirst, $tommorrow))->first();
+        $data[1] = Result::select('*')->selectRaw('sum(points) as weekpoints')->whereBetween('today_date', array($weekfirst, $tommorrow))->where('dept_id',$dept_id)->groupBy('user_id')->orderBy('weekpoints', 'desc')->first();
 
         $data[2] = Result::select('*')->selectRaw('sum(points) as monthpoints')->whereBetween('today_date', array($firstmon, $tommorrow))->where('dept_id',$dept_id)->groupBy('user_id')->orderBy('monthpoints', 'desc')->first();
 
-        // dd($data[2]);
+        // dd($data[1]);
         $user['today'] = User::find($data[0]['user_id']);
 
         $user['week'] = User::find($data[1]['user_id']);
@@ -99,83 +99,7 @@ class HomeController extends Controller
 
         return view('userdashboard',['post_data'=>$data , 'user' => $user]);
     }
-    public function adminindex()
-    {
-        $result = array();
-        $result[0] = Department::select('*')->get();
-        $result[1] = Category::select('*')->where('parent_id','0')->get();
-        // dd($result);
-         return view('addupcomming',['post_data' => $result]);
-    }
-    public function profile()
-    {
-        $data = User::find( Auth::user()->id); 
-          
-        return view('profile',compact('data'));
-       
-    }
-    public function editprofile(Request $request)
-    {
-
-        // dd($request->file('img'));
-        $upload_image=$request->file('img');
-        if(!empty($upload_image)){         
-        $image=$upload_image->getClientOriginalName();
-        $upload_image->move(public_path().'/uploads/', $image); 
-         $data = User::find( $request['id']);
-        $data->user_id=$request['userid'];
-        $data->name=$request['name'];
-        $data->gender=$request['gender'];
-        $data->doj=$request['doj'];
-        $data->images=$image;
-        $data->email=$request['email'];
-        $data->save();          
-        } 
-        $data = User::find( $request['id']);
-        $data->user_id=$request['userid'];
-        $data->name=$request['name'];
-        $data->gender=$request['gender'];
-        $data->doj=$request['doj'];       
-        $data->email=$request['email'];
-        $data->save();
-        return redirect()->back()->with('success','Updated successfully');
-          
-        // return view('profile',compact('data'));
-       
-    }
-
-     
-    
-    public function changedpassword(Request $request)
-    {
-        // dd($request);exit();;;
-        // echo Auth::user()->password;
-        // dd(Session::get('password'));exit();
-        $request->validate([
-            
-            'oldpassword' => 'required',
-            'password' => 'min:5|required_with:confirmpassword|same:confirmpassword',
-            'confirmpassword' => 'required|min:5',
-        ]);
-        
-        if($request['oldpassword']==Session::get('password'))
-        {
-        $store = User::find(Auth::user()->id); 
-        $store->password =Hash::make($request['password']);      
-        $store->save();
-         Auth::logout();        
-        $request->session()->invalidate();
-        $request->session()->flash('errors', 'You are logged out!');
-        return redirect('/');}
-        else{
-        return redirect()->back()->with('warning', 'Please Give correct oldpassword');}      
-    }
-    public function changepassword()
-    {       
-          
-        return view('changepassword');
-       
-    }
+   
    
     public function userprofile()
     {       
@@ -279,9 +203,10 @@ class HomeController extends Controller
         $store = User::find(Auth::user()->id); 
         $store->password =Hash::make($request['password']);      
         $store->save();
-         Auth::logout();        
-        $request->session()->invalidate();
-        $request->session()->flash('errors', 'You are logged out!');
+         Auth::logout();  
+         Session::flush();      
+        // $request->session()->invalidate();
+        // $request->session()->flash('errors', 'You are logged out!');
         return redirect('/user/login');}
         else{
         return redirect()->back()->with('warning', 'Please Give correct oldpassword');}      

@@ -115,7 +115,7 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
-
+    'not_in:0' => 'The :attribute format is invalid.',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

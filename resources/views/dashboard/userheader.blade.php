@@ -36,9 +36,9 @@
 </script>
 
   <style type="text/css">
-      .navbar-brand img 
+      .navbar-brand
       {
-        width: 300px;
+        width: auto!important;
       }
   </style>
 

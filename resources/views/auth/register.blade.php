@@ -27,6 +27,9 @@
           <div class="col-lg-4 mx-auto">
             <h2 class="text-center mb-4">Register</h2>
             <div class="auto-form-wrapper">
+            
+             
+                                  
                     <form method="POST" action="{{ route('register.request') }}">
                         @csrf
                 <div class="form-group">
@@ -37,17 +40,19 @@
                         <i class="mdi mdi-check-circle-outline"></i>
                       </span>
                     </div>
+
                     @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                     @endif
+                     
                   </div>
                 </div>
 
                 <div class="form-group">
                   <div class="input-group">
-                    <input type="text" class="form-control{{ $errors->has('employeeid') ? ' is-invalid' : '' }}" name="employeeid" placeholder="Employee Id">
+                    <input type="text" class="form-control{{ $errors->has('employeeid') ? ' is-invalid' : '' }}" name="employeeid" value="{{ old('employeeid') }}" placeholder="Employee Id">
                     <div class="input-group-append">
                       <span class="input-group-text">
                         <i class="mdi mdi-check-circle-outline"></i>
@@ -79,22 +84,21 @@
 <!-- <?php //print_r($department); exit; ?> -->
                 <div class="form-group">
                   <div class="input-group">
-                    <select name="dept_id" class="form-control" style="height: 44px;">
+                    <select name="deptid" class="form-control {{ $errors->has('deptid') ? ' is-invalid' : '' }}" >
                     <!-- <option value="" selected disabled hidden>Choose here</option> -->
-                    <option value="0" selected>None</option>
+                    <option value=" ">----- Select Department -----</option>
                       @foreach($department as $dept)
                       <option value="{{$dept->id}}">{{$dept->dept_name}}</option>
                       @endforeach
                     </select>
-                    <!-- <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="Email Address" value="{{ old('email') }}"> -->
                     <div class="input-group-append">
-                      <span class="input-group-text">
+                      <span class="input-group-text" style="height: 38px!important;">
                         <i class="mdi mdi-check-circle-outline"></i>
                       </span>
                     </div>
-                 @if ($errors->has('dept_id'))
+                 @if ($errors->has('deptid'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('dept_id') }}</strong>
+                                        <strong>{{ $errors->first('deptid') }} <br/> </strong>
                                     </span>
                   @endif
                   </div>

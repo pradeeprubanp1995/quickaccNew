@@ -11,7 +11,7 @@
         <div class="breadcrumbs">
             <div class="breadcrumbs-inner">
                 <div class="row m-0" >
-                    <div class="col-sm-8 headingdiv" >
+                    <div class="col-sm-12 headingdiv" >
                         <div class=" float-center">
                             <div class="page-title"  >
                                 <h1>{{ $result['title_name']}}</h1>
@@ -49,15 +49,15 @@
 
 
                      </div>
-      </div>
+     
                 
 <style type="text/css">
   .headingdiv
   {
     align-content: center;
     text-align: center;
-    background-color: #007bff;
-    color: white;
+    /*background-color: #007bff;*/
+    /*color: white;*/
   }
 </style>
 @include('dashboard.userfooter')

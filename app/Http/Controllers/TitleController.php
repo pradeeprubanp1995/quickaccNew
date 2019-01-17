@@ -15,6 +15,12 @@ class TitleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        
+        $this->middleware('is_admin');
+    }
+
     public function index()
     {
 
@@ -84,7 +90,8 @@ class TitleController extends Controller
     }
     public function createtitle(Request $request)
     {
-        // echo $request['subcategory'];exit;
+        
+
         $title = new Title();
         $data = $this->validate($request, [
             'title'=>'required',
@@ -98,7 +105,7 @@ class TitleController extends Controller
             // echo "dsfdsf";exit;
             $request['subcategory'] = '0';
         }
-
+        // print_r(implode(",", $data['dept']));exit;
         // exit;
             $title->title_name = $data['title'];
             $title->cat_id = $data['category'];

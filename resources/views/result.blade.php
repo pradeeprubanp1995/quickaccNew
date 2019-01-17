@@ -77,6 +77,6 @@
 	</div>
     @endif
  </div>
-</div>
+
 @include('dashboard.userfooter')
 @endsection

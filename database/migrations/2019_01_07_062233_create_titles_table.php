@@ -15,9 +15,9 @@ class CreateTitlesTable extends Migration
     {
         Schema::create('titles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('dept_id');
+            $table->varchar('dept_id');
             $table->integer('cat_id');
-            $table->integer('subcat_id');
+            $table->integer('subcat_id')->nullable();
             $table->string('title_name');
             $table->timestamps();
         });

@@ -17,6 +17,11 @@ class ResultController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         // Get loggedin User data
@@ -189,9 +194,18 @@ class ResultController extends Controller
     public function show()
     {
         //
-        $user_id = Auth::id();
+         $firstmon  = date('Y-m-01'); 
+        $tommorrow = date("Y-m-d", strtotime('tomorrow'));
+         $user_id = Auth::id();
         $dept_id = Auth::user()->dept_id;
         $titles = array();
+
+        $data = Result::select('*')->selectRaw('sum(points) as monthpoints')->whereBetween('today_date', array($firstmon, $tommorrow))->where('dept_id',$dept_id)->where('user_id',$user_id)->get();
+
+
+        $total_points = $data[0]['monthpoints'];
+
+       
         $result = Result::where('user_id',$user_id)->paginate(10);
         if($result->isEmpty()){
             return view('resulthistory',['empty' => '']);
@@ -222,7 +236,7 @@ class ResultController extends Controller
         // echo "<pre>";
         // print_r($titles);
         // exit;
-        return view('resulthistory',['history' => $result,'title' => $titles]);
+        return view('resulthistory',['history' => $result,'title' => $titles, 'points' => $total_points]);
     }
 
 

@@ -59,10 +59,17 @@
                         </div>
                       </div>
                     </div>
-                    <input type="submit" name="" value="Save Changes" class="btn btn-primary mr-2">
-                    <input type="reset" name="" value="Reset" class="btn btn-success mr-2">
+                    <h3>Actions</h3><br/>
+                    <div class="col-sm-12">
+                        
+                             <input type="submit" name="" value="Save Changes" class="btn btn-primary mr-2">
+                              <input type="reset" name="" value="Reset" class="btn btn-success mr-2">
+                       
+                        
+                    </div>
+                   
                   </form>
 </div>
-	</div>
+
 @include('dashboard.userfooter')
 @endsection

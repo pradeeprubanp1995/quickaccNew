@@ -20,7 +20,7 @@ Route::get('/', function () {
         $result[1] = Category::select('*')->where('parent_id','0')->get();
         // dd($result);
          return view('addupcomming',['post_data' => $result]);
-})->middleware('auth');
+})->middleware('is_admin');
 
 // Auth::routes();
 
@@ -33,7 +33,7 @@ Route::any('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::any('/home', 'HomeController@index')->name('home');
  
  //Dashbord
-Route::any('/adminindex', 'HomeController@adminindex')->name('adminindex');
+Route::any('/adminindex', 'CategoryController@adminindex')->name('adminindex');
 
 //Registration
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
@@ -41,18 +41,19 @@ Route::post('/register', 'Auth\RegisterController@register');
 Route::any('/register/response','Auth\RegisterController@register')->name('register.request');
 
 //Profile
-Route::get('/profile', 'HomeController@profile')->name('profile');
-Route::any('/editprofile', 'HomeController@editprofile')->name('editprofile');
+Route::get('/profile', 'CategoryController@profile')->name('profile');
+Route::any('/editprofile', 'CategoryController@editprofile')->name('editprofile');
 
 //cron
-Route::get('/cron', 'Auth\LoginController@cron')->name('cron');
+Route::get('/status_cron', 'WeekpointsController@status_cron')->name('status_cron');
+Route::get('/title_cron', 'WeekpointsController@title_cron')->name('title_cron');
 //Change password
 
-Route::any('/changepassword', 'HomeController@changepassword')->name('changepassword');
-Route::any('/changedpassword', 'HomeController@changedpassword')->name('changedpassword');
+Route::any('/changepassword', 'CategoryController@changepassword')->middleware('is_admin')->name('changepassword');
+Route::any('/changedpassword', 'CategoryController@changedpassword')->name('changedpassword');
 
 // Department Admin
-Route::get('/department', 'DepartmentController@index')->name('department');
+Route::get('/department', 'DepartmentController@index')->middleware('is_admin')->name('department');
 Route::post('/Newdepartment', 'DepartmentController@add')->name('depart_add');
 Route::post('/department/edit/{id}', 'DepartmentController@deptedit')->name('depart_edit');
 Route::get('/dept_delete/{id}', 'DepartmentController@deptdel')->name('depart_delete');
@@ -99,8 +100,7 @@ Route::post('/editupcoming', 'UpcomingTitleController@editupcoming')->name('edit
 
 
 // user 
-
-Route::get('/user/login','UpcomingTitleController@userlogin')->name('userlogin');
+Route::get('/user/login','WeekpointsController@userlogin')->name('userlogin');
 
 // question update
 Route::get('/updatequestioninput','QuestionController@updatequestioninput')->name('updatequestioninput');

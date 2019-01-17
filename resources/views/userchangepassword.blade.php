@@ -55,6 +55,6 @@
 
             </div>
 		</div>
-</div>
+
 @include('dashboard.userfooter')
 @endsection

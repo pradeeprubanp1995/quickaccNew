@@ -16,6 +16,11 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         
@@ -68,12 +73,10 @@ class QuestionController extends Controller
 
         $date=date("Y-m-d");
         $dept_id=Auth::user()->dept_id;
-        if($dept_id == ''){
-                
-            return view('testquestion',['empty' => '']);
-            }
-        // dd($dept_id);
+        
+        
         $upcoming_id=Upcoming_title::where('dept_id',$dept_id)->where('date_of_quiz',$date)->get();
+        // dd($upcoming_id);
          if($upcoming_id->isEmpty()){
                 
             return view('testquestion',['empty' => '']);
@@ -82,6 +85,10 @@ class QuestionController extends Controller
         // echo $id;exit;
         $question = Question::where('upcomingtitle_id',$id)->get();
         // dd($question);
+        if($question->isEmpty()){
+                
+            return view('testquestion',['empty' => '']);
+            }
 
         return view('testquestion',['ques' => $question,'id' => $id]);
     }
