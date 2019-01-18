@@ -53,7 +53,7 @@
 <label ><b>Category</b></label>
 <!-- <input type="text" id="category" name="category" class="form-control" autofocus="autofocus" >  -->
 <select id="category" name="category" class="form-control category" >
-  <option value="0">Select Category</option>
+  <option value="">Select Category</option>
   @foreach ($post_data[1] as $key => $data)
   <option value="{{ $data->id }}">{{ $data->cat_name }}</option>
  

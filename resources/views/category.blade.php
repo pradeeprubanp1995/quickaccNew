@@ -26,15 +26,17 @@
      <table class="table table-responsive" style="clear:both;float:none;">
 		<thead>
 			<tr>
+				<th>S.No</th>
 		    	<th>Category</th>
 		    	<th>Parent Category</th>
 		    	<th colspan=2>Action</th>
             </tr>
 		</thead>
 		<tbody>
-			@foreach($cat_data as $data)
+			@foreach($cat_data as $key => $data)
 				
 				<tr>
+				<td>{{ $key+1 }}</td>
 				<td>{{ ucfirst($data->cat_name) }}</td>
                  <td>
                  	@php $pid=$data->parent_id @endphp

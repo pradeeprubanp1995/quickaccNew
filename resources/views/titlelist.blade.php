@@ -52,45 +52,41 @@
                   <thead>
                     <tr>
                       <th>S.No</th>
-                      
-                      <th>Department</th>
-                      <th>Category </th>
-                      <th>Subcategory</th>
                       <th>Title Name</th>
+                      <th>Department</th>
+                     <!--  <th>Category </th>
+                      <th>Subcategory</th> -->
+                      
                       <th colspan="2">Actions</th>
                     </tr>
                   </thead>
                   
                   <tbody>
-               <!-- <?php 
-               
-
-
-                // echo "<pre>"; print_r($post_data); exit; ?>  -->  
+              <!--  <?php //echo "<pre>"; print_r($post_data); exit; ?>  -->
 
                   @foreach ($post_data as $key => $data)
 
 
                     <tr>
                     <td>{{ $key+1 }}</td>
+                      <td> {{ ucfirst($data->title_name) }}</td>
+                      <td> {{ ucfirst($data->deptname) }}</td>
                       
-                      <td> {{ ucfirst($data['deptname']) }}</td>
-                      <td> {{ ucfirst($data['cat_name']) }}</td>
-                      <td> {{ ucfirst($data['subcat_name']) }}</td>
-                      <td> {{ ucfirst($data['title_name']) }}</td>
-                      <td><a href="{{ url('edittitlepage/'.$data['id'] ) }}" class="btn btn-secondary">Edit</a></td>
+                      
+                      <td><a href="{{ url('edittitlepage/'.$data->id ) }}" class="btn btn-warning "><i class="fa fa-edit"></i>Edit</a></td>
                       
                       <td>
-                          <form action="{{ url('/deletetitle/'.$data['id'] ) }}" method="get">
-                          <button class="btn  btn-danger" type="submit" name="remove_levels" value="delete" data-toggle="modal" data-target="#deleteModal" data-deptname="{{ $data['title_name'] }}">Delete</span>
+                          <form action="{{ url('/deletetitle/'.$data->id ) }}" method="get">
+                          <button class="btn  btn-danger" type="submit" name="remove_levels" value="delete" data-toggle="modal" data-target="#deleteModal" data-deptname="{{ $data->title_name }}">Delete</span>
                           </button>
                         </form>
                       </td>
                     </tr>
                     @endforeach
+                   
                   </tbody>
                 </table>
-            
+              {{ $post_data->links()  }}
               </div>
             </div>
             

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class IsAdmin
+class IsUser
 {
     /**
      * Handle an incoming request.
@@ -23,7 +23,7 @@ class IsAdmin
         if(!$this->CheckAdmin()){
 
         //redirect to admin login
-            return redirect('/home');
+            return redirect('/adminindex');
 
         }
 
@@ -50,7 +50,7 @@ class IsAdmin
         }
        // echo Auth::user()->user_type;exit;
 
-       if(Auth::user()->user_type == '0')
+       if(Auth::user()->user_type == '1')
        {
             return false;
        }

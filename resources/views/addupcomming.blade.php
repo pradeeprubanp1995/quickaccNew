@@ -20,6 +20,13 @@
 </div><br />
 @endif
 
+@if ($post_data[0]->isEmpty())
+<div class="alert alert-danger
+">
+<p>All Departments Has Title on <?php echo date("Y-m-d", strtotime('tomorrow')); ?> </p>
+</div><br />
+@endif
+
 @if (count($errors) > 0)
     <div class="alert alert-danger">
         <strong>Whoops!</strong> There were some problems with your input.<br><br>

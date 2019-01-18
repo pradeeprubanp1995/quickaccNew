@@ -8,6 +8,10 @@ use Auth;
 use App\Upcoming_title;
 use App\Title;
 use App\Result;
+use App\User;
+use App\Department;
+use Session;
+use Hash;
 
 class QuestionController extends Controller
 {
@@ -18,7 +22,7 @@ class QuestionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('is_user');
     }
 
     public function index()
@@ -45,7 +49,7 @@ class QuestionController extends Controller
             $title[1] = Title::select('*')->where('id',$quiz[0]->title_id)->get();    
         }
         // echo "<pre>";print_r($title);exit;
-        return view('quizview',[ 'post_data' => $title]);
+        return view('quizview',[ 'post_data' => $title , 'showerror' => '1']);
         
         // echo "<pre>";print_r($upcoming[0]->title_id);exit;
 
@@ -244,4 +248,120 @@ class QuestionController extends Controller
     {
         //
     }
+
+
+    // for HomeController
+   
+    public function userprofile()
+    {       
+          $data = User::find( Auth::user()->id); 
+          $department = Department::select('*')->get();
+          
+        return view('userprofile',['data' => $data, 'department' => $department]);
+        
+       
+    }
+     public function userprofileview()
+    {       
+
+
+        $userid = Auth::user()->id;
+        $dept = Auth::user()->dept_id;
+        $today = date('Y-m-d');
+        $result = array();
+
+        $upcoming = Upcoming_title::select('*')->where('date_of_quiz',$today)->where('status','1')->whereRaw('FIND_IN_SET(?,dept_id)', [$dept])->get();
+
+        if(isset($upcoming[0]))
+        {
+            
+            
+            
+                $title = Title::select('*')->where('id',$upcoming[0]->title_id)->get();
+
+                $result['title_name'] = $title[0]->title_name;
+                $result['id'] = $upcoming[0]->id;
+
+                
+                // echo "<pre>";print_r($upcoming);exit();
+                 $data[0] = User::find( Auth::user()->id); 
+              // dd($data['dept_id']);
+              $data[1] = Department::find($data[0]['dept_id']);
+
+                // return view('updatequestion',['post_data' => $result]);
+                return view('userprofileview',['data' => $data, 'post_data' => $result]);
+            
+
+            
+        }
+        else
+        {
+              $data[0] = User::find( Auth::user()->id); 
+              // dd($data['dept_id']);
+              $data[1] = Department::find($data[0]['dept_id']);
+              // dd()
+            return view('userprofileview',['data' => $data]);
+        }
+        
+       
+    }
+    public function usereditprofile(Request $request)
+    {
+
+        // dd($request->file('img'));
+        $upload_image=$request->file('img');
+        if(!empty($upload_image)){         
+        $image=$upload_image->getClientOriginalName();
+        $upload_image->move(public_path().'/uploads/', $image); 
+         $data = User::find( $request['id']);
+        $data->user_id=$request['userid'];
+        $data->name=$request['name'];
+        $data->gender=$request['gender'];
+        $data->images=$image;
+        $data->save();          
+        } 
+        $data = User::find( $request['id']);
+        $data->user_id=$request['userid'];
+        $data->name=$request['name'];
+        $data->gender=$request['gender'];
+        $data->save();
+        return redirect()->back()->with('success','Updated successfully');
+          
+        // return view('profile',compact('data'));
+       
+    }
+    
+    public function userchangepassword()
+    {       
+          
+        return view('userchangepassword');
+       
+    }
+    public function userchangedpassword(Request $request)
+    {
+        // dd($request);exit();
+        // echo Auth::user()->password;
+        // dd(Session::get('password'));exit();
+        // $request->validate([
+            
+        //     'oldpassword' => 'required',
+        //     'password' => 'min:5|required_with:confirmpassword|same:confirmpassword',
+        //     'confirmpassword' => 'required|min:5',
+        // ]);
+        
+        if($request['oldpassword']==Session::get('password'))
+        {
+        $store = User::find(Auth::user()->id); 
+
+        $store->password =Hash::make($request['password']);      
+        $store->save();
+         Auth::logout();  
+         Session::flush();      
+        // $request->session()->invalidate();
+        // $request->session()->flash('errors', 'You are logged out!');
+        return redirect('/user/login');}
+        else{
+        return redirect()->back()->with('warning', 'Please Give correct oldpassword');}      
+    }
+
 }

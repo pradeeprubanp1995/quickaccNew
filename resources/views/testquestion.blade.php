@@ -39,5 +39,30 @@ $count = count($options);
 @endif
 </div>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+	var window_focus;
+
+	$(window).focus(function() {
+	window_focus = true;
+	})
+	.blur(function() {
+	    window_focus = false;
+	});
+
+	$(document).one('click',function() {
+		setInterval(function() { 
+			// $('body').append('has focus? ' + window_focus + '<br>'); }, 1000);
+			if(window_focus == 0)
+			{
+				var url = "/quiz?data=data"; 
+				window.location.href = url;
+			}
+            
+		});
+	});
+});
+</script>
+
 @include('dashboard.userfooter')
 @endsection

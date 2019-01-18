@@ -26,13 +26,15 @@
 	<table class="table table-responsive" style="clear:both;float:none;">
 		<thead>
 			<tr>
+				<th>S.No</th>
 		    	<th>Department</th>
 		    	<th colspan=2>Actions</th>
             </tr>
 		</thead>
 		<tbody>
-			@foreach($dept_data as $data)
+			@foreach($dept_data as $key => $data)
 			<tr>
+				<td>{{ $key+1 }}</td>
 				<td>{{ ucfirst($data->dept_name) }}</td>
 				<td><a href="javascript:void(0)" data-toggle="modal" data-target="#editModal" type="button" class="btn btn-warning edit" data-item-id="{{$data->id}}" data-deptname="{{$data->dept_name}}"><i class="fa fa-edit"></i>Edit</a></td>
 				<td>

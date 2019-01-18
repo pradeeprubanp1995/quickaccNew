@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Department;
 use App\Category;
 use DB;
+use App\Upcoming_title;
 
 class TitleController extends Controller
 {
@@ -31,39 +32,39 @@ class TitleController extends Controller
         ->select("titles.*",\DB::raw("GROUP_CONCAT(departments.dept_name) as deptname"))
         ->leftjoin("departments",\DB::raw("FIND_IN_SET(departments.id,titles.dept_id)"),">",\DB::raw("'0'"))
         ->groupBy("titles.id")  
-        ->get();
+        ->paginate(10);
         
         
         
 
-        foreach ($title as $key => $value) 
-        {
+        // foreach ($title as $key => $value) 
+        // {
 
-            $category = Category::select('*')->where('id',$value->cat_id)->get();
-            if($value->subcat_id == 0 )
-            {
-                $result[$key]['subcat_name'] = 'None';
-            }
-            else
-            {
-                $subcategory = Category::select('*')->where('id',$value->subcat_id)->get();
-                $result[$key]['subcat_name'] = $subcategory[0]->cat_name;
+        //     $category = Category::select('*')->where('id',$value->cat_id)->get();
+        //     if($value->subcat_id == 0 )
+        //     {
+        //         $result[$key]['subcat_name'] = 'None';
+        //     }
+        //     else
+        //     {
+        //         $subcategory = Category::select('*')->where('id',$value->subcat_id)->get();
+        //         $result[$key]['subcat_name'] = $subcategory[0]->cat_name;
 
-            }
+        //     }
             
 
-                $result[$key]['id'] = $value->id;
-                $result[$key]['deptname'] = $value->deptname;
-                $result[$key]['title_name'] = $value->title_name;
-                $result[$key]['cat_name'] = $category[0]->cat_name;
+        //         $result[$key]['id'] = $value->id;
+        //         $result[$key]['deptname'] = $value->deptname;
+        //         $result[$key]['title_name'] = $value->title_name;
+        //         $result[$key]['cat_name'] = $category[0]->cat_name;
                 
-        }
+        // }
 
 
 // echo "<pre>";print_r($result);exit();
         
        
-        return view('titlelist',['post_data' => $result]);
+        return view('titlelist',['post_data' => $title]);
     }
 
     /**
@@ -149,10 +150,19 @@ class TitleController extends Controller
     }
     public function deletetitle($id)
     {
-
-        $title = Title::find($id);
-        $title->delete();
-        return redirect('/title')->with('danger', 'Deleted successfully');
+        $upcoming = Upcoming_title::select('id')->where('title_id',$id)->where('status','1' || '2')->get();
+        // dd($upcoming);
+        if($upcoming->isEmpty())
+        {
+            $title = Title::find($id);
+            $title->delete();
+            return redirect('/title')->with('danger', 'Deleted successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('danger', 'This Title still using in Upcoming Table. So you can not delete this.' );
+        }
+        
     }
 
     public function getsubcategory()

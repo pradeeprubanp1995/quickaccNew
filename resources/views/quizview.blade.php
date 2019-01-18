@@ -42,6 +42,14 @@
     </div>
 @endif 
 
+<!-- <?php //echo $_GET['data'];exit;  ?>  -->
+
+@if (isset($_GET['data']))
+<div class="alert alert-danger
+">
+<p> Please take this Quiz Sincerely. Thank You ! </p>
+</div><br />
+@endif
 
 
         <!-- <?php  //echo "<pre>"; print_r($post_data[0]); exit; ?> -->

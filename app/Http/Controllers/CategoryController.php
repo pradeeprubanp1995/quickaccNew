@@ -18,7 +18,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
+     public function __construct()
     {
         $this->middleware('is_admin');
     }
@@ -163,87 +163,5 @@ class CategoryController extends Controller
 
 
 
-    // for admin Controller
-
-
-
-
-     public function adminindex()
-    {
-        $result = array();
-        $result[0] = Department::select('*')->get();
-        $result[1] = Category::select('*')->where('parent_id','0')->get();
-        // dd($result);
-         return view('addupcomming',['post_data' => $result]);
-    }
-    public function profile()
-    {
-        $data = User::find( Auth::user()->id); 
-          
-        return view('profile',compact('data'));
-       
-    }
-    public function editprofile(Request $request)
-    {
-
-        // dd($request->file('img'));
-        $upload_image=$request->file('img');
-        if(!empty($upload_image)){         
-        $image=$upload_image->getClientOriginalName();
-        $upload_image->move(public_path().'/uploads/', $image); 
-         $data = User::find( $request['id']);
-        $data->user_id=$request['userid'];
-        $data->name=$request['name'];
-        $data->gender=$request['gender'];
-        $data->doj=$request['doj'];
-        $data->images=$image;
-        $data->email=$request['email'];
-        $data->save();          
-        } 
-        $data = User::find( $request['id']);
-        $data->user_id=$request['userid'];
-        $data->name=$request['name'];
-        $data->gender=$request['gender'];
-        $data->doj=$request['doj'];       
-        $data->email=$request['email'];
-        $data->save();
-        return redirect()->back()->with('success','Updated successfully');
-          
-        // return view('profile',compact('data'));
-       
-    }
-
-     
     
-    public function changedpassword(Request $request)
-    {
-        // dd($request);exit();;;
-        // echo Auth::user()->password;
-        // dd(Session::get('password'));exit();
-        $request->validate([
-            
-            'oldpassword' => 'required',
-            'password' => 'min:5|required_with:confirmpassword|same:confirmpassword',
-            'confirmpassword' => 'required|min:5',
-        ]);
-        
-        if($request['oldpassword']==Session::get('password'))
-        {
-        $store = User::find(Auth::user()->id); 
-        $store->password =Hash::make($request['password']);      
-        $store->save();
-         Auth::logout();   
-         Session::flush();     
-        // $request->session()->invalidate();
-        // $request->session()->flash('errors', 'You are logged out!');
-        return redirect('/login');}
-        else{
-        return redirect()->back()->with('warning', 'Please Give correct oldpassword');}      
-    }
-    public function changepassword()
-    {       
-          
-        return view('changepassword');
-       
-    }
 }

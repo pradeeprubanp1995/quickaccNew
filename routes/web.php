@@ -33,7 +33,7 @@ Route::any('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::any('/home', 'HomeController@index')->name('home');
  
  //Dashbord
-Route::any('/adminindex', 'CategoryController@adminindex')->name('adminindex');
+Route::any('/adminindex', 'AdminHomeController@adminindex')->name('adminindex');
 
 //Registration
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
@@ -41,16 +41,16 @@ Route::post('/register', 'Auth\RegisterController@register');
 Route::any('/register/response','Auth\RegisterController@register')->name('register.request');
 
 //Profile
-Route::get('/profile', 'CategoryController@profile')->name('profile');
-Route::any('/editprofile', 'CategoryController@editprofile')->name('editprofile');
+Route::get('/profile', 'DepartmentController@profile')->name('profile');
+Route::any('/editprofile', 'DepartmentController@editprofile')->name('editprofile');
 
 //cron
 Route::get('/status_cron', 'WeekpointsController@status_cron')->name('status_cron');
 Route::get('/title_cron', 'WeekpointsController@title_cron')->name('title_cron');
 //Change password
 
-Route::any('/changepassword', 'CategoryController@changepassword')->middleware('is_admin')->name('changepassword');
-Route::any('/changedpassword', 'CategoryController@changedpassword')->name('changedpassword');
+Route::any('/changepassword', 'DepartmentController@changepassword')->middleware('is_admin')->name('changepassword');
+Route::any('/changedpassword', 'DepartmentController@changedpassword')->name('changedpassword');
 
 // Department Admin
 Route::get('/department', 'DepartmentController@index')->middleware('is_admin')->name('department');
@@ -122,8 +122,8 @@ Route::get('/result', 'ResultController@indexx')->name('resultview');
 Route::get('/resulthistory','ResultController@show')->name('history');
 Route::get('/result/{date}','ResultController@view');
 Route::get('/highscore','ResultController@highscore')->name('rank');
-Route::get('/userprofile','HomeController@userprofile')->name('userprofile');
-Route::any('/usereditprofile', 'HomeController@usereditprofile')->name('usereditprofile');
-Route::get('/userprofileview','HomeController@userprofileview')->name('userprofileview');
-Route::any('/userchangepassword', 'HomeController@userchangepassword')->name('userchangepassword');
-Route::any('/userchangedpassword', 'HomeController@userchangedpassword')->name('userchangedpassword');
+Route::get('/userprofile','QuestionController@userprofile')->name('userprofile');
+Route::any('/usereditprofile', 'QuestionController@usereditprofile')->name('usereditprofile');
+Route::get('/userprofileview','QuestionController@userprofileview')->name('userprofileview');
+Route::any('/userchangepassword', 'QuestionController@userchangepassword')->name('userchangepassword');
+Route::any('/userchangedpassword', 'QuestionController@userchangedpassword')->name('userchangedpassword');
