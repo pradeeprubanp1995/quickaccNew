@@ -32,7 +32,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -80,7 +80,7 @@ class LoginController extends Controller
                 $request->session()->invalidate();
                 $request->session()->flash('errors', 'You are logged out!');
                 if($_POST == 'admin')
-                    return redirect('/');
+                    return redirect('/admin/login');
                 else
                     return redirect()->route('userlogin');
                 

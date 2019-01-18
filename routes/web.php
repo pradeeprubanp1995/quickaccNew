@@ -14,16 +14,18 @@
 use App\Department;
 use App\Category;
 
-Route::get('/', function () {
-    $result = array();
-        $result[0] = Department::select('*')->get();
-        $result[1] = Category::select('*')->where('parent_id','0')->get();
-        // dd($result);
-         return view('addupcomming',['post_data' => $result]);
-})->middleware('is_admin');
+// Route::get('/', function () {
+//     $result = array();
+//         $result[0] = Department::select('*')->get();
+//         $result[1] = Category::select('*')->where('parent_id','0')->get();
+//         // dd($result);
+//          return view('addupcomming',['post_data' => $result]);
+// })->middleware('is_user');
 
 // Auth::routes();
+//localhost:8000
 
+Route::get('/', 'WeekpointsController@userlogin')->name('loginuser');
 
 //Registration
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
