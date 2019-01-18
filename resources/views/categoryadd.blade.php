@@ -24,7 +24,7 @@
           @endif
          <div class="row justify-content-center">
            <div class="col-md-6">
-           <form method="post" action="{{route('category_add')}}">
+           <form method="post" action="{{route('admin.category_add')}}">
             {{ csrf_field() }}
             <!-- <table class="categorytable">
               <tbody  id="addon"> -->

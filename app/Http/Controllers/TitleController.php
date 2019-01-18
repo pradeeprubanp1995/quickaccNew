@@ -114,7 +114,7 @@ class TitleController extends Controller
             $title->dept_id = implode(",", $data['dept']);
             $title->save();
 
-            return redirect()->route('title')->with('success','Insert Successfully');
+            return redirect()->route('admin.title')->with('success','Insert Successfully');
 
         // print_r($_POST);exit;
     }
@@ -145,7 +145,7 @@ class TitleController extends Controller
         $title->save();
 
        
-        return redirect()->route('title')->with('success','Updated Successfully');
+        return redirect()->route('admin.title')->with('success','Updated Successfully');
 
     }
     public function deletetitle($id)
@@ -156,7 +156,7 @@ class TitleController extends Controller
         {
             $title = Title::find($id);
             $title->delete();
-            return redirect('/title')->with('danger', 'Deleted successfully');
+            return redirect('/admin/title')->with('danger', 'Deleted successfully');
         }
         else
         {
@@ -193,6 +193,7 @@ class TitleController extends Controller
 
 
     public function titleautosearch() {
+       
 
         // $title=$_REQUEST['title'];
         $cat=$_REQUEST['cat'];
@@ -206,9 +207,11 @@ class TitleController extends Controller
         // print_r($_POST); exit;
         if($subcat == '')
         {
-             $getdata=Title::select('*')->where('cat_id',$cat)->where('subcat_id',NULL)
+            
+             $getdata=Title::select('*')->where('cat_id',$cat)->where('subcat_id','')
             ->whereRaw('FIND_IN_SET(?,dept_id)', [$dept])
             ->get();
+             // print_r($_REQUEST);
             echo json_encode($getdata);
         }
         else

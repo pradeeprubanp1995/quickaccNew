@@ -26,7 +26,7 @@
           @endif
 
 
-          <div align="right"><a href="{{ route('addtitleinput') }}" class="btn btn-primary">Add Title</a></div>
+          <div align="right"><a href="{{ route('admin.addtitleinput') }}" class="btn btn-primary">Add Title</a></div>
           
           <hr>
           <!-- <p>This is a great starting point for new custom pages.</p> -->
@@ -73,10 +73,10 @@
                       <td> {{ ucfirst($data->deptname) }}</td>
                       
                       
-                      <td><a href="{{ url('edittitlepage/'.$data->id ) }}" class="btn btn-warning "><i class="fa fa-edit"></i>Edit</a></td>
+                      <td><a href="{{ url('/admin/edittitlepage/'.$data->id ) }}" class="btn btn-warning "><i class="fa fa-edit"></i>Edit</a></td>
                       
                       <td>
-                          <form action="{{ url('/deletetitle/'.$data->id ) }}" method="get">
+                          <form action="{{ url('/admin/deletetitle/'.$data->id ) }}" method="get">
                           <button class="btn  btn-danger" type="submit" name="remove_levels" value="delete" data-toggle="modal" data-target="#deleteModal" data-deptname="{{ $data->title_name }}">Delete</span>
                           </button>
                         </form>

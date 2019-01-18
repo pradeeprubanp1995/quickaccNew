@@ -76,7 +76,7 @@ $(document).ready(function() {
   var cat= $('.category').val();
 
   var holdsubcat = $('#holdsubcat').val();
-  src = "{{ route('getsubcategory') }}";
+  src = "{{ route('admin.getsubcategory') }}";
       if(cat > 0)
       {
           $.ajax({
@@ -137,7 +137,7 @@ $(document).on( "change", ".category", function() {
 
         var cat= $(this).val();
 
-         src = "{{ route('getsubcategory') }}";
+         src = "{{ route('admin.getsubcategory') }}";
          
          // alert(cat);
           $.ajax({
@@ -191,7 +191,7 @@ $(document).ready(function() {
 
 $(document).on( "change", ".dept", function() {
       
-    src = "{{ route('titleauto') }}";
+    src = "{{ route('admin.titleauto') }}";
     cat = $('#category').val();
     subcat = $('#subcategory').val();
     dept = $('#dept').val();

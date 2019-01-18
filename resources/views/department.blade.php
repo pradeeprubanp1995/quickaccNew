@@ -38,7 +38,7 @@
 				<td>{{ ucfirst($data->dept_name) }}</td>
 				<td><a href="javascript:void(0)" data-toggle="modal" data-target="#editModal" type="button" class="btn btn-warning edit" data-item-id="{{$data->id}}" data-deptname="{{$data->dept_name}}"><i class="fa fa-edit"></i>Edit</a></td>
 				<td>
-					<form action="{{ url('/dept_delete/'.$data['id']) }}" method="get">
+					<form action="{{ url('/admin/dept_delete/'.$data['id']) }}" method="get">
 						<button class="btn  btn-danger" type="submit" name="remove_levels" value="delete" data-toggle="modal" data-target="#deleteModal" data-deptname="{{$data->dept_name}}"><i class="fa fa-trash-o"></i>Delete</span>
 						</button>
 					</form>
@@ -64,7 +64,7 @@
 	          </button>
             </div>
            <div>
-            <form id="for" method="post" action="{{route('depart_add')}}">
+            <form id="for" method="post" action="{{route('admin.depart_add')}}">
          	 {{ csrf_field() }}
 	         <div class="modal-body">
 	           <div>Name :</div>
@@ -140,7 +140,7 @@
 			    $updateModal.find('.confirm-btn').on('click', function (e) 
 			    {
 			        e.preventDefault();
-			        var submitUrl = '/department/edit/' + resourceId,
+			        var submitUrl = '/admin/department/edit/' + resourceId,
 			            form = $('#edit-depart-form'); // change with your form
 
 			        form.attr('action', submitUrl);

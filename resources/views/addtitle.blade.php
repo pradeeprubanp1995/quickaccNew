@@ -29,7 +29,7 @@
 
 <h2>Add Title</h2> <br/>
 
-<form action="{{ route('addtitle') }}" method="post" name="addtitle_form">
+<form action="{{ route('admin.addtitle') }}" method="post" name="addtitle_form">
 {{ csrf_field() }} 
 
 

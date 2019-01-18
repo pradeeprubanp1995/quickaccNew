@@ -23,7 +23,8 @@ class IsAdmin
         if(!$this->CheckAdmin()){
 
         //redirect to admin login
-            return redirect('/home');
+            // return redirect('/home');
+            return redirect()->back();
 
         }
 

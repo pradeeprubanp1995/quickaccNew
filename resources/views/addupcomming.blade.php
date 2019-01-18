@@ -40,7 +40,7 @@
 
 <h2>Add Upcomming Title</h2> <br/>
 
-<form action="{{ route('addupcomming') }}" method="post" name="addupcomming_form">
+<form action="{{ route('admin.addupcomming') }}" method="post" name="addupcomming_form">
 {{ csrf_field() }} 
 
 

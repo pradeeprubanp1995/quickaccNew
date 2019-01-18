@@ -342,12 +342,12 @@ class QuestionController extends Controller
         // dd($request);exit();
         // echo Auth::user()->password;
         // dd(Session::get('password'));exit();
-        // $request->validate([
+        $request->validate([
             
-        //     'oldpassword' => 'required',
-        //     'password' => 'min:5|required_with:confirmpassword|same:confirmpassword',
-        //     'confirmpassword' => 'required|min:5',
-        // ]);
+            'oldpassword' => 'required',
+            'password' => 'min:5|required_with:confirmpassword|same:confirmpassword',
+            'confirmpassword' => 'required|min:5',
+        ]);
         
         if($request['oldpassword']==Session::get('password'))
         {
@@ -359,7 +359,7 @@ class QuestionController extends Controller
          Session::flush();      
         // $request->session()->invalidate();
         // $request->session()->flash('errors', 'You are logged out!');
-        return redirect('/user/login');}
+        return redirect('/login');}
         else{
         return redirect()->back()->with('warning', 'Please Give correct oldpassword');}      
     }

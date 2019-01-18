@@ -134,12 +134,12 @@ class UpcomingTitleController extends Controller
             $title->status = '2';
             $title->dept_id = $data['dept'];
             $title->save();
-            return redirect()->route('upcomming')->with('success','Insert Successfully');
+            return redirect()->route('admin.upcomming')->with('success','Insert Successfully');
         }
         // echo "sdfdsf";exit;
 //          DB::table('upcoming_title_tbl')->insert(['title_id'=>$data['titleauto'],
 // 'dept_id'=>$data['dept'],'date_of_quiz'=>$tomorrow,'status'=>'2']);
-         return redirect()->route('addupcomminginput')->with('danger','Already that Department has Upcoming Title');
+         return redirect()->route('admin.addupcomminginput')->with('danger','Already that Department has Upcoming Title');
            
 
             
@@ -197,7 +197,7 @@ class UpcomingTitleController extends Controller
 
         $title = Upcoming_title::find($id);
         $title->delete();
-        return redirect('/upcominglist')->with('danger', 'Deleted successfully');
+        return redirect('/admin/upcominglist')->with('danger', 'Deleted successfully');
     }
 
 

@@ -16,7 +16,7 @@
                         Change Password Old Password
                       </p> -->
                       <form class="forms-sample" method="post" 
-                      action="{{ route('changedpassword') }}">
+                      action="{{ route('admin.changedpassword') }}">
                        @csrf
                         @if (session()->has('warning'))
     <div class="alert alert-danger text-center animated fadeIn">

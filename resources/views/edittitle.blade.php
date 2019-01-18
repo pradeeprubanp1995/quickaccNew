@@ -29,7 +29,7 @@
 
 
 
-<form action="{{ route('edittitle') }}" method="post" name="edittitle_form">
+<form action="{{ route('admin.edittitle') }}" method="post" name="edittitle_form">
 {{ csrf_field() }} 
 
 

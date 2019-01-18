@@ -24,7 +24,7 @@
           @endif
           <div class="row justify-content-center">
            <div class="col-md-6">
-        <form method='post' action="{{url('/update_cat/'.$cat_data['id'])}}">
+        <form method='post' action="{{url('/admin/update_cat/'.$cat_data['id'])}}">
         	{{ csrf_field() }}
           <div class="form-group">
             <label>Parent-Category</label>
@@ -41,7 +41,7 @@
                   <input type="text" name="category" placehoder="Category" id="cat" style="width:100%;" value="{{$cat_data->cat_name}}"/>
                 </div>
                <hr>
-               <a href="{{route('category')}}"><button type="button" class="btn btn-primary btn-danger" style="float:left;">Back To Category</button></a>
+               <a href="{{route('admin.category')}}"><button type="button" class="btn btn-primary btn-danger" style="float:left;">Back To Category</button></a>
                 <button type="submit" class="btn btn-primary" style="float:right;">Update</button>
         </form>
       </div>

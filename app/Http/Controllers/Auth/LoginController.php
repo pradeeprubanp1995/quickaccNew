@@ -67,7 +67,7 @@ class LoginController extends Controller
             // Authentication passed...
             if(Auth::user()->user_type==1 && $_POST['type']=="admin")
             {
-                return redirect()->route('adminindex');
+                return redirect()->route('admin.adminindex');
             }
             else if(Auth::user()->user_type==0 && $_POST['type']=="user")
             {
@@ -104,9 +104,9 @@ class LoginController extends Controller
             $request->session()->invalidate();
             
             if($usertype == 1)
-            return $this->loggedOut($request) ?: redirect('/login');
+            return $this->loggedOut($request) ?: redirect('/admin/login');
             else
-            return $this->loggedOut($request) ?: redirect('/user/login');
+            return $this->loggedOut($request) ?: redirect('/login');
         }
 
     

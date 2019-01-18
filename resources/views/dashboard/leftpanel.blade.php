@@ -8,25 +8,25 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{route('department')}}">
+            <a class="nav-link" href="{{route('admin.department')}}">
               <i class="menu-icon mdi mdi-domain"></i>
               <span class="menu-title">Department</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{route('category')}}">
+            <a class="nav-link" href="{{route('admin.category')}}">
               <i class="menu-icon mdi mdi-tag-multiple"></i>
               <span class="menu-title">Categories</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{route('title')}}">
+            <a class="nav-link" href="{{route('admin.title')}}">
               <i class="menu-icon mdi mdi-account-card-details"></i>
               <span class="menu-title">Titles</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('upcomming') }}">
+            <a class="nav-link" href="{{ route('admin.upcomming') }}">
               <i class="menu-icon mdi mdi-arrow-right-bold-box"></i>
               <span class="menu-title">Upcomming</span>
             </a>

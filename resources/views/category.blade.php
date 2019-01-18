@@ -22,7 +22,7 @@
 		<p>{{ \Session::get('danger') }}</p>
 		</div><br />
 		@endif
-		<a href="{{route('addcategory')}}"><button type="button" class="btn btn-primary" style="float:right;margin:10px;">+ ADD Category</button></a>
+		<a href="{{route('admin.addcategory')}}"><button type="button" class="btn btn-primary" style="float:right;margin:10px;">+ ADD Category</button></a>
      <table class="table table-responsive" style="clear:both;float:none;">
 		<thead>
 			<tr>
@@ -51,9 +51,9 @@
 				  <i>Top</i>
 				  @endif
 				  </td>
-				  <td><a href="{{ url('/edit_cat/'.$data['id']) }}" type="button" class="btn btn-warning edit"><i class="fa fa-edit"></i>Edit</a></td>
+				  <td><a href="{{ url('/admin/edit_cat/'.$data['id']) }}" type="button" class="btn btn-warning edit"><i class="fa fa-edit"></i>Edit</a></td>
 				  <td>
-					<form action="{{ url('/delete_cat/'.$data['id']) }}" method="get">
+					<form action="{{ url('/admin/delete_cat/'.$data['id']) }}" method="get">
 						<button class="btn  btn-danger" type="submit" name="remove_levels" value="delete" data-toggle="modal" data-target="#deleteModal" data-deptname="{{$data->cat_name}}"><i class="fa fa-trash-o"></i>Delete</span>
 						</button>
 					</form>

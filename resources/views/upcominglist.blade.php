@@ -26,7 +26,7 @@
           @endif
 
 
-          <div align="right"><a href="{{ route('addupcomminginput') }}" class="btn btn-primary">Add Upcoming Title</a></div>
+          <div align="right"><a href="{{ route('admin.addupcomminginput') }}" class="btn btn-primary">Add Upcoming Title</a></div>
           
           <hr>
           <!-- <p>This is a great starting point for new custom pages.</p> -->
@@ -77,7 +77,7 @@
                       <!-- <td><a href="{{ url('editupcomingpage/'.$data->id ) }}" class="btn btn-secondary">Edit</a></td> -->
                       
                       <td>
-                          <form action="{{ url('/deleteupcoming/'.$data->id ) }}" method="get">
+                          <form action="{{ url('/admin/deleteupcoming/'.$data->id ) }}" method="get">
                           <button class="btn  btn-danger" type="submit" name="remove_levels" value="delete" data-toggle="modal" data-target="#deleteModal" data-deptname="{{$data->title_name}}">Delete</span>
                           </button>
                         </form>

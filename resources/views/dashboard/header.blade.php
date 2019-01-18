@@ -181,21 +181,21 @@
                   </div>
                 </div>
               </a>
-              <a class="dropdown-item mt-2" href="{{ route('profile') }}" >
+              <a class="dropdown-item mt-2" href="{{ route('admin.profile') }}" >
                 Myprofile
               </a>
-              <a class="dropdown-item" href="{{ route('changepassword') }}">
+              <a class="dropdown-item" href="{{ route('admin.changepassword') }}">
                 Change Password
               </a>
               <!-- <a class="dropdown-item">
                 Check Inbox
               </a> -->
-              <a class="dropdown-item" href="{{ route('logout') }}"
+              <a class="dropdown-item" href="{{ route('admin.logout') }}"
                onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
                 Sign Out
               </a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                   @csrf
               </form>
             </div>

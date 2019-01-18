@@ -29,7 +29,7 @@
 
 
 
-<form action="{{ route('editupcoming') }}" method="post" name="editupcoming_form">
+<form action="{{ route('admin.editupcoming') }}" method="post" name="editupcoming_form">
 {{ csrf_field() }} 
 
 

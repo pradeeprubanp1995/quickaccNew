@@ -48,14 +48,14 @@ class CategoryController extends Controller
         // dd($cat);
         if($cat == true)
         {
-        return redirect('/category')->with('danger', $request['category'].' has already exists');
+        return redirect('/admin/category')->with('danger', $request['category'].' has already exists');
         }
         $add = new Category;
         $add->cat_name = $request['category'];
         $add->parent_id = $request['parent_category'];
         $added=$add->save();
 
-        return redirect('/category')->with('success', $request['category'].' has been added successfully');
+        return redirect('/admin/category')->with('success', $request['category'].' has been added successfully');
     }
     public function updatecat(Request $request,$id)
     {
@@ -66,14 +66,14 @@ class CategoryController extends Controller
         //dd($cat);
         if($cat == true)
         {
-        return redirect('/category')->with('danger', $request['category'].' has already exists');
+        return redirect('/admin/category')->with('danger', $request['category'].' has already exists');
         }
         $update = Category::find($id);
         $update->cat_name = $request['category'];
         $update->parent_id = $request['parent_category'];
         $update->save();
 
-        return redirect('/category')->with('success', $request['category'].' has been Updated');
+        return redirect('/admin/category')->with('success', $request['category'].' has been Updated');
     }
    
     public function catdel($id)
@@ -84,7 +84,7 @@ class CategoryController extends Controller
         // dd($id);
         $cat->delete();
 
-        return redirect('/category')->with('success', 'Deleted successfully');
+        return redirect('/admin/category')->with('success', 'Deleted successfully');
     }
 
     /**

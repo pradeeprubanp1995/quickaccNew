@@ -6,7 +6,7 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Myprofile</h4>
-                  <form class="form-sample" action="{{route('editprofile')}}" method="post"  enctype="multipart/form-data">
+                  <form class="form-sample" action="{{route('admin.editprofile')}}" method="post"  enctype="multipart/form-data">
                   @csrf
                   @if (\Session::has('success'))
   <div class="alert alert-success">

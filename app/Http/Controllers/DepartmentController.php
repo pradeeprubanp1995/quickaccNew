@@ -37,14 +37,14 @@ class DepartmentController extends Controller
             $check = Department::where('dept_name',$request['dept_name'])->exists();
             if($check == true)
             {
-                return redirect('/department')->with('danger', $request['dept_name'].' department has already exists');
+                return redirect('/admin/department')->with('danger', $request['dept_name'].' department has already exists');
             }
             // dd($check);
             $add = new Department;
             $add->dept_name = $request['dept_name'];
             $added=$add->save();
             // return view('/department');
-            return redirect('/department')->with('success', $request['dept_name'].' has been added successfully');
+            return redirect('/admin/department')->with('success', $request['dept_name'].' has been added successfully');
 
         }
 
@@ -54,7 +54,7 @@ class DepartmentController extends Controller
             $dept = Department::find($id);
             $dept->dept_name = $request['dept_name'];
             $dept->save();
-            return redirect('/department')->with('warning', $request['dept_name'].' has been updated successfully');
+            return redirect('/admin/department')->with('warning', $request['dept_name'].' has been updated successfully');
         }
 
         public function deptdel($id)
@@ -62,7 +62,7 @@ class DepartmentController extends Controller
             //
             $dept = Department::find($id);
             $dept->delete();
-            return redirect('/department')->with('success', 'Deleted successfully');
+            return redirect('/admin/department')->with('success', 'Deleted successfully');
         }
     /**
      * Show the form for creating a new resource.
@@ -194,7 +194,7 @@ class DepartmentController extends Controller
          Session::flush();     
         // $request->session()->invalidate();
         // $request->session()->flash('errors', 'You are logged out!');
-        return redirect('/login');}
+        return redirect('/admin/login');}
         else{
         return redirect()->back()->with('warning', 'Please Give correct oldpassword');}      
     }
