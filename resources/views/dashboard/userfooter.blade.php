@@ -29,7 +29,9 @@
 <script src="{{asset('asset/user/original/assets/js/plugins.js')}}"></script>
 <script src="{{asset('asset/user/original/assets/js/main.js')}}"></script>
 
-
+<!-- for disqus -->
+<script id="dsq-count-scr" src="//test-uojahljosi.disqus.com/count.js" async></script>
+<!-- disqus -->
 <script type="text/javascript">
 
 
