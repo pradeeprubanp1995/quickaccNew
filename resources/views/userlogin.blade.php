@@ -47,13 +47,16 @@
 			<div class="wrap-login100">
 				<form method="POST" action="{{ route('login.request') }}">
 				 @csrf
-					<span class="login100-form-logo">
-						<i class="zmdi zmdi-landscape"></i>
+					<span class="login100-form-title p-b-34 p-t-27">
+					 <!-- class="login100-form-logo" -->
+						 <center><img src="{{asset('asset/images/logo-colan.png')}}" alt="logo"  /><h4 style="color:white;padding-top: 10px;">SELF EVALUATE TOOL</h4></center>
+						<!-- <i class="zmdi zmdi-landscape"></i> -->
+
 					</span>
 
-					<span class="login100-form-title p-b-34 p-t-27">
+					<!-- <span class="login100-form-title p-b-34 p-t-27">
 						Log in
-					</span>
+					</span> -->
 					@if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert" style="display: block;color: white;">
                                         <strong> <i class="fa fa-warning"></i> {{ $errors->first('email') }} </strong>

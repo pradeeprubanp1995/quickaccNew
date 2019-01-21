@@ -208,7 +208,7 @@ class TitleController extends Controller
         if($subcat == '')
         {
             
-             $getdata=Title::select('*')->where('cat_id',$cat)->where('subcat_id','')
+             $getdata=Title::select('*')->where('cat_id',$cat)->where('subcat_id',NULL)
             ->whereRaw('FIND_IN_SET(?,dept_id)', [$dept])
             ->get();
              // print_r($_REQUEST);

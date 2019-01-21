@@ -62,6 +62,7 @@ class ResultController extends Controller
          $result = new Result;
          $result->user_id = $user_id;
          $result->dept_id = $dept_id;
+         $result->upcoming_id = $utid;
          $result->today_date = $date;
          $result->user_answer = $user_answer;
          $result->points = $points;
@@ -216,20 +217,32 @@ class ResultController extends Controller
         {
             $quiz_date = $res->today_date;
             //dd($quiz_date);
-            $upcoming_id = Upcoming_title::where('dept_id',$dept_id)->where('date_of_quiz',$quiz_date)->get();
+            // $upcoming_id = Upcoming_title::where('dept_id',$dept_id)->where('date_of_quiz',$quiz_date)->get();
+            $upcoming_id = $res->upcoming_id;
+            $upcoming_id = Upcoming_title::find($upcoming_id);
             // dd($upcoming_id);
-            if($upcoming_id->isEmpty()){
+            if($upcoming_id == null){
             $titles[] = '';
             // return view('resulthistory',['empty' => '']);
-            }else{
-            // dd($upcoming_id);
-            $title_id = $upcoming_id[0]['title_id'];
-            // dd($title_id);
-            $title = Title::find($title_id);
-            //dd($title->title_name);
-            $tile = $title->title_name;
-            $titles[] = $tile;
             }
+            else
+            {
+            // dd($upcoming_id);
+                
+                $title_id = $upcoming_id['title_id'];
+                // dd($title_id);
+                $title = Title::find($title_id);
+                //dd($title->title_name);
+                    if($title == null)
+                        {
+                          $titles[] = '';
+                        }
+                    else
+                        {
+                            $tile = $title->title_name;
+                            $titles[] = $tile;
+                        }
+                }
              
 
         }
