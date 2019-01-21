@@ -87,19 +87,21 @@ class ResultController extends Controller
         // dd($result);
         if($result->isEmpty()){
                 
-            return view('result',['empty' => '']);
+            return view('resultrecord',['empty' => '']);
             }
-        $user_answer = $result[0]['user_answer'];
-        $points = $result[0]['points'];
-        $options = json_decode($user_answer, true);
-        $total = count($options);
-        $question_id = $options[0]['question_id'];
-         // dd($question_id);
-        $quest = Question::find($question_id);
-        $upcoming_id = $quest->upcomingtitle_id;
-        // dd($upcoming_id);
-        $question = Question::where('upcomingtitle_id',$upcoming_id)->get();
-        return view('result',['answer' => $user_answer,'question' => $question,'points' => $points,'totalanswered' => $total]);
+            
+            return redirect('/result/'.$result[0]['id']);
+        // $user_answer = $result[0]['user_answer'];
+        // $points = $result[0]['points'];
+        // $options = json_decode($user_answer, true);
+        // $total = count($options);
+        // $question_id = $options[0]['question_id'];
+        //  // dd($question_id);
+        // $quest = Question::find($question_id);
+        // $upcoming_id = $quest->upcomingtitle_id;
+        // // dd($upcoming_id);
+        // $question = Question::where('upcomingtitle_id',$upcoming_id)->get();
+        // return view('result',['answer' => $user_answer,'question' => $question,'points' => $points,'totalanswered' => $total]);
     }
 
     public function highscore()
@@ -160,7 +162,7 @@ class ResultController extends Controller
     {
         //
     }
-    public function view($date)
+    public function view($id)
     {
         //
         // dd($date);
@@ -171,9 +173,14 @@ class ResultController extends Controller
             return view('testquestion',['empty' => '']);
 
         }
-        $result = Result::where('user_id', $user_id)->where('today_date',$date)->get();
+        $result = Result::where('user_id', $user_id)->where('id',$id)->get();
         // dd($result);
+        if($result->isEmpty()){
+                
+            return view('result',['empty' => '']);
+            }
         $user_answer = $result[0]['user_answer'];
+        $date = $result[0]['today_date'];
         $points = $result[0]['points'];
         $options = json_decode($user_answer, true);
         $total = count($options);

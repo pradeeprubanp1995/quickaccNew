@@ -5,6 +5,8 @@
 	<div class="card-body">
 		<center><h3>Result Record on {{$date}}</h3></center>
     <br />
+     @php $error="No Result Found"; @endphp
+    @if(isset($empty) && $empty == '') <center><p>{{$error}}</p></center> @else
     <div class="card border border-success">
        <div class="card-header" style="text-align: center;font-size: 20px;">
                                 <strong class="card-title">Your {{$date}}'s Point</strong>
@@ -67,7 +69,22 @@
 		   		</div>
 		   		<hr>
 	    @endforeach
+
 	</div>
+
+	<div id="disqus_thread"></div>
+<script>
+
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://test-uojahljosi.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+@endif
 </div>
 
 @include('dashboard.userfooter')

@@ -310,6 +310,11 @@ class QuestionController extends Controller
 
         // dd($request->file('img'));
         $upload_image=$request->file('img');
+        $size = $request->file('img')->getClientSize();
+        if(!$size)
+        {
+          return redirect()->back()->with('danger','Profile image should be less than 2MB');
+        }
         if(!empty($upload_image)){         
         $image=$upload_image->getClientOriginalName();
         $upload_image->move(public_path().'/uploads/', $image); 

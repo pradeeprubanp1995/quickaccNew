@@ -3,13 +3,13 @@
 @section('content') 
  <div class="content">
  	<div class="card-body">
-      <center><h3>Quiz Result History</h3></center>
+      <center><h3>Quiz Result History <div align="right"><a href="{{route('resultview')}}" class="btn btn-primary">Today</a></div></h3></center>
     <br />
     @php $n=0; $error="No Data Found" @endphp
     @if(isset($empty) && $empty == '') <center><p>{{$error}}</p></center> @else
     <div style="padding: 30px;">
         <p style="float:right;font-weight:bold;">Your Total Points: {{Auth::user()->points}}</p>
-    <table class="table table-striped">
+    <table class="table table-striped" border="1">
         <thead>
             <tr>
                 <th>S.no</th>
@@ -33,7 +33,7 @@
 <td>{{$title[$key]}}</td>@else<td><i>Title Not found</i></td>@endif
 
         <td>{{$his->points}}</td>
-        <td><a href="{{url('/result/'.$his['today_date'])}}" class="btn btn-primary">View</a></td>
+        <td><a href="{{url('/result/'.$his['id'])}}" class="btn btn-primary">View</a></td>
         </tr>
     	@endforeach
         @endif

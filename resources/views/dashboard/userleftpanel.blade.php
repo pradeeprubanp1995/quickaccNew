@@ -15,7 +15,11 @@
                         <a href="{{route('quiz')}}" > <i class="menu-icon fa fa-sign-in"></i>QuiZ</a>
                         
                     </li>
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item">
+                        <a href="{{route('history')}}" > <i class="menu-icon fa fa-glass"></i>Result</a>
+                        
+                    </li>
+                    <!-- <li class="menu-item-has-children dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Result</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-sign-in"></i><a href="{{ route('history') }}">All Records</a></li>
@@ -23,7 +27,8 @@
                             
                             
                         </ul>
-                    </li>
+                    </li> -->
+                    
                     <!-- <li class="menu-item">
                         <a href="{{route('updatequestioninput')}}" > <i class="menu-icon fa fa-sign-in"></i>Post Question Today</a>
                         
@@ -54,8 +59,12 @@
                 <div class="navbar-header"> 
                     <div class="col-sm-8">
                           <div class="col-sm-4">
-                    <a class="navbar-brand" href="#"><img  src="{{asset('asset/user/original/images/logo-frontuser.png')}}" alt="Logo"></a></div>
-                    <div class="col-sm-4 titset"> <span class="logoset"><b>SET</b></span> </div> </div>   
+                                <a class="navbar-brand" href="#"><img  src="{{asset('asset/user/original/images/logo-frontuser.png')}}" alt="Logo"></a>
+                          </div>
+                    <div class="col-sm-4 titset"> 
+                        <span class="logoset"><b>SET</b></span>
+                     </div> 
+                    </div>   
                     <a class="navbar-brand hidden" href="./"><img src="{{asset('asset/user/original/images/logo2.png')}}" alt="Logo"></a> 
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a> 
                 </div> 

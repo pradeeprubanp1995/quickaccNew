@@ -120,7 +120,7 @@ Route::get('/quiz','QuestionController@index')->name('quiz');
 Route::post('/answersubmit', 'ResultController@index')->name('result');
 Route::get('/result', 'ResultController@indexx')->name('resultview');
 Route::get('/resulthistory','ResultController@show')->name('history');
-Route::get('/result/{date}','ResultController@view');
+Route::get('/result/{id}','ResultController@view');
 Route::get('/highscore','ResultController@highscore')->name('rank');
 Route::get('/userprofile','QuestionController@userprofile')->name('userprofile');
 Route::any('/usereditprofile', 'QuestionController@usereditprofile')->name('usereditprofile');

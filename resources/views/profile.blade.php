@@ -13,6 +13,11 @@
   <p>{{ \Session::get('success') }}</p>
   </div><br />
   @endif
+  @if (\Session::has('danger'))
+  <div class="alert alert-danger">
+  <p>{{ \Session::get('danger') }}</p>
+  </div><br />
+  @endif
                     <p class="card-description">
                       Personal info
                     </p>
@@ -75,6 +80,7 @@
                              <img src="{{URL('/')}}/uploads/{{$data['images']}}" width="100px" /></img>
                             @endif
                             <input type="file" class="form-control" value="" name="img" />
+                            <span style="color:red">*Note: Image should not exceed 2MB</span>
                           </div>
                         </div>
                       </div>

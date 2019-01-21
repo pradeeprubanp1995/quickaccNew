@@ -23,7 +23,7 @@
 	</div><br />
 	@endif
     <button type="button" class="btn btn-primary" style="float:right;margin:10px;" data-toggle="modal" data-target="#addModal">+ ADD</button>
-	<table class="table table-responsive" style="clear:both;float:none;">
+	<table class="table table-responsive" style="clear:both;float:none;" width="100%">
 		<thead>
 			<tr>
 				<th>S.No</th>

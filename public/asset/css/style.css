@@ -16308,6 +16308,10 @@ width:100%;
 .btn-warning{
 background-color: #231aa094;
 }
+.table th,.table td:first-child {
+    width: 33%!important;
+}
+
 
 /*# sourceMappingURL=maps/style.css.map */
 /*nav.navbar.navbar-expand-sm.navbar-default {
