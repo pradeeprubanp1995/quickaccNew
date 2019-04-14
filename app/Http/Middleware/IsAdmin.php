@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
+use redirect;
 
 class IsAdmin
 {
@@ -17,10 +18,13 @@ class IsAdmin
     public function handle($request, Closure $next) 
     {
 
+        // echo "<pre>";print_r(Auth::user()->id);exit;
         /**
         * Checks if user is Admin
         */
         if(!$this->CheckAdmin()){
+
+            // echo Auth::user()->id; exit;
 
         //redirect to admin login
             // return redirect('/home');
@@ -33,7 +37,7 @@ class IsAdmin
         */
         return $next($request);
 
-        }
+    }
 
         /**
         * Checks if user is logged in as an admin
@@ -45,7 +49,7 @@ class IsAdmin
         */
         if (!Auth::check()) {
 
-        // echo 'hau';exit;
+        // echo "bb";exit;
             return false;
 
         }

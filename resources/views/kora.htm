@@ -1,0 +1,631 @@
+
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+  <title>Quickacc</title>
+  <!-- Meta tag Keywords -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+   <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  <!--// Meta tag Keywords -->
+  
+  <!-- Custom-Files -->
+  <link rel="stylesheet" href="http://ec2-18-224-182-62.us-east-2.compute.amazonaws.com/asset/user_dashboard/css/bootstrap.css">
+  <!-- Bootstrap-Core-CSS -->
+  <link href="http://ec2-18-224-182-62.us-east-2.compute.amazonaws.com/asset/user_dashboard/css/css_slider.css" type="text/css" rel="stylesheet" media="all">
+  <!-- banner slider -->
+  <link rel="stylesheet" href="http://ec2-18-224-182-62.us-east-2.compute.amazonaws.com/asset/user_dashboard/css/style.css" type="text/css" media="all" />
+  <!-- Style-CSS -->
+  <link href="http://ec2-18-224-182-62.us-east-2.compute.amazonaws.com/asset/user_dashboard/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Font-Awesome-Icons-CSS -->
+  <!-- //Custom-Files -->
+
+  <!-- Web-Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+  <link href="//fonts.googleapis.com/css?family=Mukta:200,300,400,500,600,700,800&amp;subset=devanagari,latin-ext" rel="stylesheet">
+  <!-- //Web-Fonts -->
+
+   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js">
+  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  
+   <script>
+    addEventListener("load", function () {
+      setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+      window.scrollTo(0, 1);
+    }
+	
+	
+	<!-- Fixed scroll -->
+	
+	
+$(window).scroll(function(){
+    if ($(window).scrollTop() >= 300) {
+        $('.main-top').addClass('fixed-header');
+        $
+    }
+    else {
+        $('.main-top').removeClass('fixed-header');
+      
+    }
+});
+$(document).ready(function(){
+  $("#menu-bar").click(function(){
+    $('.main-wrapper').toggleClass('myactive');
+  });
+});
+
+  </script>
+  <style type="text/css">
+    .container
+    {
+      width: 65% !important;
+    }
+    <!--Custom -->
+.main-top.fixed-header {
+    position: fixed;
+    top: 0;
+}
+.main-top {
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.80);
+    height: 60px;
+}
+.main-top.fixed-header {
+    position: fixed;
+    top: 0;
+}
+div#logo {
+    display: none;
+}
+.main-wrapper.myactive .left-menu {
+    left: -100% !important;
+    transition: all 0.2s;
+}
+
+.main-wrapper.myactive section#why {
+    margin-left: 0;
+    transition: all 0.2s;
+}
+.left-menu
+    width: 250px;
+    background: #000000ba;
+    height: 100vh;
+    z-index: 999999;
+    position: fixed;
+    left: 0;
+    transition: all 0.2s;
+    left: 0;
+}
+
+.main-wr
+    margin-left: 250px;
+    transition: all 0.2s;
+.main-wr
+    margin-left: 250px;
+    transition: all 0.2;
+.main-wr
+    margin-left: 250px;
+    transition: all 0.;
+.main-wr
+    margin-left: 250px;
+    transition: all 0;
+.main-wr
+    margin-left: 250px;
+    transition: all;
+.main-wr
+    margin-left: 250px;
+    transition: initial;
+.main-wr
+    margin-left: 250px;
+    transition: auto;
+.main-wr
+    margin-left: 250px;
+    transition:;
+
+.main-wrapper {
+    width: 100%;
+    float: left;
+    position: relative;
+}
+
+.main-wrapper section#why {
+    margin-left: 250px;
+}
+
+.leftmenu-profile {
+    width: 100%;
+    float: left;
+    text-align: center;
+    padding-top: 120px;
+}
+
+.leftmenu-profile img {
+    width: 150px;
+    display: inline-block;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.leftmenu-profile span {
+    width: 100%;
+    float: left;
+    color: #fff;
+    font-size: 30px;
+    padding: 10px 0;
+}
+
+.left-menu ul li {
+    width: 100%;
+    float: left;
+}
+.left-menu {
+    width: 250px;
+    background: #000000ba;
+    height: 100vh;
+    z-index: 999999;
+    position: fixed;
+    left: 0;
+    transition: all 0.2s;
+top: 60px;
+}
+.left-menu ul li a {
+    color: #fff;
+    font-size: 18px;
+    text-align: left;
+    width: 100%;
+    float: left;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+div#menu-bar {
+    display: inline-block;
+    color: #fff;
+}
+
+.nav_w3ls {
+    display: flex;
+}
+
+div#menu-bar i {
+    font-size: 25px;
+    cursor: pointer;
+}
+.left-menu ul li a:hover {
+    background: #ccc;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px){
+.container {
+    width: 94% !important;
+}
+}
+@media only screen and (min-width: 768px) and (max-width: 1000px){
+
+.title-section.mb-md-5.mb-4 {
+    margin-top: 80px;
+}
+
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px){
+.left-menu {
+    left: -100%;
+}
+.main-wrapper section#why {
+    margin-left: 0 !important;
+}
+.main-wrapper.myactive .left-menu {
+    left: 0% !important;
+    transition: all 0.2s;
+}
+.main-wrapper.myactive section#why {
+    margin-left: 250px !important; 
+}
+.container {
+    width: 90% !important;
+}
+.title-section.mb-md-5.mb-4 {
+    margin-top: 75px;
+}
+}
+    <!--Custom -->
+  </style>
+</head>
+
+<body>
+    
+ 
+<div id="home">
+       
+
+        <!-- second header -->
+        <div class="main-top">
+            <div class="container" >
+                <div class="header d-md-flex  py-3">
+                    <!-- logo -->
+                    <div id="logo">
+                        <h4>
+                            <a href="http://ec2-18-224-182-62.us-east-2.compute.amazonaws.com/userprofile">
+                                <img src="http://ec2-18-224-182-62.us-east-2.compute.amazonaws.com/uploads/face1.jpg" width="50px" height="40px" style="border-radius: 100px;" />
+                                <span class="logo-sp">Quick</span> Acc
+                            </a>
+                        </h4>
+                    </div>
+                    <!-- //logo -->
+                    <!-- nav -->
+                    <div class="nav_w3ls" style="padding-top:8px;">
+					<div id="menu-bar">
+					<i class="fa fa-bars" aria-hidden="true"></i>
+					</div>
+                        <nav>
+                            <label for="drop" class="toggle">Menu</label>
+                            <input type="checkbox" id="drop" />
+                            <ul class="menu">
+                                <li><a href="index.html" class="active">Home</a></li>
+                                <li class="mx-lg-4 mx-md-3 my-md-0 my-2"><a href="about.html">About Us</a></li>
+                                <li><a href="gallery.html">Pricing</a></li>
+                                
+                                <li><a class="mx-lg-4 mx-md-3 my-md-0 my-2" href="contact.html">Accounts</a></li>
+                                <li><a href="#">Generator</a></li>
+                                <li> <a class=""></a></li>
+
+                            <li><a href="http://ec2-18-224-182-62.us-east-2.compute.amazonaws.com/admin/logout" class=""><span class="fa fa-sign-in mr-2"></span>Logout</a></li> 
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- //nav -->
+                </div>
+            </div>
+        </div>
+        <!-- //second header -->
+
+       
+    </div>
+
+
+
+
+<!-- for accounts -->
+<!-- Main-wrapper -->
+<div class="main-wrapper">
+<!-- Left sideMenu -->
+<div class="left-menu">
+<div class="leftmenu-profile">
+<img src="http://ec2-18-224-182-62.us-east-2.compute.amazonaws.com/uploads/face1.jpg" alt="pro"/>
+<span>Pradeep Ruba</span>
+</div>
+<ul>
+<li><a href="#">Edit profile</a></li>
+<li><a href="http://ec2-18-224-182-62.us-east-2.compute.amazonaws.com/admin/logout">Logout</a></li>
+</ul>
+</div>
+
+<section class="blog_w3ls py-xl-5" id="why" >
+    <div class="container py-xl-5 py-3 ">
+        <div class="title-section mb-md-5 mb-4">
+            
+            <h3 class="w3ls-title text-uppercase text-bl font-weight-bold">Myprofile</h3>
+            
+        </div>
+ 
+        <div class="row">
+             
+                 <form class="form-sample" action="http://ec2-18-224-182-62.us-east-2.compute.amazonaws.com/usereditprofile" method="post"  enctype="multipart/form-data">
+                  <input type="hidden" name="_token" value="KoGWrBLr89QirboUctLoKqTGatlUu7CF5Oaer9PL">                    
+
+   
+                    <p class="card-description">
+                      Personal info
+                    </p>
+                    <input type="hidden" name="id" class="form-control" value="2" />
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Premium</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="primeum" class="form-control" value="normal"  disabled/>
+                            
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" value="pradeep ruban"  name="name" required />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                     <div class="col-md-6">
+                      <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Profile Image</label>
+                          <div class="col-sm-9">
+                                                         
+                             <img src="http://ec2-18-224-182-62.us-east-2.compute.amazonaws.com/uploads/095767af4bf9a2b57ba22de708ffb5f9.jpg" width="170px" height="150px" />
+                                                         <input type="hidden" name="imgbackup"   value="095767af4bf9a2b57ba22de708ffb5f9.jpg"/>
+                            <input type="file" class="form-control" value="" name="img" />
+                            <span style="color:red">*Note: Image should not exceed 1MB</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Phone Number</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" value="9876543210"  name="phone" required />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <h3>Actions</h3><br/>
+                    <div class="col-sm-12">
+                        
+                             <input type="submit" name="" value="Save Changes" class="btn btn-primary mr-2">
+
+                             <a href="http://ec2-18-224-182-62.us-east-2.compute.amazonaws.com/userchangepassword" class="btn btn-primary" >Change Password</a>
+                              
+                       
+                        
+                    </div>
+                   
+                  </form>
+            </div>
+
+
+            </div>
+        
+    </section>
+                   </div> 
+<!-- footer bottom -->
+    <!-- copyright -->
+    <!-- <div class="copy-w3pvt">
+        <div class="container py-3">
+            <div class="row">
+                <div class="col-lg-7 w3ls_footer_grid1_left text-lg-left text-center">
+                    <p>&copy; 2019 Be Clinic. All rights reserved | Design by
+                        <a href="http://w3layouts.com/">W3layouts</a>
+                    </p>
+                </div>
+                <div class="col-lg-5 w3ls_footer_grid_left1_pos text-lg-right text-center mt-lg-0 mt-2">
+                    <ul>
+                        <li>
+                            <a href="#" class="facebook">
+                                <span class="fa fa-facebook-f mr-2"></span>Facebook</a>
+                        </li>
+                        <li class="mx-3">
+                            <a href="#" class="twitter">
+                                <span class="fa fa-twitter mr-2"></span>Twitter</a>
+                        </li>
+                        <li>
+                            <a href="#" class="google">
+                                <span class="fa fa-google-plus mr-2"></span>Google Plus</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- //copyright -->
+    <!-- //footer bottom -->
+    <!-- move top icon -->
+    <a href="#home" class="move-top text-center"></a>
+    <!-- //move top icon -->
+
+
+<!-- Right Panel -->
+
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!-- for disqus -->
+<script id="dsq-count-scr" src="//test-uojahljosi.disqus.com/count.js" async></script>
+<!-- disqus -->
+<script type="text/javascript">
+
+
+var ques_arr = [];
+var answer_arr=[];
+var answer_keys=[];
+
+
+    
+$(document).ready(function(){
+
+    $('.amountdiv').hide();
+  $('#amountdiv').empty();
+
+
+
+$(document).on( "change", ".premium", function() {
+  
+
+        var premium= $(this).val();
+
+         src = "http://ec2-18-224-182-62.us-east-2.compute.amazonaws.com/getamount";
+         
+         // alert(premium);
+          $.ajax({
+                     url: src,
+                     dataType : 'json',
+                     type : 'POST',
+                     data : { premium:premium},
+                     
+                     success: function(res) 
+                     {
+
+                                            
+                        if(res)
+                        {
+                          $('#amount').empty();
+                          $('.amountdiv').fadeIn(2000);
+                          $('#amount').val(res.amt);
+                          $('#amt').val(res.amt);
+                          // $('#item_name').val(res.primeum);
+                          $('#item_number').val(res.id);
+                        }
+                        else
+                        {
+                          
+                          
+                          $('#amount').empty();
+                          $('.amountdiv').hide();
+                          
+                        }
+                      }
+                 });
+
+  });
+
+
+
+    $(document).on('click', '#add', function(){ 
+
+        // $('#myModal').modal('show');
+        // var abc = ['A','B','C','D','E'];
+        var labCnt = $('.add_div').length+1;
+        // alert(labCnt);
+        // <div class="col-xs-2"><b>'+abc[labCnt]+'</b></div><div class="col-xs-6"></div>
+        if(labCnt < 4 )
+        {
+        $("#add_input").append(' <div class="add_div add_div_'+labCnt+'"> <div class="col-xs-2"> <input type="radio"  name="keys_radio" value="'+labCnt+'" /> </div> <div class="col-xs-8">  <input type="text" class="form-control" name="keys[]" placeholder="Option" required /> </div> <div class="col-xs-2"> <img src="'+cancel+'" class="cancel_div" /> </div> <div> &nbsp; </div> </div>'); 
+        }
+    });
+    
+
+
+    $(document).on('click', '#save', function(){ 
+
+        $('.viewquestion').html('');
+        var arr1 = [];
+        var arr2 = [];
+        
+
+        var ques = $('#ques').val();
+        var keys = $("input[name='keys[]']")
+              .map(function(){return $(this).val();}).get();
+        var answer = $('input[name=keys_radio]:checked').val(); 
+
+
+             if(ques == '' )
+            {
+                // alert("Please Enter All Values");
+                 document.getElementById('queserror').innerHTML="* Please Enter Question *";
+                 document.getElementById('anserror').innerHTML="";
+                 document.getElementById('optnerror').innerHTML="";
+            }
+            else if( $('input[name=keys_radio]:checked').length <= 0 )
+            {
+                document.getElementById('anserror').innerHTML="* Please Choose correct Answer *";
+                 document.getElementById('queserror').innerHTML="";
+                 document.getElementById('optnerror').innerHTML="";
+            }
+            else if(answer =='')
+            {
+                
+                // document.getElementById('optnerror').innerHTML="* Please Enter All Options or Remove it please *";
+                document.getElementById('anserror').innerHTML="* Please Choose correct Answer *";
+                 document.getElementById('queserror').innerHTML="";
+                 document.getElementById('optnerror').innerHTML="";
+            }
+            else
+            {
+                var data=[];
+                // arr.length = 0; 
+                arr1.push(ques);arr2.push(keys);
+                
+                answer_arr.push(answer);
+                // $.each( arr, function( key_arr, arr_val ) {
+
+                    data.push(arr1);
+                    data.push(arr2);
+                    // data.push(arr3);
+                // });
+
+                
+                ques_arr.push(data); 
+                
+                $.each( ques_arr, function( key, ques_val ) {
+                        var save_key = key;
+                        key=key+1;
+                        
+                        $(".viewquestion").append('<font size="+2"  class="ans_radio" style="color:tomato;">'+ key+'.'+ques_val[0]+'  <br/>    </font>');   
+                        $.each( ques_val[1], function( key_data, value ) {
+                            $.each(value ,function(key_last,val_option){
+                            // key_data=key_data+1;
+                                $(".viewquestion").append(' <input type="radio" class="mark" name="opt_radio_'+save_key+'" value="'+key_last+'"><font size="+2">'+val_option+'  <br/>    </font>'); 
+                            });
+                        });
+                });
+                
+                $(this).closest('form').find("input[type=text], textarea").val("");
+                $('input[name="keys_radio"]').prop('checked', false);
+                $("#add_input").html('');
+
+                 
+                 var success = "http://ec2-18-224-182-62.us-east-2.compute.amazonaws.com/userprofileview";
+                 var upcomingid = $('#upcomingid').val();
+                $.ajax({
+                            url:src,
+                            method:'POST',
+                            data:{
+                                ques:ques,
+                                keys:keys,
+                                answer:answer,
+                                upcomingid:upcomingid
+                                
+                            },
+                           success:function(data){
+
+                               // alert(data);
+                               if(data == 1 )
+                               {
+                                    window.location.href = success;
+                               }
+                           }
+                        });
+                    
+                }
+                
+                    
+
+            }); 
+
+            
+
+            $(document).on('click', '.cancel_div', function(){ 
+                
+                    
+                $(this).closest('.add_div').remove();
+                    
+            });
+
+            
+
+});
+
+</script>
+
+
+</body>
+
+</html>

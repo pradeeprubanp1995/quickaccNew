@@ -1,36 +1,67 @@
 </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="container-fluid clearfix">
-            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2018
-              <a href="http://www.bootstrapdash.com/" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with
-              <i class="mdi mdi-heart text-danger"></i>
-            </span>
-          </div>
-        </footer>
-        <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
+                <!-- PAGE CONTENT WRAPPER -->                                
+            </div>    
+            <!-- END PAGE CONTENT -->
+        </div>
+        <!-- END PAGE CONTAINER -->       
+        
+        <!-- MESSAGE BOX-->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to log out?</p>                    
+                        <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a href="pages-login.html" class="btn btn-success btn-lg">Yes</a>
+                            <button class="btn btn-default btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MESSAGE BOX-->
 
-  <!-- plugins:js -->
-  <script src="{{asset('asset/vendors/js/vendor.bundle.base.js')}}"></script>
-  <script src="{{asset('asset/vendors/js/vendor.bundle.addons.js')}}"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page-->
-  <!-- End plugin js for this page-->
-  <!-- inject:js -->
-  <script src="{{asset('asset/js/off-canvas.js')}}"></script>
-  <script src="{{asset('asset/js/misc.js')}}"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="{{asset('asset/js/dashboard.js')}}"></script>
-  <!-- End custom js for this page-->
+                           
+        
+    <!-- START SCRIPTS -->
+        <!-- START PLUGINS -->
+
+        <script type="text/javascript" src="{{asset('asset/admin/js/plugins/jquery/jquery.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('asset/admin/js/plugins/jquery/jquery-ui.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('asset/admin/js/plugins/bootstrap/bootstrap.min.js')}}"></script>        
+        <!-- END PLUGINS -->                
+
+        <!-- START TEMPLATE -->
+        <script type="text/javascript" src="{{asset('asset/admin/js/settings.js')}}"></script>
+        
+        <script type="text/javascript" src="{{asset('asset/admin/js/plugins.js')}}"></script>        
+        <script type="text/javascript" src="{{asset('asset/admin/js/actions.js')}}"></script>        
+        <!-- END TEMPLATE -->
+
+
+        <!-- THIS PAGE PLUGINS -->
+        <script type='text/javascript' src="{{asset('asset/admin/js/plugins/icheck/icheck.min.js')}}"></script>
+        
+        <script type="text/javascript" src="{{asset('asset/admin/js/plugins/datatables/jquery.dataTables.min.js')}}"></script>    
+        <script type="text/javascript" src="{{asset('asset/admin/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js')}}"></script>
+
+        <!-- END PAGE PLUGINS -->
+
+    <!-- END SCRIPTS --> 
+        
+    </body>
+</html>
+
+
+
+
+
+
+
 
 
 <!-- pradeep -->
@@ -71,7 +102,8 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 
-  $('.subcategorydiv').hide();
+  $('.amountdiv').hide();
+  $('#amountdiv').empty();
   $('#subcategory').val("0");
   var cat= $('.category').val();
 
@@ -127,50 +159,40 @@ $(document).ready(function() {
         }
         else
         {
-          $('#subcategory').empty();
-          $('.subcategorydiv').hide();
+          $('#amount').empty();
+          $('.amountdiv').hide();
         }
   
 
-$(document).on( "change", ".category", function() {
+$(document).on( "change", ".premium", function() {
   
 
-        var cat= $(this).val();
+        var premium= $(this).val();
 
-         src = "{{ route('admin.getsubcategory') }}";
+         src = "{{ route('getamount') }}";
          
-         // alert(cat);
+         alert(premium);
           $.ajax({
                      url: src,
                      dataType : 'json',
                      type : 'POST',
-                     data : { category:cat},
+                     data : { premium:premium},
                      
                      success: function(res) 
                      {
-                      
+                      console.log(res);
                         if(res.length > 0)
                         {
-                          $('#subcategory').empty();
-                          $('.subcategorydiv').fadeIn(2000);
-                          var id = JSON.stringify(res);
-                        // console.log(id);
-                     
-
-                          $("#subcategory").get(0).options[$("#subcategory").get(0).options.length] = new Option("----    Select Subcategory    ----", "");
-                            
-                            $.each($.parseJSON(id), function(idx, obj) {
-                              // console.log(obj.cat_name);
-                                $("#subcategory").get(0).options[$("#subcategory").get(0).options.length] = new Option(obj.cat_name, obj.id);
-                               
-                            });
+                          $('#amount').empty();
+                          $('.amountdiv').fadeIn(2000);
+                          $('#amount').val(res.amount);
                         }
                         else
                         {
                           
                           
-                          $('#subcategory').empty();
-                          $('.subcategorydiv').hide();
+                          $('#amount').empty();
+                          $('.amountdiv').hide();
                           
                         }
                       }
@@ -251,7 +273,11 @@ $(document).on( "change", ".dept", function() {
 
 
 
-
+<style type="text/css">
+  .fornavigation {
+      min-height: 750px !important;
+    }
+    </style>
 </body>
 
 </html>

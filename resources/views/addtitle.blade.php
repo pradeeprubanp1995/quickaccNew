@@ -1,4 +1,3 @@
-
 @include('dashboard.header')
 @extends('dashboard.leftpanel')
 @section('content')
@@ -6,12 +5,23 @@
     <div class="col-lg-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-
-@if (\Session::has('success'))
-<div class="alert alert-success">
-<p>{{ \Session::get('success') }}</p>
-</div><br />
-@endif
+       <h1>Add Accounts</h1>
+        <br />
+         @if (\Session::has('success'))
+          <div class="alert alert-success">
+          <p>{{ \Session::get('success') }}</p>
+          </div><br />
+          @endif
+          @if (\Session::has('warning'))
+          <div class="alert alert-warning">
+          <p>{{ \Session::get('warning') }}</p>
+          </div><br />
+          @endif
+          @if (\Session::has('danger'))
+          <div class="alert alert-danger">
+          <p>{{ \Session::get('danger') }}</p>
+          </div><br />
+          @endif
 
 @if (count($errors) > 0)
     <div class="alert alert-danger">
@@ -22,97 +32,64 @@
             @endforeach
         </ul>
     </div>
-@endif
+@endif 
+         <div class="row justify-content-center">
+           <div class="col-md-6">
+           <form method="post" action="{{route('admin.addaccount')}}">
+            {{ csrf_field() }}
+            <!-- <table class="categorytable">
+              <tbody  id="addon"> -->
 
+                <div class="form-group">
+                  <label>Service</label>
+                  <select style="width:100%" name="services">
+                    <!-- <option value="" selected disabled hidden>Choose here</option> -->
 
-
-
-<h2>Add Title</h2> <br/>
-
-<form action="{{ route('admin.addtitle') }}" method="post" name="addtitle_form">
-{{ csrf_field() }} 
-
-
-
-
-<div class="form-group">
-<div class="form-row">
-<div class="col-md-12">
-<label ><b>Title</b></label>
-<textarea id="title" name="title" class="form-control"></textarea>    
-</div>
-<span class="text-danger"></span>
-</div>
-</div>
-
-<!-- <?php //echo "<pre>";print_r($post_data[0]); exit; ?> -->
-
-<div class="form-group">
-<div class="form-row">
-<div class="col-md-12">
-<label ><b>Category</b></label>
-<!-- <input type="text" id="category" name="category" class="form-control" autofocus="autofocus" >  -->
-<select id="category" name="category" class="form-control category" >
-  <option value="">Select Category</option>
-  @foreach ($post_data[1] as $key => $data)
-  <option value="{{ $data->id }}">{{ $data->cat_name }}</option>
- 
-  @endforeach
-</select>
-</div>
-<span class="text-danger"></span>
-</div>
-</div>
-
-<div class="form-group subcategorydiv">
-<div class="form-row">
-<div class="col-md-12">
-<label ><b>Sub Category</b></label>
-<!-- <input type="text" id="sub_cat" name="sub_cat" class="form-control" autofocus="autofocus" >  -->
-<select id="subcategory" name="subcategory" class="form-control subcategory" >
- <option value="0">Select</option> 
-  
-</select>
-</div>
-<span class="text-danger"></span>
-</div>
-</div>
-
-
-<div class="form-group">
-<div class="form-row">
-<div class="col-md-12">
-
-
-<label ><b>Department</b></label>
-<!-- <input type="text" id="dept" name="dept" class="form-control" autofocus="autofocus" >  -->
-<select id="dept" name="dept[]" class="form-control" multiple="multiple">
-  
-  @foreach ($post_data[0] as $key => $data)
-  <option value="{{ $data->id }}">{{ $data->dept_name }}</option>
- 
-  @endforeach
-</select>
-
-</div>
-<span class="text-danger"></span>
-</div>
-</div>
-
-
-
-
-
-
-<input type="submit" name="submit" class="btn btn-primary btn-block" >
-</form> 
+                    <option value="0" selected>--- Select Services ---</option>
+                      @foreach($pre as $data)
+                      <option value="{{$data->id}}">{{$data->service_name}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+               <div class="form-group">
+                <label>Account Name</label>
+                  <input type="text" name="acc_name" placehoder="Accounts" id="cat" style="width:100%;" required />
+                </div>
+                <!--
+             </tbody>
+            </table> -->
+            <hr>
+            <button type="submit" class="btn btn-primary" style="float:right;">Add Account</button>
+           </form>
+        </div>
+       </div>
+     </div>
+   </div>
  </div>
-</div>
-</div>
-</div>
-
-
-
-
-  @include('dashboard.footer')
+  </div>
+ <!--  <script type="text/javascript">
+    $(document).ready(function () {
+      // $(document).on('change', 'select', function(){
+        // alert('hai');
+        var value = $('select').val();
+        // alert(value);
+        if(value == null)
+        {
+          // alert('hai');
+           $("#cat").prop('disabled', true);
+        }
+         $(document).on('change', 'select', function(){
+          var value = $('select').val();
+          if(value != null)
+        {
+          // alert('hai');
+           $("#cat").prop('disabled', false);
+        }
+        });
+      });
+  </script> -->
+@include('dashboard.footer')
 @endsection
+
+
+

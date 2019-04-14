@@ -1,0 +1,177 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <title>User Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->  
+    
+    <link rel="icon" type="image/png" href="{{asset('asset/user/images/favicon.ico')}}" />
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('asset/user/vendor/bootstrap/css/bootstrap.min.css')}}">
+
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('asset/user/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('asset/user/fonts/iconic/css/material-design-iconic-font.min.css')}}">
+
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('asset/user/vendor/animate/animate.css')}}">
+
+<!--===============================================================================================-->  
+    <link rel="stylesheet" type="text/css" href="{{asset('asset/user/vendor/css-hamburgers/hamburgers.min.css')}}">
+
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('asset/user/vendor/animsition/css/animsition.min.css')}}">
+
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('asset/user/vendor/select2/select2.min.css')}}">
+
+<!--===============================================================================================-->  
+    <link rel="stylesheet" type="text/css" href="{{asset('asset/user/vendor/daterangepicker/daterangepicker.css')}}">
+
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{asset('asset/user/css/util.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('asset/user/css/main.css')}}">
+
+<!--===============================================================================================-->
+</head>
+<body>
+
+    
+                       
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url('{{asset('asset/user/images/bg-01.jpg')}}');">
+
+            <div class="wrap-login100">
+                <form method="POST" action="{{ route('login') }}">
+                 @csrf
+                    <span class="login100-form-title p-b-34 p-t-27">
+                     <!-- class="login100-form-logo" -->
+                         <center><img src="{{asset('asset/images/admin_img.png')}}" width="30%" alt="logo" /><h4 style="color:white;padding-top: 10px;">QUICK ACC</h4></center>
+                        <!-- <i class="zmdi zmdi-landscape"></i> -->
+
+                    </span>
+@if (\Session::has('danger'))
+  <div class="alert alert-danger">
+  <p>{{ \Session::get('danger') }}</p>
+  </div><br />
+  @endif
+  
+@if (count($errors) > 0)
+<div class="alert alert-danger">
+<strong>Whoops!</strong> There were some problems with your input.<br><br>
+<ul>
+@foreach ($errors->all() as $error)
+<li>{{ $error }}</li>
+@endforeach
+</ul>
+</div>
+@endif 
+
+ 
+
+
+                     <div class="form-group">
+                  <label class="label">User Name</label>
+                  <div class="input-group">
+                    <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email address" value="{{old('email')}}" required /><br/>
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="mdi mdi-check-circle-outline"></i>
+                      </span>
+                    </div>
+                    
+                     <!-- @if ($errors->has('email'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif -->
+                  </div>
+                </div>
+
+                        
+                    <div class="form-group">
+                        <label class="label">{{ __('Password') }}</label>
+                        <div class="input-group">
+                        <input type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="*********">
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                        <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                       <!--  @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif -->
+                        </div>
+                    </div>
+                    
+                        
+                        
+                        <input type="hidden" name="type" value="user">
+                    <!-- <div class="contact100-form-checkbox">
+                        
+                        <label class="" for="ckb1"><input class="" id="remember" type="checkbox" name="remember">
+                            Remember me
+                        </label>
+                    </div> -->
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn">
+                            Login
+                        </button>
+                    </div>
+
+                    <div class="text-center p-t-30">
+                        
+                        <a class="txt1" href="{{ url('/register') }}">
+                            Register Here 
+                        </a>
+
+                        
+                        @if (Route::has('password.request'))
+                                    <a class="btn btn-link txt1" href="{{ route('password.request') }}"> |&nbsp;&nbsp;
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
+                    
+
+                  
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+    <div id="dropDownSelect1"></div>
+    
+<!--===============================================================================================-->
+    <script src="{{asset('asset/user/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+
+<!--===============================================================================================-->
+    <script src="{{asset('asset/user/vendor/animsition/js/animsition.min.js')}}"></script>
+
+<!--===============================================================================================-->
+    <script src="{{asset('asset/user/vendor/bootstrap/js/popper.js')}}"></script>
+    <script src="{{asset('asset/user/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+
+<!--===============================================================================================-->
+    <script src="`"></script>
+
+<!--===============================================================================================-->
+    <script src="{{asset('asset/user/vendor/daterangepicker/moment.min.js')}}"></script>
+    <script src="{{asset('asset/user/vendor/daterangepicker/daterangepicker.js')}}"></script>
+
+<!--===============================================================================================-->
+    <script src="{{asset('asset/user/vendor/countdowntime/countdowntime.js')}}"></script>
+
+<!--===============================================================================================-->
+    <script src="{{asset('asset/user/js/main.js')}}"></script>
+
+
+</body>
+</html>

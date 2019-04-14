@@ -10,6 +10,7 @@ use App\User;
 use Auth;
 use Session;
 use Hash;
+use Redirect;
 
 class CategoryController extends Controller
 {
@@ -26,7 +27,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $result = Category::select('*')->paginate(10);
+        $result = Category::select('*')->paginate(4);
         // dd($result);
         return view('category',['cat_data' => $result]);
     }
@@ -35,45 +36,78 @@ class CategoryController extends Controller
     {
         //
         // $items = department::all('dept_name', 'id');
-        $cat = Category::where('parent_id', 0)->get();
+        // $cat = Category::get();
         // dd($items);
-        return view('categoryadd',['cat' => $cat]);
+        return view('categoryadd');
     }
     public function addcat(Request $request)
     {
-        // dd($request);
-        $cat = Category::where('parent_id',$request['parent_category'])
-        ->where('cat_name',$request['category'])
-        ->exists();
+        // // dd($request);
+        // $cat = Category::where('parent_id',$request['parent_category'])
+        // ->where('cat_name',$request['category'])
+        // ->exists();
         // dd($cat);
+         // 'email' => 'required|email|unique:users',
+                // 'mobileno' => 'required|numeric',
+                // 'password' => 'required|min:3|max:20',
+                // 'confirm_password' => 'required|min:3|max:20|same:password',
+                // 'details' => 'required'
+
+       
+        $this->validate($request,[
+                'primeum' => 'required',
+                'amt' => 'required',
+                'count' => 'required',
+                'days' => 'required',
+               
+            
+            ]);
+
+        $cat = Category::where('primeum',$request['primeum'])->exists();
         if($cat == true)
         {
-        return redirect('/admin/category')->with('danger', $request['category'].' has already exists');
+        return redirect('/admin/category')->with('danger', $request['primeum'].' has already exists');
         }
         $add = new Category;
-        $add->cat_name = $request['category'];
-        $add->parent_id = $request['parent_category'];
+        $add->primeum = $request['primeum'];
+        $add->amt = $request['amt'];
+        $add->count = $request['count'];
+        $add->days = $request['days'];
         $added=$add->save();
 
-        return redirect('/admin/category')->with('success', $request['category'].' has been added successfully');
+        return redirect('/admin/category')->with('success', $request['primeum'].' has been added successfully');
     }
     public function updatecat(Request $request,$id)
     {
         // dd($request);
-        $cat = Category::where('parent_id',$request['parent_category'])
-        ->where('cat_name',$request['category'])
-        ->exists();
-        //dd($cat);
-        if($cat == true)
-        {
-        return redirect('/admin/category')->with('danger', $request['category'].' has already exists');
-        }
+        // $cat = Category::where('parent_id',$request['parent_category'])
+        // ->where('cat_name',$request['category'])
+        // ->exists();
+        // //dd($cat);
+
+         $this->validate($request,[
+                'primeum' => 'required',
+                'amt' => 'required',
+               'count' => 'required',
+               'days' => 'required',
+            
+            ]);
+
+
+        // $cat = Category::where('primeum',$request['primeum'])->exists();
+        // if($cat == true)
+        // {
+        //          return redirect('/admin/category')->with('danger', $request['primeum'].' has already exists');
+        // }
         $update = Category::find($id);
-        $update->cat_name = $request['category'];
-        $update->parent_id = $request['parent_category'];
+        $update->primeum = $request['primeum'];
+        $update->amt = $request['amt'];
+        $update->count = $request['count'];
+        $update->days = $request['days'];
         $update->save();
 
-        return redirect('/admin/category')->with('success', $request['category'].' has been Updated');
+        return redirect('/admin/category')->with('success', $request['primeum'].' has been Updated');
+        
     }
    
     public function catdel($id)
@@ -87,80 +121,19 @@ class CategoryController extends Controller
         return redirect('/admin/category')->with('success', 'Deleted successfully');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-
+   
     public function edit($id)
     {
         //
         $cat = Category::find($id);
         // dd($cat);
-        $parent = Category::where('parent_id', 0)->get();
+        // $parent = Category::where('parent_id', 0)->get();
         // $sub = category::where('parent_id',$id)->get();
         // dd($sub);
-        return view('categoryedit',['cat_data' => $cat , 'parent_data' => $parent]);
+        return view('categoryedit',['cat_data' => $cat ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Category $category)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Category $category)
-    {
-        //
-    }
-
-
+   
 
 
     

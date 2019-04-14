@@ -5,7 +5,7 @@
     <div class="col-lg-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-       <h1>Add Category</h1>
+       <h1>Add Premium</h1>
         <br />
          @if (\Session::has('success'))
           <div class="alert alert-success">
@@ -22,31 +22,48 @@
           <p>{{ \Session::get('danger') }}</p>
           </div><br />
           @endif
+
+          @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif 
+
+
          <div class="row justify-content-center">
            <div class="col-md-6">
            <form method="post" action="{{route('admin.category_add')}}">
             {{ csrf_field() }}
             <!-- <table class="categorytable">
               <tbody  id="addon"> -->
-                <div class="form-group">
-                  <label>Parent</label>
-                  <select style="width:100%" name="parent_category">
-                    <!-- <option value="" selected disabled hidden>Choose here</option> -->
-                    <option value="0" selected>Top</option>
-                      @foreach($cat as $data)
-                      <option value="{{$data->id}}">{{$data->cat_name}}</option>
-                      @endforeach
-                    </select>
-                  </div>
+                
                <div class="form-group">
-                <label>Category</label>
-                  <input type="text" name="category" placehoder="Category" id="cat" style="width:100%;"/>
+                <label>Premium</label>
+                  <input type="text" name="primeum" placehoder="Premium" id="cat" style="width:100%;" required />
                 </div>
+                <div class="form-group">
+                 <label>Amount</label>
+                  <input type="text" name="amt" placehoder="Amout" id="amt" style="width:100%;" required />
+                </div>
+                <div class="form-group">
+                <label>Count</label>
+                  <input type="text" name="count" placehoder="Count" id="count" style="width:100%;" required />
+                </div>
+                <div class="form-group">
+                <label>Validity Days</label>
+                  <input type="text" name="days" placehoder="days" id="days" style="width:100%;" required />
+                </div>
+                
                 <!--
              </tbody>
             </table> -->
             <hr>
-            <button type="submit" class="btn btn-primary" style="float:right;">Add category</button>
+            <button type="submit" class="btn btn-primary" style="float:right;">Add Premium</button>
            </form>
         </div>
        </div>

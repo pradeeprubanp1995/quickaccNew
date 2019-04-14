@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Department;
+use App\Category;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -30,7 +31,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/payment';
+     public $lastCreatedUser;
 
     /**
      * Create a new controller instance.
@@ -50,12 +52,13 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        // dd($data);
+        
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-             'employeeid' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'numeric'],
+             // 'employeeid' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'deptid' => ['required'],
+            // 'deptid' => ['required'],
             'password' => ['required', 'string', 'min:5', 'confirmed'],
             
         ]);
@@ -69,22 +72,51 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+
+        $secrt = uniqid();
+        $identity = md5(sha1($secrt));
+        // echo $data['preid'];exit;
         // dd($data);
         
 
-        return User::create([
+
+         $user = User::create([
             'name' => $data['name'],
-            'user_id' => $data['employeeid'],
+            'phone' => $data['phone'],
             'email' => $data['email'],
-            'doj' => date('Y-m-d'),
-            'dept_id' => $data['deptid'],            
+            'identity' => $identity,
+            'premium_id' => $data['preid'],            
             'password' => Hash::make($data['password']),
         ]);
+
+         $this->lastCreatedUserId = $user->id;
+         // $_SESSION['userid'] = $this->lastCreatedUserId;
+         // session()->flash('userid', $this->lastCreatedUserId);
+
+         return $user;
+
+
+        
+         // print_r($_SESSION);exit;
+        
     }
-    public function showRegistrationForm()
+    // protected function redirectTo()
+    //     {
+    //         $lastid =  $this->lastCreatedUserId;
+    //         $data = User::select('identity')->where('id',$lastid )->first();
+    //         // print_r($data->identity);exit();
+    //         $identity = $data->identity;
+    //         return route('payment', ['user_id' => $identity ]);
+    //     }
+    public function showRegistrationForm($id)
     {
-        $department =Department::get(); 
-        return view('auth.register',['department' => $department]);
+       
+
+        $category =Category::where('id',$id)->first();
+         // echo "<pre>"; print_r($category->amt);
+         // exit;
+        return view('auth.register', array('category' => $category));
     }
 
 }

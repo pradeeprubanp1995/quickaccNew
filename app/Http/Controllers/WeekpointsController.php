@@ -6,7 +6,13 @@ use App\weekpoints;
 use Illuminate\Http\Request;
 use App\Upcoming_title;
 use App\Department;
+use App\Category;
+use App\User;
 use App\Title;
+use DB;
+use Hash;
+use Auth;
+use Session;
 
 class WeekpointsController extends Controller
 {
@@ -19,166 +25,85 @@ class WeekpointsController extends Controller
 
     public function status_cron()
     {        
-        $status_data=Upcoming_title::select('id')
-                ->where('status','1')->get();
-        foreach ($status_data as $data)
-         {
-            $id=$data['id'];
-            $status_data1=Upcoming_title::find($id);
-            $status_data1->status="0";
-            $status_data1->save();
-        }
-
-        $date= date("Y-m-d");
-        $tommorrow =date("Y-m-d", strtotime('tomorrow'));
-        $data=Upcoming_title::select('id')->where('status','2')->where('date_of_quiz','<=',$date)->get();
-        foreach ($data as $value)
-         {
-            $id=$value['id'];            
-            $data=Upcoming_title::find($id);
-            $data->status="1";
-            $data->save();
-           
-        }
+        
 
     }
     public function title_cron()
     {
-        $tommorrow =date("Y-m-d", strtotime('tomorrow'));
-        $dept=Upcoming_title::select('dept_id')
-                ->where('date_of_quiz',$tommorrow)->get();
-        $particular_dept=Department::select('id','dept_name')
-                ->whereNotIn('id', $dept)->get(); 
-
-        // dd($particular_dept);      
-        $dept=json_decode($particular_dept);               
-        $title_assign=[];
-        $forrand = array();
-        foreach ($dept as $key=> $value) {
-          $title_assign[$key] =Title::select('id')
-          ->whereRaw('FIND_IN_SET(?,dept_id)', [$value->id])->get();
-                       
-        }
-
-        foreach ($title_assign as $key => $value) 
-        {
-                foreach ($value as $keydata => $val) {
-                    
-                     $forrand[$dept[$key]->id][$val->id] =  $dept[$key]->dept_name;
-                }
-           
-            
-        }
-        $randvalues =[];
-        foreach($forrand as $key => $row) {
-
-            $randvalues[$key] =array_rand($row,1);
-             
-            
-             
-        }
-       // echo'<pre>';
-       //      print_r($randvalues);exit();
-
-        // $tot_title=count($randvalues); 
-                
-        foreach($randvalues as $key => $settitle){ 
-            // print_r($settitle[]);key
-        $title = new Upcoming_title();   
-        $title->title_id = $settitle;
-        $title->date_of_quiz = $tommorrow;
-        $title->status = '2';
-        $title->dept_id = $key;
-        $title->save();
-        }
+     
     }
 
 
+     public function userdash()
+    {
+        return view('userdashboard');
+    }
      public function userlogin()
     {
+         
+
         return view('userlogin');
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    public function index()
+     public function paymentpage()
     {
-        //
+            $userid = Auth::user()->id;
+            $premiumid = User::select('premium_id')->where('id',$userid)->first();
+            $premium = Category::where('id' ,$premiumid->premium_id)->first();
+            $user=array();
+            $user['id']=$userid;
+            $user['uname'] = Auth::user()->email;
+        // echo "<pre>";print_r($premium);exit;
+        return view('paymentpage' , ['premium' => $premium ,'user' => $user]);
+    }
+    public function getamount()
+    {
+        $id =$_POST['premium'];
+        $data = \DB::table('categories')->select('*')->where('id',$id)->first();
+        echo json_encode($data);
+        // print_r($data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+
+    public function paypalerror()
     {
-        //
+      // echo "<pre>";print_r($_POST);print_r($_REQUEST);print_r($_GET); exit;
+        return view('paypalerror');
+    }
+    public function paypalsuccess()
+    {
+
+      // Auth::logout();
+      // session::flush();
+
+      // echo "<pre>";print_r($_POST['item_name']); exit;
+
+      $preid = $_POST['item_number'];
+      $userid = $_POST['item_name'];
+      $amt = $_POST['payment_gross'];
+      // $preid = 4;
+      // $mail = 'pradeepruban.p1995@gmail.com';
+      $getpre = \DB::table('categories')->select('*')->where('id',$preid)->first(); 
+      $count = $getpre->count;
+      $days = $getpre->days;
+      $exdate = date('Y-m-d',strtotime("+".$days." day"));
+
+
+      $payrecords = array('userid' => $userid ,'premium_id' => $preid , 'amount' =>$amt);
+      $paymentinsert = \DB::table('payments')->insert($payrecords);
+
+
+      
+      $statuschange =  \DB::table('users')->where('id',$userid)->update(array('status' =>'1','count' => $count, 'expiredate' => $exdate , 'current_cnt' => $count ));
+        // echo "<pre>";print_r($data->status);exit;
+        return view('paypalsuccess');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\weekpoints  $weekpoints
-     * @return \Illuminate\Http\Response
-     */
-    public function show(weekpoints $weekpoints)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\weekpoints  $weekpoints
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(weekpoints $weekpoints)
-    {
-        //
-    }
+   
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\weekpoints  $weekpoints
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, weekpoints $weekpoints)
-    {
-        //
-    }
+   
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\weekpoints  $weekpoints
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(weekpoints $weekpoints)
-    {
-        //
-    }
 }

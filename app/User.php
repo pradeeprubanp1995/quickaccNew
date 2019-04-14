@@ -18,7 +18,7 @@ const DEFAULT_TYPE = '0';
      * @var array
      */
     protected $fillable = [
-        'name', 'user_id','email','dept_id', 'password',
+        'name','phone','email','identity','premium_id', 'password',
     ];
 
     /**

@@ -1,11 +1,19 @@
 @include('dashboard.header')
 @extends('dashboard.leftpanel')
 @section('content')
+
+
+<style type="text/css">
+	.table thead th 
+	{
+		font-weight: bolder !important;
+	}
+</style>
 	<div class="row">
 		<div class="col-lg-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-       <h1>Categories</h1>
+       <h1>Premium</h1>
         <br />
         @if (\Session::has('success'))
 		<div class="alert alert-success">
@@ -22,14 +30,16 @@
 		<p>{{ \Session::get('danger') }}</p>
 		</div><br />
 		@endif
-		<a href="{{route('admin.addcategory')}}"><button type="button" class="btn btn-primary" style="float:right;margin:10px;">+ ADD Category</button></a>
-     <table class="table table-responsive" style="clear:both;float:none;">
+		<a href="{{route('admin.addcategory')}}"><button type="button" class="btn btn-primary" style="float:right;margin:10px;">+ ADD premium</button></a>
+     <table class="table datatable_simple" style="clear:both;float:none;">
 		<thead>
 			<tr>
 				<th>S.No</th>
-		    	<th>Category</th>
-		    	<th>Parent Category</th>
-		    	<th colspan=2>Action</th>
+		    	<th>premium</th>
+		    	<th>Amout</th>
+		    	<th>Count</th>
+		    	<th>Validity Days</th>
+		    	<th colspan="2">Action</th>
             </tr>
 		</thead>
 		<tbody>
@@ -37,27 +47,18 @@
 				
 				<tr>
 				<td>{{ $key+1 }}</td>
-				<td>{{ ucfirst($data->cat_name) }}</td>
-                 <td>
-                 	@php $pid=$data->parent_id @endphp
-                 	@if($pid != 0)
-				 @foreach($cat_data as $parent)
-				    @if($parent['id'] == $pid)
-				    {{ ucfirst($parent->cat_name) }}
-				    @endif
-				    
-				  @endforeach
-				  @else
-				  <i>Top</i>
-				  @endif
-				  </td>
+				<td>{{ ucfirst($data->primeum) }}</td>
+				<td>{{ ucfirst($data->amt) }}</td>
+				<td>{{ ucfirst($data->count) }}</td>
+				<td>{{ ucfirst($data->days) }}</td>
+                
 				  <td><a href="{{ url('/admin/edit_cat/'.$data['id']) }}" type="button" class="btn btn-warning edit"><i class="fa fa-edit"></i>Edit</a></td>
-				  <td>
+				  <!-- <td>
 					<form action="{{ url('/admin/delete_cat/'.$data['id']) }}" method="get">
 						<button class="btn  btn-danger" type="submit" name="remove_levels" value="delete" data-toggle="modal" data-target="#deleteModal" data-deptname="{{$data->cat_name}}"><i class="fa fa-trash-o"></i>Delete</span>
 						</button>
 					</form>
-				</td>
+				</td> -->
 				  </tr>
 			@endforeach
 		</tbody>

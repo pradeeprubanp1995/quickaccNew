@@ -17,6 +17,7 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
 
+// echo "stop";exit;
             // $usertype = Auth::user()->user_type;
             // // $holduser = \DB::table('users')
             // echo "<pre>";print_r(Auth::user());exit;

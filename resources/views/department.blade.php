@@ -1,11 +1,21 @@
 @include('dashboard.header')
 @extends('dashboard.leftpanel')
 @section('content')
+
+
+<style type="text/css">
+	.table thead th 
+	{
+		font-weight: bolder !important;
+	}
+</style>
+
+
 <div class="row">
 		<div class="col-lg-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-	<h1>Department</h1>
+	<h1>Services</h1>
     <br />
     @if (\Session::has('success'))
 	<div class="alert alert-success">
@@ -22,27 +32,42 @@
 	<p>{{ \Session::get('danger') }}</p>
 	</div><br />
 	@endif
-    <button type="button" class="btn btn-primary" style="float:right;margin:10px;" data-toggle="modal" data-target="#addModal">+ ADD</button>
-	<table class="table table-responsive" style="clear:both;float:none;" width="100%">
+    
+    <a href="{{route('admin.depart_add')}}"><button type="button" class="btn btn-primary" style="float:right;margin:10px;">+ Add Service</button></a>
+	<table class="table datatable_simple" style="clear:both;float:none;" width="100%">
 		<thead>
 			<tr>
 				<th>S.No</th>
-		    	<th>Department</th>
+				<th>Services</th>
+				
+				<th>Premium</th>
+		    	<th>Image</th>
 		    	<th colspan=2>Actions</th>
             </tr>
 		</thead>
 		<tbody>
 			@foreach($dept_data as $key => $data)
 			<tr>
+
 				<td>{{ $key+1 }}</td>
-				<td>{{ ucfirst($data->dept_name) }}</td>
-				<td><a href="javascript:void(0)" data-toggle="modal" data-target="#editModal" type="button" class="btn btn-warning edit" data-item-id="{{$data->id}}" data-deptname="{{$data->dept_name}}"><i class="fa fa-edit"></i>Edit</a></td>
+				<td>{{ ucfirst($data->service_name) }}</td>
+				
+				<td>{{ ucfirst($data->primeum) }}</td>
+				<td><img src="{{asset('uploads/'.$data->image)}}" width="100px"  /></td>
+
+				
+
+
 				<td>
-					<form action="{{ url('/admin/dept_delete/'.$data['id']) }}" method="get">
-						<button class="btn  btn-danger" type="submit" name="remove_levels" value="delete" data-toggle="modal" data-target="#deleteModal" data-deptname="{{$data->dept_name}}"><i class="fa fa-trash-o"></i>Delete</span>
+				<a href="{{ url('/admin/department/edit/'.$data->dept_id) }}"  class="btn btn-warning editt"><i class="fa fa-edit"></i>Edit</a>
+				<td>
+					<form action="{{ url('/admin/dept_delete/'.$data->dept_id) }}" method="get">
+						<button class="btn  btn-danger" type="submit" name="remove_levels" value="delete" data-toggle="modal" data-target="#deleteModal" data-deptname="{{$data->service_name}}"><i class="fa fa-trash-o"></i>Delete</span>
 						</button>
 					</form>
 				</td>
+
+
 			</tr>
 			@endforeach
 		</tbody>

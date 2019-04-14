@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,162 +6,200 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Star Admin Free Bootstrap Admin Dashboard Template</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="{{asset('asset/vendors/iconfonts/mdi/css/materialdesignicons.min.css')}}">
-  <link rel="stylesheet" href="{{asset('asset/vendors/css/vendor.bundle.base.css')}}">
-  <link rel="stylesheet" href="{{asset('asset/vendors/css/vendor.bundle.addons.css')}}">
-  <!-- endinject -->
-  <!-- plugin css for this page -->
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="{{asset('asset/images/favicon.png')}}" />
-</head>
+  <title>Admin Quick Acc</title>
 
-<body>
-  <div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper auth-page">
-      <div class="content-wrapper d-flex align-items-center auth register-bg-1 theme-one">
-        <div class="row w-100">
-          <div class="col-lg-4 mx-auto">
-            <h2 class="text-center mb-4">Register</h2>
-            <div class="auto-form-wrapper">
-            
-             
-                                  
-                    <form method="POST" action="{{ route('register.request') }}">
-                        @csrf
-                <div class="form-group">
-                  <div class="input-group">
-                    <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" placeholder="Name" value="{{ old('name') }}">
-                    <div class="input-group-append">
-                      <span class="input-group-text">
-                        <i class="mdi mdi-check-circle-outline"></i>
-                      </span>
-                    </div>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<!-- <link rel="stylesheet" href="{{asset('asset/css/style.css')}}"> -->
+
+<style type="text/css">
+  .divider-text {
+    position: relative;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.divider-text span {
+    padding: 7px;
+    font-size: 12px;
+    position: relative;   
+    z-index: 2;
+}
+.divider-text:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    top: 55%;
+    left: 0;
+    z-index: 1;
+}
+
+.btn-facebook {
+    background-color: #405D9D;
+    color: #fff;
+}
+.btn-twitter {
+    background-color: #42AEEC;
+    color: #fff;
+}
+
+</style>
+
+<div class="container">
+<br>  <h2 class="text-center">Quick Acc</h2>
+<hr>
+
+
+
+
+
+<div class="card bg-light">
+<article class="card-body mx-auto" style="max-width: 400px;">
+  <h4 class="card-title mt-3 text-center">Create Account</h4>
+  <p class="text-center">Get started with your free account</p>
+  <!-- <p>
+    <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
+    <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
+  </p>
+  <p class="divider-text">
+        <span class="bg-light">OR</span>
+    </p> -->
+  <form method="POST" action="{{ route('register.request') }}">
+    @csrf
+
+  <div class="form-group input-group">
+    <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+     </div>
+          <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" placeholder="Name" value="{{ old('name') }}">
+
 
                     @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                     @endif
-                     
-                  </div>
-                </div>
+    </div> <!-- form-group// -->
+    
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+    </div>
+    
+      <input type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" placeholder="Phone Number">
 
-                <div class="form-group">
-                  <div class="input-group">
-                    <input type="text" class="form-control{{ $errors->has('employeeid') ? ' is-invalid' : '' }}" name="employeeid" value="{{ old('employeeid') }}" placeholder="Employee Id">
-                    <div class="input-group-append">
-                      <span class="input-group-text">
-                        <i class="mdi mdi-check-circle-outline"></i>
-                      </span>
-                    </div>
-                    @if ($errors->has('employeeid'))
+      @if ($errors->has('phone'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('employeeid') }}</strong>
+                                        <strong>{{ $errors->first('phone') }}</strong>
                                     </span>
                     @endif
-                  </div>
-                </div>
 
-                <div class="form-group">
-                  <div class="input-group">
-                    <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="Email Address" value="{{ old('email') }}">
-                    <div class="input-group-append">
-                      <span class="input-group-text">
-                        <i class="mdi mdi-check-circle-outline"></i>
-                      </span>
-                    </div>
-                    @if ($errors->has('email'))
+    </div> <!-- form-group// -->
+
+    
+
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-plan"></i> </span>
+    </div>
+    
+      <input type="text" class="form-control{{ $errors->has('plan') ? ' is-invalid' : '' }}" name="plan" value="{{ $category->primeum }}" readonly />
+
+      @if ($errors->has('plan'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('plan') }}</strong>
+                                    </span>
+                    @endif
+
+    </div> <!-- form-group// -->
+
+        <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-payment"></i></span>
+    </div>
+    
+      <input type="text" class="form-control{{ $errors->has('amt') ? ' is-invalid' : '' }}" name="amt" value="{{ $category->amt }}" readonly />
+
+      <input type="hidden" name="preid" value="{{ $category->id }}" />
+
+      @if ($errors->has('amt'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('amt') }}</strong>
+                                    </span>
+                    @endif
+
+    </div> <!-- form-group// -->
+
+
+
+    
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+     </div>
+        <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="Email Address" value="{{ old('email') }}">
+
+        @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                   @endif
-                  </div>
-                </div> 
-<!-- <?php //print_r($department); exit; ?> -->
-                <div class="form-group">
-                  <div class="input-group">
-                    <select name="deptid" class="form-control {{ $errors->has('deptid') ? ' is-invalid' : '' }}" >
-                    <!-- <option value="" selected disabled hidden>Choose here</option> -->
-                    <option value=" ">----- Select Department -----</option>
-                      @foreach($department as $dept)
-                      <option value="{{$dept->id}}">{{$dept->dept_name}}</option>
-                      @endforeach
-                    </select>
-                    <div class="input-group-append">
-                      <span class="input-group-text" style="height: 38px!important;">
-                        <i class="mdi mdi-check-circle-outline"></i>
-                      </span>
-                    </div>
-                 @if ($errors->has('deptid'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('deptid') }} <br/> </strong>
-                                    </span>
-                  @endif
-                  </div>
-                </div>                
 
-                <div class="form-group">
-                  <div class="input-group">
-                    <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password">
-                    <div class="input-group-append">
-                      <span class="input-group-text">
-                        <i class="mdi mdi-check-circle-outline"></i>
-                      </span>
-                    </div>
-                    @if ($errors->has('password'))
+    </div> <!-- form-group// -->
+
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+    </div>
+        <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Password">
+
+        @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                     @endif
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="input-group">
-                    <input type="password" class="form-control" placeholder="Confirm Password" name="password_confirmation">
-                    <div class="input-group-append">
-                      <span class="input-group-text">
-                        <i class="mdi mdi-check-circle-outline"></i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group d-flex justify-content-center">
-                  <div class="form-check form-check-flat mt-0">
-                    <label class="form-check-label">
-                      <input type="checkbox" class="form-check-input" checked> I agree to the terms
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <button class="btn btn-primary submit-btn btn-block">Register</button>
-                </div>
-                <div class="text-block text-center my-3">
-                  <span class="text-small font-weight-semibold">Already have and account ?</span>
-                  <a href="{{ route('loginuser') }}" class="text-black text-small">Login</a>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- content-wrapper ends -->
+
+                    
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
     </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
-  <!-- plugins:js -->
-  <script src="{{asset('asset/vendors/js/vendor.bundle.base.js')}}"></script>
-  <script src="{{asset('asset/vendors/js/vendor.bundle.addons.js')}}"></script>
-  <!-- endinject -->
-  <!-- inject:js -->
-  <script src="{{asset('asset/js/off-canvas.js')}}"></script>
-  <script src="{{asset('asset/js/misc.js')}}"></script>
-  <!-- endinject -->
+        <input type="password" class="form-control" placeholder="Confirm Password" name="password_confirmation">
+    </div> <!-- form-group// -->                                      
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
+    </div> <!-- form-group// -->      
+    <p class="text-center">Have an account? <a href="{{ route('userlogin') }}">Log In</a> </p>                                                                 
+</form>
+</article>
+</div> <!-- card.// -->
+
+</div> 
+<!--container end.//-->
+<!-- 
+<br><br>
+<article class="bg-secondary mb-3">  
+<div class="card-body text-center">
+    <h3 class="text-white mt-3">Bootstrap 4 UI KIT</h3>
+<p class="h5 text-white">Components and templates  <br> for Ecommerce, marketplace, booking websites 
+and product landing pages</p>   <br>
+<p><a class="btn btn-warning" target="_blank" href="http://bootstrap-ecommerce.com/"> Bootstrap-ecommerce.com  
+ <i class="fa fa-window-restore "></i></a></p>
+</div>
+<br><br>
+</article>
+ -->
+
+
 </body>
 
 </html>
+
+
+
